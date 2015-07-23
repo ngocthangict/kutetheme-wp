@@ -30,6 +30,12 @@
  *
  * @since Twenty Fifteen 1.0
  */
+ 
+ /**
+  * Define constant
+  * */
+define('THEME_LANG', 'kutetheme');
+
 if ( ! isset( $content_width ) ) {
 	$content_width = 660;
 }
@@ -353,3 +359,18 @@ require get_template_directory() . '/inc/template-tags.php';
  * @since Twenty Fifteen 1.0
  */
 require get_template_directory() . '/inc/customizer.php';
+
+/**
+ * Function utility
+ * */
+require get_template_directory() . '/inc/utility.php';
+
+/**
+ * hooks action 
+ * */
+
+require get_template_directory() . '/inc/hooks/theme.php';
+
+if( kt_is_wc() ){
+    require get_template_directory() . '/inc/hooks/woocommerce.php';
+}
