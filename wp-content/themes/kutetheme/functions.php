@@ -34,8 +34,9 @@
  /**
   * Define constant
   * */
-define('THEME_LANG', 'kutetheme');
-
+if( ! defined('THEME_LANG')){
+    define('THEME_LANG', 'kutetheme');
+}
 if ( ! isset( $content_width ) ) {
 	$content_width = 660;
 }
