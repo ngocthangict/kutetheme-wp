@@ -260,7 +260,7 @@ final class WOOF
          */
 //+++
 
-        if (zis_string($link))
+        if (is_string($link))
         {
             echo $link;
         } else

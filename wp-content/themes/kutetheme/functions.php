@@ -1,6 +1,6 @@
 <?php
 /**
- * Twenty Fifteen functions and definitions
+ * Kute Theme functions and definitions
  *
  * Set up the theme and provides some helper functions, which are used in the
  * theme as custom template tags. Others are attached to action and filter
@@ -22,13 +22,13 @@
  *
  * @package WordPress
  * @subpackage Twenty_Fifteen
- * @since Twenty Fifteen 1.0
+ * @since Kute Theme 1.0
  */
 
 /**
  * Set the content width based on the theme's design and stylesheet.
  *
- * @since Twenty Fifteen 1.0
+ * @since Kute Theme 1.0
  */
  
  /**
@@ -37,18 +37,21 @@
 if( ! defined('THEME_LANG')){
     define('THEME_LANG', 'kutetheme');
 }
+define( 'THEME_DIR', trailingslashit(get_template_directory()));
+define( 'THEME_URL', trailingslashit(get_template_directory_uri()));
+
 if ( ! isset( $content_width ) ) {
 	$content_width = 660;
 }
 
 /**
- * Twenty Fifteen only works in WordPress 4.1 or later.
+ * Kute Theme only works in WordPress 4.1 or later.
  */
 if ( version_compare( $GLOBALS['wp_version'], '4.1-alpha', '<' ) ) {
-	require get_template_directory() . '/inc/back-compat.php';
+	require THEME_DIR . '/inc/back-compat.php';
 }
 
-if ( ! function_exists( 'twentyfifteen_setup' ) ) :
+if ( ! function_exists( 'kutetheme_setup' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
@@ -56,17 +59,17 @@ if ( ! function_exists( 'twentyfifteen_setup' ) ) :
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  *
- * @since Twenty Fifteen 1.0
+ * @since Kute theme 1.0.0
  */
-function twentyfifteen_setup() {
+function kutetheme_setup() {
 
 	/*
 	 * Make theme available for translation.
 	 * Translations can be filed in the /languages/ directory.
-	 * If you're building a theme based on twentyfifteen, use a find and replace
-	 * to change 'twentyfifteen' to the name of your theme in all the template files
+	 * If you're building a theme based on kutetheme, use a find and replace
+	 * to change 'kutetheme' to the name of your theme in all the template files
 	 */
-	load_theme_textdomain( 'twentyfifteen', get_template_directory() . '/languages' );
+	load_theme_textdomain( THEME_LANG, THEME_DIR . '/languages' );
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
@@ -85,12 +88,13 @@ function twentyfifteen_setup() {
 	 * See: https://codex.wordpress.org/Function_Reference/add_theme_support#Post_Thumbnails
 	 */
 	add_theme_support( 'post-thumbnails' );
+    
 	set_post_thumbnail_size( 825, 510, true );
 
 	// This theme uses wp_nav_menu() in two locations.
 	register_nav_menus( array(
-		'primary' => __( 'Primary Menu',      'twentyfifteen' ),
-		'social'  => __( 'Social Links Menu', 'twentyfifteen' ),
+		'primary' => __( 'Primary Menu',      THEME_LANG ),
+		'social'  => __( 'Vertical Menu', THEME_LANG ),
 	) );
 
 	/*
@@ -110,11 +114,11 @@ function twentyfifteen_setup() {
 		'aside', 'image', 'video', 'quote', 'link', 'gallery', 'status', 'audio', 'chat'
 	) );
 
-	$color_scheme  = twentyfifteen_get_color_scheme();
+	$color_scheme  = kt_get_color_scheme();
 	$default_color = trim( $color_scheme[0], '#' );
 
 	// Setup the WordPress core custom background feature.
-	add_theme_support( 'custom-background', apply_filters( 'twentyfifteen_custom_background_args', array(
+	add_theme_support( 'custom-background', apply_filters( 'kt_custom_background_args', array(
 		'default-color'      => $default_color,
 		'default-attachment' => 'fixed',
 	) ) );
@@ -123,40 +127,45 @@ function twentyfifteen_setup() {
 	 * This theme styles the visual editor to resemble the theme style,
 	 * specifically font, colors, icons, and column width.
 	 */
-	add_editor_style( array( 'css/editor-style.css', 'genericons/genericons.css', twentyfifteen_fonts_url() ) );
+	add_editor_style( array( 'css/editor-style.css', 'genericons/genericons.css', kt_fonts_url() ) );
+    
+    add_image_size ( '100x122', 100, 122, true );
+    add_image_size ( '585x65', 585, 66, true );
+    add_image_size ( '1170x66', 1170, 66, true );
+    add_image_size ( '234x350', 234, 350, true );
 }
-endif; // twentyfifteen_setup
-add_action( 'after_setup_theme', 'twentyfifteen_setup' );
+endif; // kt_setup
+add_action( 'after_setup_theme', 'kutetheme_setup' );
 
 /**
  * Register widget area.
  *
- * @since Twenty Fifteen 1.0
+ * @since Kute Theme 1.0
  *
  * @link https://codex.wordpress.org/Function_Reference/register_sidebar
  */
-function twentyfifteen_widgets_init() {
+function kt_widgets_init() {
 	register_sidebar( array(
-		'name'          => __( 'Widget Area', 'twentyfifteen' ),
+		'name'          => __( 'Widget Area', THEME_LANG ),
 		'id'            => 'sidebar-1',
-		'description'   => __( 'Add widgets here to appear in your sidebar.', 'twentyfifteen' ),
+		'description'   => __( 'Add widgets here to appear in your sidebar.', THEME_LANG ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</aside>',
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
 	) );
 }
-add_action( 'widgets_init', 'twentyfifteen_widgets_init' );
+add_action( 'widgets_init', 'kt_widgets_init' );
 
-if ( ! function_exists( 'twentyfifteen_fonts_url' ) ) :
+if ( ! function_exists( 'kt_fonts_url' ) ) :
 /**
- * Register Google fonts for Twenty Fifteen.
+ * Register Google fonts for Kute Theme.
  *
- * @since Twenty Fifteen 1.0
+ * @since Kute Theme 1.0
  *
  * @return string Google fonts URL for the theme.
  */
-function twentyfifteen_fonts_url() {
+function kt_fonts_url() {
 	$fonts_url = '';
 	$fonts     = array();
 	$subsets   = 'latin,latin-ext';
@@ -165,7 +174,7 @@ function twentyfifteen_fonts_url() {
 	 * Translators: If there are characters in your language that are not supported
 	 * by Noto Sans, translate this to 'off'. Do not translate into your own language.
 	 */
-	if ( 'off' !== _x( 'on', 'Noto Sans font: on or off', 'twentyfifteen' ) ) {
+	if ( 'off' !== _x( 'on', 'Noto Sans font: on or off', THEME_LANG ) ) {
 		$fonts[] = 'Noto Sans:400italic,700italic,400,700';
 	}
 
@@ -173,7 +182,7 @@ function twentyfifteen_fonts_url() {
 	 * Translators: If there are characters in your language that are not supported
 	 * by Noto Serif, translate this to 'off'. Do not translate into your own language.
 	 */
-	if ( 'off' !== _x( 'on', 'Noto Serif font: on or off', 'twentyfifteen' ) ) {
+	if ( 'off' !== _x( 'on', 'Noto Serif font: on or off', THEME_LANG ) ) {
 		$fonts[] = 'Noto Serif:400italic,700italic,400,700';
 	}
 
@@ -181,7 +190,7 @@ function twentyfifteen_fonts_url() {
 	 * Translators: If there are characters in your language that are not supported
 	 * by Inconsolata, translate this to 'off'. Do not translate into your own language.
 	 */
-	if ( 'off' !== _x( 'on', 'Inconsolata font: on or off', 'twentyfifteen' ) ) {
+	if ( 'off' !== _x( 'on', 'Inconsolata font: on or off', THEME_LANG ) ) {
 		$fonts[] = 'Inconsolata:400,700';
 	}
 
@@ -189,7 +198,7 @@ function twentyfifteen_fonts_url() {
 	 * Translators: To add an additional character subset specific to your language,
 	 * translate this to 'greek', 'cyrillic', 'devanagari' or 'vietnamese'. Do not translate into your own language.
 	 */
-	$subset = _x( 'no-subset', 'Add new subset (greek, cyrillic, devanagari, vietnamese)', 'twentyfifteen' );
+	$subset = _x( 'no-subset', 'Add new subset (greek, cyrillic, devanagari, vietnamese)', THEME_LANG );
 
 	if ( 'cyrillic' == $subset ) {
 		$subsets .= ',cyrillic,cyrillic-ext';
@@ -217,62 +226,99 @@ endif;
  *
  * Adds a `js` class to the root `<html>` element when JavaScript is detected.
  *
- * @since Twenty Fifteen 1.1
+ * @since Kute Theme 1.1
  */
-function twentyfifteen_javascript_detection() {
+function kt_javascript_detection() {
 	echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
 }
-add_action( 'wp_head', 'twentyfifteen_javascript_detection', 0 );
+add_action( 'wp_head', 'kt_javascript_detection', 0 );
 
 /**
  * Enqueue scripts and styles.
  *
- * @since Twenty Fifteen 1.0
+ * @since Kute Theme 1.0
  */
-function twentyfifteen_scripts() {
+function kt_scripts() {
 	// Add custom fonts, used in the main stylesheet.
-	wp_enqueue_style( 'twentyfifteen-fonts', twentyfifteen_fonts_url(), array(), null );
-
-	// Add Genericons, used in the main stylesheet.
-	wp_enqueue_style( 'genericons', get_template_directory_uri() . '/genericons/genericons.css', array(), '3.2' );
-
+	wp_enqueue_style( 'kt-fonts', kt_fonts_url(), array(), null );
+    
 	// Load our main stylesheet.
-	wp_enqueue_style( 'twentyfifteen-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'kutetheme-style', get_stylesheet_uri() );
 
 	// Load the Internet Explorer specific stylesheet.
-	wp_enqueue_style( 'twentyfifteen-ie', get_template_directory_uri() . '/css/ie.css', array( 'twentyfifteen-style' ), '20141010' );
-	wp_style_add_data( 'twentyfifteen-ie', 'conditional', 'lt IE 9' );
+	wp_enqueue_style( 'kt-ie', get_template_directory_uri() . '/css/ie.css', array( 'kt-style' ), '1.0' );
+	wp_style_add_data( 'kt-ie', 'conditional', 'lt IE 9' );
 
-	// Load the Internet Explorer 7 specific stylesheet.
-	wp_enqueue_style( 'twentyfifteen-ie7', get_template_directory_uri() . '/css/ie7.css', array( 'twentyfifteen-style' ), '20141010' );
-	wp_style_add_data( 'twentyfifteen-ie7', 'conditional', 'lt IE 8' );
-
-	wp_enqueue_script( 'twentyfifteen-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20141010', true );
+	// Load reset default setting browser
+	wp_enqueue_style( 'kt-reset', get_template_directory_uri() . '/css/reset.css', array( ), '1.0' );
+    
+    wp_enqueue_style( 'kt-responsive', get_template_directory_uri() . '/css/responsive.css', array( ), '1.0' );
+    
+    wp_enqueue_style( 'kt-animate', get_template_directory_uri() . '/css/animate.css', array( ), '1.0' );
+    
+    wp_enqueue_style( 'kt-bootstrap', get_template_directory_uri() . '/libs/bootstrap/css/bootstrap.min.css' );
+    
+    wp_enqueue_style( 'kt-font-awesome', get_template_directory_uri() . '/libs/font-awesome/css/font-awesome.min.css' );
+    
+    wp_enqueue_style( 'kt-select2', get_template_directory_uri() . '/libs/select2/css/select2.min.css' );
+    
+    wp_enqueue_style( 'kt-bxslider', get_template_directory_uri() . '/libs/jquery.bxslider/jquery.bxslider.css' );
+    
+    wp_enqueue_style( 'kt-carousel', get_template_directory_uri() . '/libs/owl.carousel/owl.carousel.css' );
+    
+    wp_enqueue_style( 'kt-jquery-ui', get_template_directory_uri() . '/libs/jquery-ui/jquery-ui.css' );
+    
+    wp_enqueue_style( 'kt-style', get_template_directory_uri() . '/css/style.css', 
+        array( 
+            'kt-bootstrap', 
+            'kt-select2', 
+            'kt-reset', 
+            'kt-responsive', 
+            'kt-animate',
+            'kt-font-awesome',
+            'kt-jquery-ui'
+        ), '1.0' );
+    wp_enqueue_style( 'kt-option-6', get_template_directory_uri() . '/css/option6.css', array('kt-style') );
+    
+	wp_enqueue_script( 'kt-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20141010', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
 	if ( is_singular() && wp_attachment_is_image() ) {
-		wp_enqueue_script( 'twentyfifteen-keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '20141010' );
+		wp_enqueue_script( 'kt-keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '20141010' );
 	}
-
-	wp_enqueue_script( 'twentyfifteen-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '20150330', true );
-	wp_localize_script( 'twentyfifteen-script', 'screenReaderText', array(
-		'expand'   => '<span class="screen-reader-text">' . __( 'expand child menu', 'twentyfifteen' ) . '</span>',
-		'collapse' => '<span class="screen-reader-text">' . __( 'collapse child menu', 'twentyfifteen' ) . '</span>',
+    
+    wp_enqueue_script( 'kt-bootstrap', get_template_directory_uri() . '/libs/bootstrap/js/bootstrap.min.js', array( 'jquery' ) );
+    
+    wp_enqueue_script( 'kt-select2', get_template_directory_uri() . '/libs/select2/js/select2.min.js', array( 'jquery' ) );
+    
+    wp_enqueue_script( 'kt-bxslider', get_template_directory_uri() . '/libs/jquery.bxslider/jquery.bxslider.min.js', array( 'jquery' ) );
+    
+    wp_enqueue_script( 'kt-carousel', get_template_directory_uri() . '/libs/owl.carousel/owl.carousel.min.js', array( 'jquery' ) );
+    
+    wp_enqueue_script( 'kt-countdown', get_template_directory_uri() . '/libs/jquery.countdown/jquery.countdown.min.js', array( 'jquery' ) );
+    
+    wp_enqueue_script( 'kt-actual', get_template_directory_uri() . '/js/jquery.actual.min.js', array( 'jquery' ) );
+    
+	wp_enqueue_script( 'kt-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '1.0.0', true );
+    
+	wp_localize_script( 'kt-script', 'screenReaderText', array(
+		'expand'   => '<span class="screen-reader-text">' . __( 'expand child menu', THEME_LANG ) . '</span>',
+		'collapse' => '<span class="screen-reader-text">' . __( 'collapse child menu', THEME_LANG ) . '</span>',
 	) );
 }
-add_action( 'wp_enqueue_scripts', 'twentyfifteen_scripts' );
+add_action( 'wp_enqueue_scripts', 'kt_scripts' );
 
 /**
  * Add featured image as background image to post navigation elements.
  *
- * @since Twenty Fifteen 1.0
+ * @since Kute Theme 1.0
  *
  * @see wp_add_inline_style()
  */
-function twentyfifteen_post_nav_background() {
+function kt_post_nav_background() {
 	if ( ! is_single() ) {
 		return;
 	}
@@ -305,12 +351,12 @@ function twentyfifteen_post_nav_background() {
 
 	wp_add_inline_style( 'twentyfifteen-style', $css );
 }
-add_action( 'wp_enqueue_scripts', 'twentyfifteen_post_nav_background' );
+add_action( 'wp_enqueue_scripts', 'kt_post_nav_background' );
 
 /**
  * Display descriptions in main navigation.
  *
- * @since Twenty Fifteen 1.0
+ * @since Kute Theme 1.0
  *
  * @param string  $item_output The menu item output.
  * @param WP_Post $item        Menu item object.
@@ -318,60 +364,64 @@ add_action( 'wp_enqueue_scripts', 'twentyfifteen_post_nav_background' );
  * @param array   $args        wp_nav_menu() arguments.
  * @return string Menu item with possible description.
  */
-function twentyfifteen_nav_description( $item_output, $item, $depth, $args ) {
+function kt_nav_description( $item_output, $item, $depth, $args ) {
 	if ( 'primary' == $args->theme_location && $item->description ) {
 		$item_output = str_replace( $args->link_after . '</a>', '<div class="menu-item-description">' . $item->description . '</div>' . $args->link_after . '</a>', $item_output );
 	}
 
 	return $item_output;
 }
-add_filter( 'walker_nav_menu_start_el', 'twentyfifteen_nav_description', 10, 4 );
+add_filter( 'walker_nav_menu_start_el', 'kt_nav_description', 10, 4 );
 
 /**
  * Add a `screen-reader-text` class to the search form's submit button.
  *
- * @since Twenty Fifteen 1.0
+ * @since Kute Theme 1.0
  *
  * @param string $html Search form HTML.
  * @return string Modified search form HTML.
  */
-function twentyfifteen_search_form_modify( $html ) {
+function kt_search_form_modify( $html ) {
 	return str_replace( 'class="search-submit"', 'class="search-submit screen-reader-text"', $html );
 }
-add_filter( 'get_search_form', 'twentyfifteen_search_form_modify' );
+add_filter( 'get_search_form', 'kt_search_form_modify' );
 
 /**
  * Implement the Custom Header feature.
  *
- * @since Twenty Fifteen 1.0
+ * @since Kute Theme 1.0
  */
-require get_template_directory() . '/inc/custom-header.php';
+require THEME_DIR . '/inc/custom-header.php';
 
 /**
  * Custom template tags for this theme.
  *
- * @since Twenty Fifteen 1.0
+ * @since Kute Theme 1.0
  */
-require get_template_directory() . '/inc/template-tags.php';
+require THEME_DIR . '/inc/template-tags.php';
 
 /**
  * Customizer additions.
  *
- * @since Twenty Fifteen 1.0
+ * @since Kute Theme 1.0
  */
-require get_template_directory() . '/inc/customizer.php';
+require THEME_DIR . '/inc/customizer.php';
 
 /**
  * Function utility
  * */
-require get_template_directory() . '/inc/utility.php';
+require THEME_DIR . '/inc/utility.php';
 
 /**
  * hooks action 
  * */
 
-require get_template_directory() . '/inc/hooks/theme.php';
+require THEME_DIR . '/inc/hooks/theme.php';
 
 if( kt_is_wc() ){
-    require get_template_directory() . '/inc/hooks/woocommerce.php';
+    require THEME_DIR . '/inc/hooks/woocommerce.php';
+}
+
+if( kt_is_vc() ){
+    require THEME_DIR . '/js_composer/visualcomposer.php';
 }

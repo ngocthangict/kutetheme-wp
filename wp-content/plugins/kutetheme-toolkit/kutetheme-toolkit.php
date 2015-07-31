@@ -18,6 +18,7 @@ if( ! defined('THEME_LANG')){
 //CMB2
 require_once KUTETHEME_PLUGIN_PATH .'cmb2/init.php';
 require_once KUTETHEME_PLUGIN_PATH .'cmb2/kt_header_field_type.php';
+require_once KUTETHEME_PLUGIN_PATH .'cmb2/kt_page_field_type.php';
 require_once KUTETHEME_PLUGIN_PATH.'option_post_type.php';
 require_once KUTETHEME_PLUGIN_PATH .'cmb2/admin.php';
 

@@ -258,6 +258,27 @@ class KT_Admin {
             'desc'    => __( 'Setting sidebar in the area sidebar', THEME_LANG ),
     	) );
         
+        $cmb_options_general->add_field( array(
+    		'name'    => __( 'Page Service', THEME_LANG ),
+    		'id'      => 'kt_page_service',
+    		'type'    => 'page',
+            'desc'    => __( 'Setting page service', THEME_LANG ),
+    	) );
+        
+        $cmb_options_general->add_field( array(
+    		'name'    => __( 'Page Support', THEME_LANG ),
+    		'id'      => 'kt_page_support',
+    		'type'    => 'page',
+            'desc'    => __( 'Setting page support ', THEME_LANG ),
+    	) );
+        
+        $cmb_options_general->add_field( array(
+    		'name'    => __( 'About Us', THEME_LANG ),
+    		'id'      => 'kt_page_about_us',
+    		'type'    => 'page',
+            'desc'    => __( 'Setting page about us', THEME_LANG ),
+    	) );
+        
         
         $cmb_options_logo = new_cmb2_box( array(
 			'id'      => 'kt_logo_favicon',
@@ -312,9 +333,14 @@ class KT_Admin {
             'desc'    => __( 'Setting User Menu', THEME_LANG ),
             'default' => 'header_1',
             'options' => array(
-    			'header_1' => KUTETHEME_PLUGIN_URL .'/assets/imgs/v1.jpg',
-    			'header_2' => KUTETHEME_PLUGIN_URL .'/assets/imgs/v2.jpg',
-    			'header_3' => KUTETHEME_PLUGIN_URL .'/assets/imgs/v3.jpg',
+    			'1' => KUTETHEME_PLUGIN_URL .'/assets/imgs/v1.jpg',
+    			'2' => KUTETHEME_PLUGIN_URL .'/assets/imgs/v2.jpg',
+    			'3' => KUTETHEME_PLUGIN_URL .'/assets/imgs/v3.jpg',
+                '4' => KUTETHEME_PLUGIN_URL .'/assets/imgs/v3.jpg',
+                '5' => KUTETHEME_PLUGIN_URL .'/assets/imgs/v3.jpg',
+                '6' => KUTETHEME_PLUGIN_URL .'/assets/imgs/v1.jpg',
+                '7' => KUTETHEME_PLUGIN_URL .'/assets/imgs/v3.jpg',
+                '8' => KUTETHEME_PLUGIN_URL .'/assets/imgs/v3.jpg',
     		),
     	) );
         
@@ -518,6 +544,33 @@ class KT_Admin {
     		'type' => 'textarea',
     	) );
         
+        /**
+         * INFO
+         * */
+       $cmb_options_info = new_cmb2_box( array(
+			'id'      => 'kt_info',
+			'hookup'  => false,
+            'title'   => 'Info',
+			'show_on' => array(
+				// These are important, don't remove
+				'key'   => 'options-page',
+				'value' => array( $this->key, )
+			),
+		) );
+        
+        $cmb_options_info->add_field( array(
+    		'name' => __( 'Phone', THEME_LANG ),
+    		'desc' => __( 'Setting hotline for your site', THEME_LANG ),
+    		'id'   => 'kt_phone',
+    		'type' => 'text',
+    	) );
+        
+        $cmb_options_info->add_field( array(
+    		'name' => __( 'Email', THEME_LANG ),
+    		'desc' => __( 'Setting email for your site', THEME_LANG ),
+    		'id'   => 'kt_email',
+    		'type' => 'text',
+    	) );
 	}
 	/**
 	 * Public getter method for retrieving protected/private variables

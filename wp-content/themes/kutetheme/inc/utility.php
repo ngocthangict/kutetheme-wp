@@ -5,26 +5,62 @@
 * @param string $default If $option doesn't exist in DB return $default value
 * @return string
 */
+$kt_used_header = 1;
+if( ! function_exists( 'kt_get_header' )){
+    function kt_get_header(){
+        global $kt_used_header;
+        $setting = kt_option('kt_used_header', '1');
+        
+        $kt_used_header = intval($setting);
+        
+        get_template_part( 'templates/headers/header',  $setting);
+    }
+}
 
+if( ! function_exists( 'kt_get_hotline' )){
+    function kt_get_hotline(){
+        $hotline = kt_option('kt_phone', false);
+        $email   = kt_option('kt_email', false);
+        ob_start();
+        ?>
+            <div class="nav-top-links link-contact-us">
+                <?php if( $hotline ) : ?>
+                    <a title="<?php echo $hotline;?>">
+                        <img alt="<?php echo $hotline;?>" src="<?php $phone_icon = THEME_URL.'/images/phone.png'; echo $phone_icon; ?>" />
+                        <span><?php echo $hotline;?></span>
+                    </a>
+                <?php endif; ?>
+                <?php if( $email ) : ?>
+                    <a href="mailto:<?php echo $email;?>" title="<?php echo $email;?>">
+                        <img alt="<?php echo $email;?>" src="<?php $email_icon = THEME_URL.'/images/email.png'; echo $email_icon; ?>" />
+                        <span><?php _e('Contact us today !', THEME_LANG) ?></span>
+                    </a>
+                <?php endif; ?>
+            </div>
+        <?php
+        $result = ob_get_contents();
+        ob_end_clean();
+        return  $result;
+    }
+}
 if ( ! function_exists( 'kt_option' ) ){
     function kt_option( $option = false, $default = false ){
         if($option === FALSE){
             return FALSE;
         }
-        $option_name = apply_filters('theme_option_name', THEME_OPTIONS );
+        $option_name = apply_filters('theme_option_name', 'kt_options' );
         $kt_options  = wp_cache_get( $option_name );
-        if(  !$kt_options ){
+        if(  ! $kt_options ){
             $kt_options = get_option( $option_name );
             if( empty($kt_options)  ){
                 // get default theme option
                 if( defined( 'ICL_LANGUAGE_CODE' ) ){
-                    $kt_options = get_option( THEME_OPTIONS );
+                    $kt_options = get_option( 'kt_options' );
                 }
             }
             wp_cache_delete( $option_name );
             wp_cache_add( $option_name, $kt_options );
         }
-        
         if(isset($kt_options[$option]) && $kt_options[$option] !== ''){
             return $kt_options[$option];
         }else{
@@ -35,19 +71,10 @@ if ( ! function_exists( 'kt_option' ) ){
 
 if( ! function_exists( "kt_get_logo" ) ){
     function kt_get_logo(){
-        $logo = array();
-        //get setting logo default
-        $default = kt_option("logo");
-        //get setting logo higher quanlity on among screen retina, 2k, 4k
-        $retina = kt_option("logo_retina");
+        $default = kt_option("kt_logo" , THEME_URL . '/images/logo.png');
         
-        if(is_array($default) && $default['url']){
-            $logo['default'] = $default['url'];
-        }
-        if(is_array($retina) && $retina["url"]){
-            $logo["retina"] = $retina["url"];
-        }
-        return $logo;
+        $html = '<a href="'.get_home_url().'"><img alt="'.get_bloginfo('name').'" src="'.esc_url($default).'" /></a>';
+        return $html;
     }
 }
 /**
@@ -67,60 +94,208 @@ if( ! function_exists( "kt_get_wpml" )){
                     }
                 }
             }
-            echo '<div class="top-bar-link top-bar-languages">
-                    <div class="link-container dropdown '.( (count($languages) > 1) ? 'menu-item-has-children' : '').'">
-                        <a class="current-selected" href="#" data-toggle="dropdown">';
-                            printf('<span><img src="%s" alt="languages"></span>', esc_url($active_lang['country_flag_url']));
-                  echo '</a>
-                        <ul class="dropdown-menu" role="menu">';
+            $html = '<div class="language">
+                    <div class="dropdown">
+                        <a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                            <img alt="email" src="'.esc_url($active_lang['country_flag_url']).'" />
+                            <span>'.$active_lang["translated_name"].'</span>
+                        </a>';
+              $html .= '<ul class="dropdown-menu" role="menu">';
                             foreach($languages as $lang):
-                                printf('<li><a href="%4$s"><span><img src="%1$s" alt="%2$s"></span> %3$s</a></li>',
+                                printf('<li><a href="%4$s"><img src="%1$s" alt="%2$s"><span>%3$s</span></a></li>',
                                     esc_url($lang['country_flag_url']),
                                     $lang["language_code"],
                                     $lang["translated_name"],
                                     $lang['url']
                                 );
                             endforeach;
-                    echo '</ul>
+            $html .= '</ul>
                 </div>
 			</div>';
+            return $html;
         }
     }
 }
 if( ! function_exists('kt_menu_my_account')){
     function kt_menu_my_account($output = ''){
-        $output .= '<div class="top-bar-link top-bar-services">
-                        <div class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children right-dropdown dropdown link-container">
-                            <a class="current-selected" href="#" data-toggle="dropdown" >My account</a>
-                            <ul class="dropdown-menu" role="menu">';
-        if ( ! is_user_logged_in() ): 
-            $url = get_permalink( get_option('woocommerce_myaccount_page_id') );
-            if( ! $url || ! kt_is_wc()){
-                $url = wp_login_url();
-                $url_register = wp_registration_url();
-                $output .= '<li><a href="'.$url.'" title="'.__('Login', THEME_LANG).'">'.__('Login', THEME_LANG).'</a></li>';
-                $output .= '<li><a href="'.$url_register.'" title="'.__('Register', THEME_LANG).'">'.__('Register', THEME_LANG).'</a></li>';
-            }else{
-                $output .= '<li><a href="'.$url.'" title="'.__('Login / Register','woothemes').'">'.__('Login / Register','woothemes').'</a></li>';
-            }
-        else:
-            $output .= '<li><a href="'.wp_logout_url().'">'.__('Logout', THEME_LANG).'</a></li>';
-            if( function_exists( 'YITH_WCWL' ) ){
-                $wishlist_url = YITH_WCWL()->get_wishlist_url();
-                $output .=  '<li><a href="'.$wishlist_url.'">'.__( 'Wishlists', THEME_LANG).'</a></li>';
-            }
-        endif;
-        if(defined( 'YITH_WOOCOMPARE' )){
-            global $yith_woocompare;
-            $count = count($yith_woocompare->obj->products_list);
-            
-            $output .=  '<li><a href="#" class="yith-woocompare-open">'.__("Compare", THEME_LANG).'<span>('.$count.')</span></a></li>';
-            
+        ob_start();
+        ?>
+        <div id="user-info-top" class="user-info pull-right">
+            <div class="dropdown">
+                <a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                    <span><?php _e( 'My Account', THEME_LANG ) ?></span>
+                </a>
+                <ul class="dropdown-menu mega_dropdown" role="menu">
+                    <?php if ( ! is_user_logged_in() ):  ?>
+                        <?php if( kt_is_wc() ): $url = get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>
+                            <li><a href="<?php echo $url; ?>" title="<?php _e( 'Login / Register', THEME_LANG ) ?>"><?php _e('Login / Register', THEME_LANG); ?></a></li>
+                        <?php else: 
+                            $url = wp_login_url();
+                            $url_register = wp_registration_url(); ?>
+                            <li><a href="<?php echo $url; ?>" title="<?php _e('Login', THEME_LANG) ?>"><?php _e('Login', THEME_LANG) ?></a></li>
+                            <li><a href="<?php echo $url_register; ?>" title="<?php _e('Register', THEME_LANG); ?>"><?php _e('Register', THEME_LANG); ?></a></li>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <li><a href="<?php echo wp_logout_url(); ?>"><?php _e('Logout', THEME_LANG) ?></a></li>
+                        <?php if( function_exists( 'YITH_WCWL' ) ):
+                            $wishlist_url = YITH_WCWL()->get_wishlist_url(); ?>
+                            <li><a href="<?php echo $wishlist_url; ?>"><?php _e( 'Wishlists', THEME_LANG) ?></a></li>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <?php 
+                    if(defined( 'YITH_WOOCOMPARE' )): global $yith_woocompare; $count = count($yith_woocompare->obj->products_list); ?>
+                        <li><a href="#" class="yith-woocompare-open"><?php _e( "Compare", THEME_LANG) ?><span>(<?php echo $count ?>)</span></a></li>
+                    <?php endif; ?>
+                </ul>
+            </div>
+        </div>
+        <?php
+        $return = ob_get_contents();
+        ob_clean();
+        return $return;
+    }
+}
+if( ! function_exists( 'kt_service_link' ) ){
+    function kt_service_link(){
+        $kt_page_service = kt_option( 'kt_page_service', false );
+        if( $kt_page_service ){
+            echo get_page_link( $kt_page_service );
         }
-        $output .=  '       </ul>
-                        </div>
-                    </div>';   
-        return $output;   
+    }
+}
+
+if( ! function_exists( 'kt_support_link' ) ){
+    function kt_support_link(){
+        $kt_page_support = kt_option( 'kt_page_support', false );
+        if( $kt_page_support ){
+            echo get_page_link( $kt_page_support );
+        }
+    }
+}
+
+if( ! function_exists('kt_about_us_link')){
+    function kt_about_us_link(){
+        $kt_page_about_us = kt_option( 'kt_page_about_us', false );
+        if( $kt_page_about_us ){
+            echo get_page_link( $kt_page_about_us );
+        }
+    }
+}
+
+if( ! function_exists('kt_search_form') ){
+    function kt_search_form(){
+        if( kt_is_wc() ){
+            get_template_part('templates/search-form/product', 'search-form' );
+        }else{
+            get_template_part('templates/search-form/post', 'search-form' );
+        }
+    }
+}
+
+if( ! function_exists('kt_cart_button')){
+    function kt_cart_button(){
+        if( kt_is_wc() ):
+        ob_start();
+        $cart_count =  WC()->cart->cart_contents_count ;
+        $cart_total = WC()->cart->get_cart_total() ;
+        $check_out_url = WC()->cart->get_cart_url();
+        $cart_content = WC()->cart->cart_contents;
+        global $kt_used_header;
+        ?>
+        
+            <?php if( $kt_used_header == 6 ): ?>
+                <div class="btn-cart" id="cart-block">
+                    <a href="<?php echo $check_out_url; ?>" title="<?php _e( 'My cart', THEME_LANG ) ?>" ><?php _e( 'Cart', THEME_LANG ) ?></a>
+                    <span class="notify notify-right"><?php echo $cart_count; ?></span>
+                    <?php echo kt_get_cart_content($cart_content, $cart_total, $check_out_url); ?>
+                </div>
+            <?php else: ?>
+                <div id="cart-block" class="shopping-cart-box col-xs-5 col-sm-2">
+                    <a class="cart-link" href="<?php echo $check_out_url; ?>">
+                        <span class="title"><?php _e('Shopping cart', THEME_LANG) ?></span>
+                        <span class="total"><?php echo sprintf (_n( '%d item', '%d items', $cart_count ), $cart_count ); ?> <?php _e('-', THEME_LANG) ?> <?php echo $cart_total ?></span>
+                        <span class="notify notify-left"><?php echo $cart_count; ?></span>
+                    </a>
+                    <?php echo kt_get_cart_content($cart_content, $cart_total, $check_out_url); ?>
+                </div>
+            <?php endif; ?>
+        <?php
+        endif;
+        $result = ob_get_contents();
+        ob_clean();
+        return $result;
+    }
+}
+if( ! function_exists('kt_get_cart_content')){
+    function kt_get_cart_content($cart_content, $cart_total, $check_out_url, $option = 1){
+        ob_start();
+        if ( sizeof($cart_content) > 0 ): ?>
+            <div class="cart-block">
+                <div class="cart-block-content">
+                    <h5 class="cart-title"><?php _e( sprintf (_n( '%d item in my cart', '%d items in my cart', WC()->cart->cart_contents_count ), WC()->cart->cart_contents_count ), THEME_LANG ); ?></h5>
+                    <div class="cart-block-list">
+                        <ul>
+                            <?php foreach ( $cart_content as $cart_item_key => $cart_item ):
+                                    $bag_product = $cart_item['data']; 
+                                    
+                                    if ( $bag_product->exists() && $cart_item['quantity'] > 0 ): ?>
+                                        <li class="product-info">
+                                            <div class="p-left">
+                                                <a href="<?php echo esc_url( WC()->cart->get_remove_url( $cart_item_key ) ); ?>" class="remove_link"></a>
+                                                <a href="<?php echo get_permalink($cart_item['product_id']) ?>">
+                                                    <?php echo $bag_product->get_image('100x122'); ?>
+                                                </a>
+                                            </div>
+                                            <div class="p-right">
+                                                <p class="p-name"><?php echo $bag_product->get_title(); ?></p>
+                                                <p class="p-rice"><?php echo wc_price($bag_product->get_price()) ?></p>
+                                                <p><?php _e('Qty', THEME_LANG) ?><?php _e(':', THEME_LANG) ?> <?php echo $cart_item['quantity']; ?></p>
+                                            </div>
+                                        </li>
+                                    <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <div class="toal-cart">
+                        <span><?php _e('Total', THEME_LANG) ?></span>
+                        <span class="toal-price pull-right">
+                            <?php echo $cart_total; ?>
+                        </span>
+                    </div>
+                    <div class="cart-buttons">
+                        <a href="<?php echo $check_out_url; ?>" class="btn-check-out"><?php echo _e('Checkout', THEME_LANG ); ?></a>
+                    </div>
+                </div>
+            </div>
+        <?php endif;//if ( sizeof(WC()->cart->cart_contents)>0 ) {
+        $result = ob_get_contents();
+        ob_clean();
+        return $result;
+    }
+}
+if( ! function_exists('get_wishlist_url') ){
+    function get_wishlist_url(){
+        if( function_exists( 'YITH_WCWL' ) ):
+            $wishlist_url = YITH_WCWL()->get_wishlist_url();
+            return $wishlist_url;
+        endif;
+    }
+}
+
+if( ! function_exists('kt_get_all_attributes') ){
+    function kt_get_all_attributes( $tag, $text )
+    {
+        preg_match_all( '/' . get_shortcode_regex() . '/s', $text, $matches );
+        $out = array();
+        if( isset( $matches[2] ) )
+        {
+            foreach( (array) $matches[2] as $key => $value )
+            {
+                if( $tag === $value )
+                    $out[] = shortcode_parse_atts( $matches[3][$key] );  
+            }
+        }
+        return $out;
     }
 }
 /************************************************************************************************************/
@@ -256,55 +431,6 @@ function kt_get_all_revSlider( ){
     }
 
 	return $options;
-}
-if( ! function_exists('kt_logo')){
-    function kt_logo(){
-        $logo = kt_get_logo();
-        $logo_class = ( isset($logo['retina']) && $logo['retina']) ? 'retina-logo-wrapper' : '';
-        $tag_wrapper = (is_front_page() && is_home())? "h1" : "p";
-        ob_start();
-        ?>
-        <div class="logo">
-    		<a href="<?php echo esc_url( get_home_url( '/' ) ); ?>" title="<?php bloginfo( 'description' ); ?>">
-                <img src="<?php echo esc_url($logo['default']); ?>" class="default-logo" alt="<?php bloginfo( 'name' ); ?>" />
-                <?php if( isset($logo['retina']) && $logo['retina']): ?>
-                    <img src="<?php echo esc_url($logo['retina']); ?>" class="retina-logo" alt="<?php bloginfo( 'name' ); ?>" />
-                <?php endif; ?>
-            </a>
-        </div>
-        <?php
-        $result = ob_get_contents();
-        ob_end_clean();
-        echo $result;
-    }
-}
-if( ! function_exists( "kt_cart" )){
-    function kt_cart(){
-        if ( kt_is_wc() ) {
-            $cart_total = WC()->cart->get_cart_total();
-            $cart_count = WC()->cart->cart_contents_count;
-            ob_start();
-            ?>
-            <div class="shopping-cart-top">
-				<a class="info-cart" href="<?php echo esc_url(WC()->cart->get_cart_url()); ?>">
-					<span class="shopping-cart-name"><?php _e('Shopping Cart', THEME_LANG ) ?></span>
-					<span class="shopping-cart-desc">
-						<span class="shopping-cart-qty"><?php echo $cart_count ; ?> Item(s)</span>
-						<span class="shopping-cart-total"> - <?php echo $cart_total; ?></span>
-					</span>
-				</a>
-                <div class="cart-mini">
-                <?php
-                    wc_get_template_part( 'cart/mini', 'cart' );
-                ?>
-                </div>
-			</div>
-            <?php
-            $result = ob_get_contents();
-            ob_end_clean();
-            echo $result;
-        }
-    }
 }
 /**
 * Function to get sidebars
