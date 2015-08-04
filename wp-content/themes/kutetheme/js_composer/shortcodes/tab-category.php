@@ -189,7 +189,9 @@ class WPBakeryShortCode_Categories_Tab extends WPBakeryShortCodesContainer {
         
         if( count( $tabs ) >0 && $term ):
             $term_link = get_term_link($term);
-            @include( THEME_DIR.'js_composer/includes/'.$tabs_type.'.php' );
+            if( file_exists( THEME_DIR.'js_composer/includes/'.$tabs_type.'.php' ) ){
+                @include( locate_template( 'js_composer/includes/'.$tabs_type.'.php' ) );
+            }
         endif;
     }
     /**

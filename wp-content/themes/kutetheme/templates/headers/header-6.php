@@ -236,7 +236,7 @@
                                 <ul class="nav navbar-nav">
                                     <li class="active"><a href="#">Home</a></li>
                                     <li class="dropdown">
-                                        <a href="category.html" class="dropdown-toggle" data-toggle="dropdown">Fashion</a>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fashion</a>
                                         <ul class="dropdown-menu mega_dropdown" role="menu" style="width: 830px;">
                                             <li class="block-container col-sm-3">
                                                 <ul class="block">
@@ -307,9 +307,9 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li><a href="category.html" class="dropdown-toggle" data-toggle="dropdown">Sports</a></li>
+                                    <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Sports</a></li>
                                     <li class="dropdown">
-                                        <a href="category.html" class="dropdown-toggle" data-toggle="dropdown">Foods</a>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Foods</a>
                                             <ul class="mega_dropdown dropdown-menu" style="width: 830px;">
                                             <li class="block-container col-sm-3">
                                                 <ul class="block">
@@ -416,7 +416,7 @@
                                     </li>
                                     <li class="dropdown">
 
-                                        <a href="category.html" class="dropdown-toggle" data-toggle="dropdown">Digital<span class="notify notify-right">new</span></a>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Digital<span class="notify notify-right">new</span></a>
                                         <ul class="dropdown-menu container-fluid">
                                             <li class="block-container">
                                                 <ul class="block">
@@ -429,9 +429,9 @@
                                             </li>
                                         </ul> 
                                     </li>
-                                    <li><a href="category.html">Furniture</a></li>
-                                    <li><a href="category.html">Jewelry</a></li>
-                                    <li><a href="category.html">Blog</a></li>
+                                    <li><a href="#">Furniture</a></li>
+                                    <li><a href="#">Jewelry</a></li>
+                                    <li><a href="#">Blog</a></li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a class="link-buytheme" href="#"><i class="fa fa-angle-double-right"></i> Buy This Template</a></li>

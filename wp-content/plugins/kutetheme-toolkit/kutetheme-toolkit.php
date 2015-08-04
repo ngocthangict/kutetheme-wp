@@ -28,5 +28,7 @@ require_once KUTETHEME_PLUGIN_PATH.'woocommerce-products-filter/index.php';
 // Post types
 require_once KUTETHEME_PLUGIN_PATH.'post-types/post-types.php';
 
+require_once KUTETHEME_PLUGIN_PATH.'js_composer/custom-fields.php';
+
 //Shortcodes
 require_once KUTETHEME_PLUGIN_PATH.'shortcodes.php';

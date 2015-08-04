@@ -26,7 +26,7 @@
                             <a data-toggle="tab" href="<?php echo '#tab-'.$id.'-'.$i; ?>">
                                 <?php
                                 if(isset( $tab['header'] ) && $tab['header']){
-                                    _e( $tab['header'], THEME_LANG );
+                                    echo $tab['header'];
                                 }elseif( isset($tab['section_type']) && $tab['section_type'] == 'new-arrival' ){
                                     _e( 'New Arrivals', THEME_LANG );
                                 }elseif( isset($tab['section_type']) && $tab['section_type'] == 'most-review' ){
@@ -36,12 +36,12 @@
                                 }elseif( isset($tab['section_type']) && $tab['section_type'] == 'category' && isset( $tab['section_cate'] ) && intval( $tab['section_cate'] ) >0 ){
                                     $child_term = get_term( $tab['section_cate'], 'product_cat' );
                                     if($child_term){
-                                        _e( $child_term->name, THEME_LANG );
+                                        echo $child_term->name;
                                     }else{
-                                        _e( "Tab {$i}", THEME_LANG );
+                                        echo sprintf('%1$s %2$s', __( "Tab", THEME_LANG ), $i );
                                     }
                                 }else{
-                                    _e( "Tab {$i}", THEME_LANG );
+                                   echo sprintf('%1$s %2$s', __( "Tab", THEME_LANG ), $i );
                                 }
                                  ?>
                             </a>
