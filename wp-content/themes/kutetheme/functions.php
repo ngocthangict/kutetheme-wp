@@ -133,6 +133,8 @@ function kutetheme_setup() {
     add_image_size ( '585x65', 585, 66, true );
     add_image_size ( '1170x66', 1170, 66, true );
     add_image_size ( '234x350', 234, 350, true );
+    add_image_size ( '30x30', 30, 30, true );
+    add_image_size ( 'shop_catalog', 213, 260, false );
 }
 endif; // kt_setup
 add_action( 'after_setup_theme', 'kutetheme_setup' );
@@ -266,6 +268,8 @@ function kt_scripts() {
     
     wp_enqueue_style( 'kt-carousel', get_template_directory_uri() . '/libs/owl.carousel/owl.carousel.css' );
     
+    wp_enqueue_style( 'kt-fancyBox', get_template_directory_uri() . '/libs/fancyBox/jquery.fancybox.css' );
+    
     wp_enqueue_style( 'kt-jquery-ui', get_template_directory_uri() . '/libs/jquery-ui/jquery-ui.css' );
     
     wp_enqueue_style( 'kt-style', get_template_directory_uri() . '/css/style.css', 
@@ -278,7 +282,7 @@ function kt_scripts() {
             'kt-font-awesome',
             'kt-jquery-ui'
         ), '1.0' );
-    wp_enqueue_style( 'kt-option-6', get_template_directory_uri() . '/css/option6.css', array('kt-style') );
+    //wp_enqueue_style( 'kt-option-6', get_template_directory_uri() . '/css/option6.css', array('kt-style') );
     
 	wp_enqueue_script( 'kt-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20141010', true );
 
@@ -298,6 +302,8 @@ function kt_scripts() {
     
     wp_enqueue_script( 'kt-carousel', get_template_directory_uri() . '/libs/owl.carousel/owl.carousel.min.js', array( 'jquery' ) );
     
+    wp_enqueue_script( 'kt-fancyBox', get_template_directory_uri() . '/libs/fancyBox/jquery.fancybox.js', array( 'jquery' ) );
+    
     wp_enqueue_script( 'kt-countdown', get_template_directory_uri() . '/libs/jquery.countdown/jquery.countdown.min.js', array( 'jquery' ) );
     
     wp_enqueue_script( 'kt-actual', get_template_directory_uri() . '/js/jquery.actual.min.js', array( 'jquery' ) );
@@ -307,7 +313,12 @@ function kt_scripts() {
 	wp_localize_script( 'kt-script', 'screenReaderText', array(
 		'expand'   => '<span class="screen-reader-text">' . __( 'expand child menu', THEME_LANG ) . '</span>',
 		'collapse' => '<span class="screen-reader-text">' . __( 'collapse child menu', THEME_LANG ) . '</span>',
+        
+        'ajaxurl' => admin_url( 'admin-ajax.php' ),
+        'security' => wp_create_nonce( 'screenReaderText' ),
+        'current_date' => date_i18n('Y-m-d H:i:s')
 	) );
+
 }
 add_action( 'wp_enqueue_scripts', 'kt_scripts' );
 

@@ -1,5 +1,57 @@
 (function($){
     "use strict"; // Start of use strict
+    
+    /**==============================
+    ***  Effect tab category
+    ===============================**/
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+      var $this = jQuery(this);
+      var $container = $this.closest('.category-featured');
+      
+      var $href = $this.attr('href');
+      var $tab_active = $container.find($href);
+      $tab_active.find('.owl-item.active').each(function($i){
+            var $item = jQuery(this);
+            var $style = $item.attr("style");
+            var delay = $i * 300;
+            $item.attr("style",$style +
+                      "-webkit-animation-delay:" + delay + "ms;"
+                    + "-moz-animation-delay:" + delay + "ms;"
+                    + "-o-animation-delay:" + delay + "ms;"
+                    + "animation-delay:" + delay + "ms;"
+            ).addClass('slideInTop animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+                $item.removeClass('slideInTop animated');
+                $item.attr("style", $style);
+            }); 
+        });
+    });
+    
+    /* ---------------------------------------------
+     Quick view
+     ---------------------------------------------*/
+     $(document).on('click','.btn-quick-view',function(){
+        var product_id = $(this).data('id');
+        var data = {
+            action: 'frontend_product_quick_view',
+            security : screenReaderText.security,
+            product_id: product_id
+        };
+        $(this).append('<i class="fa fa-spinner fa-spin"></i>');
+        var t = $(this);
+        $.post(screenReaderText.ajaxurl, data, function(response){
+            t.find('.fa').remove();
+            $.fancybox(response, {
+              // fancybox API options
+              fitToView: false,
+              autoSize: false,
+              closeClick: false,
+              openEffect: 'none',
+              closeEffect: 'none'
+            }); // fancybox
+        })
+        return false;
+     });
+    
     /* ---------------------------------------------
      Scripts initialization
      --------------------------------------------- */

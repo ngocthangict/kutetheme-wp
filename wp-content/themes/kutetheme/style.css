@@ -20,3 +20,11 @@ Use it to make something cool, have fun, and share what you've learned with othe
 .vertical-menu-list{
     display: none;
 }
+.owl-item {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+}
