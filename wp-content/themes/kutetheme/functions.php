@@ -94,7 +94,7 @@ function kutetheme_setup() {
 	// This theme uses wp_nav_menu() in two locations.
 	register_nav_menus( array(
 		'primary' => __( 'Primary Menu',      THEME_LANG ),
-		'social'  => __( 'Vertical Menu', THEME_LANG ),
+		'vertical'  => __( 'Vertical Menu', THEME_LANG ),
 	) );
 
 	/*
@@ -435,4 +435,10 @@ if( kt_is_wc() ){
 
 if( kt_is_vc() ){
     require THEME_DIR . '/js_composer/visualcomposer.php';
+}
+if( ! class_exists( 'wp_bootstrap_navwalker' ) && file_exists( THEME_DIR. 'inc/nav/wp_bootstrap_navwalker.php' ) ){
+    require_once( THEME_DIR. 'inc/nav/wp_bootstrap_navwalker.php' );
+}
+if( ! class_exists( 'KT_MEGAMENU' ) && file_exists( THEME_DIR. 'inc/nav/nav.php' ) ){
+    require_once( THEME_DIR. 'inc/nav/nav.php' );
 }
