@@ -42,6 +42,7 @@ class WPBakeryShortCode_Tab_Producs extends WPBakeryShortCode {
         	'css_animation' => $this->getCSSAnimation( $css_animation ),
             'shortcode_custom' => vc_shortcode_custom_css_class( $css, ' ' )
         );
+        
         $elementClass = preg_replace( array( '/\s+/', '/^\s|\s$/' ), array( ' ', '' ), implode( ' ', $elementClass ) );
         
         $elementClass = apply_filters( 'kt_product_tab_class_container', $elementClass );
@@ -97,10 +98,33 @@ class WPBakeryShortCode_Tab_Producs extends WPBakeryShortCode {
                     
                     if ( $products->have_posts() ) :
                     
+                    $data_carousel = array(
+                        "autoplay" => $autoplay,
+                        "navigation" => $navigation,
+                        "margin"    => $margin,
+                        "slidespeed" => $slidespeed,
+                        "theme" => 'style-navigation-bottom',
+                        "autoheight" => 'false',
+                        'nav' => 'true',
+                        'dots' => 'false',
+                        'loop' => 'true',
+                        'autoplayTimeout' => 1000,
+                        'autoplayHoverPause' => 'true'
+                    );
+                    
+                    if( ! $use_responsive){
+                        $arr = array('0' => array("items" => $items_mobile), '768' => array("items" => $items_tablet), '992' => array("items" => $items_destop));
+                        $data_responsive = json_encode($arr);
+                        $data_carousel["responsive"] = $data_responsive;
+                    }else{
+                        if( $product_column > 0 )
+                            $data_carousel['items'] =  $product_column;
+                    }
+                    
                     add_filter( 'kt_template_loop_product_thumbnail_size', array( $this, 'kt_thumbnail_size' ) );
                     ?>
                     <div id="tab-<?php echo $k . $uniqeID  ?>" class="tab-panel <?php echo ( $i == 0 ) ? 'active': '' ?>">
-                        <ul class="product-list owl-carousel" data-dots="false" data-loop="true" data-nav = "true" data-margin = "30" data-autoplayTimeout="1000" data-autoplayHoverPause = "true" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":3}}'>
+                        <ul class="product-list owl-carousel" <?php echo _data_carousel($data_carousel); ?>>
                             <?php while( $products->have_posts() ): $products->the_post(); ?>
                                 <?php wc_get_template_part( 'content', 'product-tab' ); ?>
                             <?php endwhile; ?>

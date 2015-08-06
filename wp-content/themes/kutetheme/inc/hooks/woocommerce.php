@@ -85,6 +85,78 @@ if ( ! function_exists( 'kt_show_product_loop_new_flash' ) ) {
 	}
 }
 
+//Lastest Deal
+
+add_action( 'woocommerce_datatime_sale_product', 'woocommerce_datatime_sale_product_variable' );
+
+function woocommerce_datatime_sale_product_variable( $product = false, $post = false ){
+    $product_id = 0;
+    if( is_object( $product ) ){
+        $product_id = $product->id;
+    }elseif( is_object( $post) ){
+        $product_id = $post->ID;
+    }else{
+        global $post;
+        $product_id =  $post->ID;
+    }
+
+    if( ! $product_id  ){
+        return;
+    }
+
+    $cache_key = 'time_sale_price_'.$product_id;
+    $cache = wp_cache_get($cache_key);
+    if( $cache ){
+        echo $cache;
+        return;
+    }
+    // Get variations
+    $args = array(
+        'post_type'     => 'product_variation',
+        'post_status'   => array( 'private', 'publish' ),
+        'numberposts'   => -1,
+        'orderby'       => 'menu_order',
+        'order'         => 'asc',
+        'post_parent'   => $product_id
+    );
+    $variations = get_posts( $args );
+    $variation_ids = array();
+    if( $variations ){
+        foreach ( $variations as $variation ) {
+            $variation_ids[]  = $variation->ID;
+        }
+    }
+    $sale_price_dates_to = false;
+
+    if( !empty(  $variation_ids )   ){
+        global $wpdb;
+        $sale_price_dates_to = $wpdb->get_var( "
+            SELECT
+            meta_value
+            FROM $wpdb->postmeta
+            WHERE meta_key = '_sale_price_dates_to' and post_id IN(".join(',',$variation_ids).")
+            ORDER BY meta_value DESC
+            LIMIT 1
+        " );
+
+        if( $sale_price_dates_to !='' ){
+            $sale_price_dates_to = date('Y-m-d', $sale_price_dates_to);
+        }
+    }
+
+    if( !$sale_price_dates_to ){
+        $sale_price_dates_to 	= ( $date = get_post_meta( $product_id, '_sale_price_dates_to', true ) ) ? date_i18n( 'Y-m-d', $date ) : '';
+    }
+
+    if($sale_price_dates_to){
+        $cache = 'data-time="'.$sale_price_dates_to.'" data-strtotime="'.strtotime($sale_price_dates_to).'"';
+        wp_cache_add( $cache_key, $cache );
+        echo $cache;
+    }else{
+        wp_cache_delete( $cache_key );
+    }
+}
+
 // Ensure cart contents update when products are added to the cart via AJAX (place the following in functions.php)
 add_filter( 'woocommerce_add_to_cart_fragments', 'kt_header_add_to_cart_fragment' );
 

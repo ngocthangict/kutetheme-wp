@@ -348,7 +348,7 @@ if ( ! function_exists( 'kt_comment_nav' ) ) :
     /**
      * Display navigation to next/previous comments when applicable.
      *
-     * @since London 1.0
+     * @since KuteTheme 1.0
      */
     function kt_comment_nav() {
         // Are there comments to navigate through?
@@ -459,4 +459,20 @@ if( ! function_exists( "kt_get_menu" ) ){
         }
         wp_nav_menu( $setting );
     }
+}
+
+/**
+ * Render data option for carousel
+ * 
+ * @param $data array. All data for carousel
+ * 
+ */
+function _data_carousel( $data ){
+    $output = "";
+    foreach($data as $key => $val){
+        if($val){
+            $output .= ' data-'.$key.'="'.esc_attr($val).'"';
+        }
+    }
+    return $output;
 }

@@ -2,7 +2,7 @@
 // Exit if accessed directly
 if ( !defined('ABSPATH')) exit;
 
-if(class_exists('WPBakeryShortCode')){
+if( class_exists( 'WPBakeryShortCode' ) ){
     // Setting shortcode service
     vc_map( array(
         "name" => __( "Service", THEME_LANG),
