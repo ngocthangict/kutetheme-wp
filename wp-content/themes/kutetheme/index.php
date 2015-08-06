@@ -22,7 +22,6 @@ if( $kt_sidebar_are == "left" || $kt_sidebar_are == "right" ){
     $col_class = "main-content col-xs-12 col-sm-12 col-md-12";
 }
 ?>
-
 	<div id="primary" class="content-area <?php echo esc_attr($sidebar_are_layout);?>">
 		<main id="main" class="site-main" role="main">
         <div class="container">
@@ -38,7 +37,6 @@ if( $kt_sidebar_are == "left" || $kt_sidebar_are == "right" ){
             			<?php
             			// Start the loop.
             			while ( have_posts() ) : the_post();
-            
             				/*
             				 * Include the Post-Format-specific template for the content.
             				 * If you want to override this in a child theme, then include a file

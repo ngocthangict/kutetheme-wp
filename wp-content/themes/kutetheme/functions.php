@@ -245,8 +245,7 @@ function kt_scripts() {
 	// Add custom fonts, used in the main stylesheet.
 	wp_enqueue_style( 'kt-fonts', kt_fonts_url(), array(), null );
     
-	// Load our main stylesheet.
-	wp_enqueue_style( 'kutetheme-style', get_stylesheet_uri() );
+	
 
 	// Load the Internet Explorer specific stylesheet.
 	wp_enqueue_style( 'kt-ie', get_template_directory_uri() . '/css/ie.css', array( 'kt-style' ), '1.0' );
@@ -283,6 +282,9 @@ function kt_scripts() {
             'kt-font-awesome',
             'kt-jquery-ui'
         ), '1.0' );
+        // Load our main stylesheet.
+	wp_enqueue_style( 'kutetheme-style', get_stylesheet_uri(),array('kt-style') );
+            
     //wp_enqueue_style( 'kt-option-6', get_template_directory_uri() . '/css/option6.css', array('kt-style') );
     
 	wp_enqueue_script( 'kt-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20141010', true );
