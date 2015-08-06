@@ -28,3 +28,52 @@ Use it to make something cool, have fun, and share what you've learned with othe
     -moz-transform: translate3d(0,0,0);
     -ms-transform: translate3d(0,0,0);
 }
+/*--------------
+[Common]
+---------------*/
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+textarea,
+select {
+	padding: 5px;
+	width: 100%;
+    border: 1px solid #eaeaea;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid #eaeaea;
+    padding: 5px;
+}
+/*---------------
+[Layout]
+-------------------*/
+.sidebar-left .main-content{
+    float: right;
+}
+
+/*----------------
+[Widget]
+------------------*/
+.widget{
+    border: 1px solid #eaeaea;
+    padding: 0 20px 15px 20px;
+}
+.widget .widget-title{
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #eaeaea;
+    padding-left: 28px;
+    text-transform: uppercase;
+    padding-top: 11px;
+    padding-bottom: 12px;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: 15px;
+}

@@ -550,7 +550,7 @@ class KT_Admin {
        $cmb_options_info = new_cmb2_box( array(
 			'id'      => 'kt_info',
 			'hookup'  => false,
-            'title'   => 'Info',
+            'title'   => __('Info', THEME_LANG ),
 			'show_on' => array(
 				// These are important, don't remove
 				'key'   => 'options-page',
