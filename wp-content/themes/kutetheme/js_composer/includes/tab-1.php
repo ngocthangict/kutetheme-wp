@@ -215,6 +215,7 @@
                         </div>
                         <?php
                         endif;
+                        wp_reset_query();
                         wp_reset_postdata();
                         $i++; ?>
                         <?php endforeach; ?>

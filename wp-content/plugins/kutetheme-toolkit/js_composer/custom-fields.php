@@ -21,8 +21,10 @@ function kt_add_vc_global_params(){
     vc_add_params( 'vc_column', $vc_setting_col );
     vc_add_params( 'vc_column_inner', $vc_setting_column_inner );
     
+    
     add_shortcode_param( 'kt_select_image', 'vc_kt_select_image_settings_field' );
     add_shortcode_param( 'kt_categories', 'vc_kt_categories_settings_field' );
+    vc_add_shortcode_param('kt_number' , 'vc_ktnumber_settings_field');
 }
 /**
  * Tabs type dropdown
@@ -59,6 +61,21 @@ function vc_kt_select_image_settings_field($settings, $value) {
     ob_clean();
     return $result;
     
+}
+/**
+ * Number field.
+ *
+ */
+function vc_ktnumber_settings_field($settings, $value){
+	$dependency = '';
+	$param_name = isset( $settings[ 'param_name' ] ) ? $settings[ 'param_name' ] : '';
+	$type = isset($settings[ 'type ']) ? $settings[ 'type' ] : '';
+	$min = isset($settings[ 'min' ]) ? $settings[ 'min' ] : '';
+	$max = isset($settings[ 'max' ]) ? $settings[ 'max'] : '';
+	$suffix = isset($settings[ 'suffix' ]) ? $settings[ 'suffix' ] : '';
+	$class = isset($settings[ 'class' ]) ? $settings[ 'class' ] : '';
+	$output = '<input type="number" min="'.esc_attr( $min ).'" max="'.esc_attr( $max ).'" class="wpb_vc_param_value ' . $param_name . ' ' . $type . ' ' . $class . '" name="' . $param_name . '" value="'.esc_attr($value).'" '.$dependency.' style="max-width:100px; margin-right: 10px;" />'.$suffix;
+	return $output;
 }
 
 /**

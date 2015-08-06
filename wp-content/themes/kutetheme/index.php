@@ -10,8 +10,8 @@
  * Learn more: {@link https://codex.wordpress.org/Template_Hierarchy}
  *
  * @package WordPress
- * @subpackage Twenty_Fifteen
- * @since Twenty Fifteen 1.0
+ * @subpackage Kute Theme
+ * @since KuteTheme 1.0
  */
 get_header(); 
 $kt_sidebar_are = kt_option('kt_sidebar_are','full');

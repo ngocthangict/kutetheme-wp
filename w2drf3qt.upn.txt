@@ -1,0 +1,239 @@
+﻿Merge remote-tracking branch 'origin/master'
+
+Conflicts:
+	wp-content/themes/kutetheme/style.css
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 1 and 3 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   wp-content/plugins/kutetheme-toolkit/js_composer/custom-fields.php
+#	modified:   wp-content/plugins/kutetheme-toolkit/option_post_type.php
+#	modified:   wp-content/themes/kutetheme/assets/data/ads1.jpg
+#	modified:   wp-content/themes/kutetheme/content-page.php
+#	modified:   wp-content/themes/kutetheme/functions.php
+#	modified:   wp-content/themes/kutetheme/inc/hooks/woocommerce.php
+#	modified:   wp-content/themes/kutetheme/index.php
+#	modified:   wp-content/themes/kutetheme/js_composer/includes/tab-1.php
+#	new file:   wp-content/themes/kutetheme/js_composer/shortcodes/service.php
+#	modified:   wp-content/themes/kutetheme/js_composer/shortcodes/tab-category.php
+#	new file:   wp-content/themes/kutetheme/js_composer/shortcodes/tab-product.php
+#	modified:   wp-content/themes/kutetheme/js_composer/visualcomposer.php
+#	modified:   wp-content/themes/kutetheme/page.php
+#	modified:   wp-content/themes/kutetheme/style.css
+#	new file:   wp-content/themes/kutetheme/templates/fullwidth.php
+#	modified:   wp-content/themes/kutetheme/woocommerce/content-product-tab.php
+#	new file:   wp-content/themes/kutetheme/woocommerce/loop/new-flash.php
+#	new file:   wp-content/themes/kutetheme/woocommerce/loop/sale-flash.php
+#	new file:   wp-content/uploads/2015/07/ads1-100x122.jpg
+#	new file:   wp-content/uploads/2015/07/ads1-115x260.jpg
+#	new file:   wp-content/uploads/2015/07/ads1-133x300.jpg
+#	new file:   wp-content/uploads/2015/07/ads1-150x150.jpg
+#	new file:   wp-content/uploads/2015/07/ads1-180x180.jpg
+#	new file:   wp-content/uploads/2015/07/ads1-200x154.jpg
+#	new file:   wp-content/uploads/2015/07/ads1-200x350.jpg
+#	new file:   wp-content/uploads/2015/07/ads1-200x66.jpg
+#	new file:   wp-content/uploads/2015/07/ads1-30x30.jpg
+#	new file:   wp-content/uploads/2015/07/ads1-32x32.jpg
+#	new file:   wp-content/uploads/2015/07/ads1.jpg
+#	new file:   wp-content/uploads/2015/07/s1-30x30.png
+#	new file:   wp-content/uploads/2015/07/s1-32x32.png
+#	new file:   wp-content/uploads/2015/07/s1.png
+#	new file:   wp-content/uploads/2015/07/s2-30x30.png
+#	new file:   wp-content/uploads/2015/07/s2-32x32.png
+#	new file:   wp-content/uploads/2015/07/s2.png
+#	new file:   wp-content/uploads/2015/07/s3-30x30.png
+#	new file:   wp-content/uploads/2015/07/s3-32x32.png
+#	new file:   wp-content/uploads/2015/07/s3.png
+#	new file:   wp-content/uploads/2015/07/s4-30x30.png
+#	new file:   wp-content/uploads/2015/07/s4-32x32.png
+#	new file:   wp-content/uploads/2015/07/s4.png
+#	new file:   wp-content/uploads/2015/08/slide-100x122.jpg
+#	new file:   wp-content/uploads/2015/08/slide-150x150.jpg
+#	new file:   wp-content/uploads/2015/08/slide-180x180.jpg
+#	new file:   wp-content/uploads/2015/08/slide-213x144.jpg
+#	new file:   wp-content/uploads/2015/08/slide-220x154.jpg
+#	new file:   wp-content/uploads/2015/08/slide-234x350.jpg
+#	new file:   wp-content/uploads/2015/08/slide-300x203.jpg
+#	new file:   wp-content/uploads/2015/08/slide-30x30.jpg
+#	new file:   wp-content/uploads/2015/08/slide-32x32.jpg
+#	new file:   wp-content/uploads/2015/08/slide-585x66.jpg
+#	new file:   wp-content/uploads/2015/08/slide-600x450.jpg
+#	new file:   wp-content/uploads/2015/08/slide-666x66.jpg
+#	new file:   wp-content/uploads/2015/08/slide.jpg
+#	new file:   wp-content/uploads/revslider/slider1/1-100x122.jpg
+#	new file:   wp-content/uploads/revslider/slider1/1-100x34.png
+#	new file:   wp-content/uploads/revslider/slider1/1-1024x438.jpg
+#	new file:   wp-content/uploads/revslider/slider1/1-1170x66.jpg
+#	new file:   wp-content/uploads/revslider/slider1/1-150x150.jpg
+#	new file:   wp-content/uploads/revslider/slider1/1-180x180.jpg
+#	new file:   wp-content/uploads/revslider/slider1/1-213x91.jpg
+#	new file:   wp-content/uploads/revslider/slider1/1-220x154.jpg
+#	new file:   wp-content/uploads/revslider/slider1/1-234x350.jpg
+#	new file:   wp-content/uploads/revslider/slider1/1-300x128.jpg
+#	new file:   wp-content/uploads/revslider/slider1/1-30x30.jpg
+#	new file:   wp-content/uploads/revslider/slider1/1-30x30.png
+#	new file:   wp-content/uploads/revslider/slider1/1-32x32.jpg
+#	new file:   wp-content/uploads/revslider/slider1/1-32x32.png
+#	new file:   wp-content/uploads/revslider/slider1/1-585x66.jpg
+#	new file:   wp-content/uploads/revslider/slider1/1-600x500.jpg
+#	new file:   wp-content/uploads/revslider/slider1/1-825x500.jpg
+#	new file:   wp-content/uploads/revslider/slider1/1.jpg
+#	new file:   wp-content/uploads/revslider/slider1/1.png
+#	new file:   wp-content/uploads/revslider/slider1/11-100x32.png
+#	new file:   wp-content/uploads/revslider/slider1/11-150x32.png
+#	new file:   wp-content/uploads/revslider/slider1/11-180x32.png
+#	new file:   wp-content/uploads/revslider/slider1/11-30x30.png
+#	new file:   wp-content/uploads/revslider/slider1/11-32x32.png
+#	new file:   wp-content/uploads/revslider/slider1/11.png
+#	new file:   wp-content/uploads/revslider/slider1/111-100x41.png
+#	new file:   wp-content/uploads/revslider/slider1/111-150x41.png
+#	new file:   wp-content/uploads/revslider/slider1/111-180x41.png
+#	new file:   wp-content/uploads/revslider/slider1/111-213x36.png
+#	new file:   wp-content/uploads/revslider/slider1/111-220x41.png
+#	new file:   wp-content/uploads/revslider/slider1/111-234x41.png
+#	new file:   wp-content/uploads/revslider/slider1/111-30x30.png
+#	new file:   wp-content/uploads/revslider/slider1/111-32x32.png
+#	new file:   wp-content/uploads/revslider/slider1/111.png
+#	new file:   wp-content/uploads/revslider/slider1/1111-100x55.png
+#	new file:   wp-content/uploads/revslider/slider1/1111-150x55.png
+#	new file:   wp-content/uploads/revslider/slider1/1111-180x55.png
+#	new file:   wp-content/uploads/revslider/slider1/1111-213x38.png
+#	new file:   wp-content/uploads/revslider/slider1/1111-220x55.png
+#	new file:   wp-content/uploads/revslider/slider1/1111-234x55.png
+#	new file:   wp-content/uploads/revslider/slider1/1111-300x54.png
+#	new file:   wp-content/uploads/revslider/slider1/1111-30x30.png
+#	new file:   wp-content/uploads/revslider/slider1/1111-32x32.png
+#	new file:   wp-content/uploads/revslider/slider1/1111.png
+#	new file:   wp-content/uploads/revslider/slider1/2-100x122.jpg
+#	new file:   wp-content/uploads/revslider/slider1/2-100x41.png
+#	new file:   wp-content/uploads/revslider/slider1/2-1024x438.jpg
+#	new file:   wp-content/uploads/revslider/slider1/2-1170x66.jpg
+#	new file:   wp-content/uploads/revslider/slider1/2-150x150.jpg
+#	new file:   wp-content/uploads/revslider/slider1/2-150x41.png
+#	new file:   wp-content/uploads/revslider/slider1/2-180x180.jpg
+#	new file:   wp-content/uploads/revslider/slider1/2-213x91.jpg
+#	new file:   wp-content/uploads/revslider/slider1/2-220x154.jpg
+#	new file:   wp-content/uploads/revslider/slider1/2-234x350.jpg
+#	new file:   wp-content/uploads/revslider/slider1/2-300x128.jpg
+#	new file:   wp-content/uploads/revslider/slider1/2-30x30.jpg
+#	new file:   wp-content/uploads/revslider/slider1/2-30x30.png
+#	new file:   wp-content/uploads/revslider/slider1/2-32x32.jpg
+#	new file:   wp-content/uploads/revslider/slider1/2-32x32.png
+#	new file:   wp-content/uploads/revslider/slider1/2-585x66.jpg
+#	new file:   wp-content/uploads/revslider/slider1/2-600x500.jpg
+#	new file:   wp-content/uploads/revslider/slider1/2-825x500.jpg
+#	new file:   wp-content/uploads/revslider/slider1/2.jpg
+#	new file:   wp-content/uploads/revslider/slider1/2.png
+#	new file:   wp-content/uploads/revslider/slider1/22-100x37.png
+#	new file:   wp-content/uploads/revslider/slider1/22-150x37.png
+#	new file:   wp-content/uploads/revslider/slider1/22-180x37.png
+#	new file:   wp-content/uploads/revslider/slider1/22-213x24.png
+#	new file:   wp-content/uploads/revslider/slider1/22-220x37.png
+#	new file:   wp-content/uploads/revslider/slider1/22-234x37.png
+#	new file:   wp-content/uploads/revslider/slider1/22-300x33.png
+#	new file:   wp-content/uploads/revslider/slider1/22-30x30.png
+#	new file:   wp-content/uploads/revslider/slider1/22-32x32.png
+#	new file:   wp-content/uploads/revslider/slider1/22.png
+#	new file:   wp-content/uploads/revslider/slider1/222-100x44.png
+#	new file:   wp-content/uploads/revslider/slider1/222-150x44.png
+#	new file:   wp-content/uploads/revslider/slider1/222-180x44.png
+#	new file:   wp-content/uploads/revslider/slider1/222-213x28.png
+#	new file:   wp-content/uploads/revslider/slider1/222-220x44.png
+#	new file:   wp-content/uploads/revslider/slider1/222-234x44.png
+#	new file:   wp-content/uploads/revslider/slider1/222-300x39.png
+#	new file:   wp-content/uploads/revslider/slider1/222-30x30.png
+#	new file:   wp-content/uploads/revslider/slider1/222-32x32.png
+#	new file:   wp-content/uploads/revslider/slider1/222.png
+#	new file:   wp-content/uploads/revslider/slider1/2222-100x68.png
+#	new file:   wp-content/uploads/revslider/slider1/2222-150x68.png
+#	new file:   wp-content/uploads/revslider/slider1/2222-180x68.png
+#	new file:   wp-content/uploads/revslider/slider1/2222-213x42.png
+#	new file:   wp-content/uploads/revslider/slider1/2222-220x68.png
+#	new file:   wp-content/uploads/revslider/slider1/2222-234x68.png
+#	new file:   wp-content/uploads/revslider/slider1/2222-300x59.png
+#	new file:   wp-content/uploads/revslider/slider1/2222-30x30.png
+#	new file:   wp-content/uploads/revslider/slider1/2222-32x32.png
+#	new file:   wp-content/uploads/revslider/slider1/2222-348x66.png
+#	new file:   wp-content/uploads/revslider/slider1/2222.png
+#	new file:   wp-content/uploads/revslider/slider1/3-100x122.jpg
+#	new file:   wp-content/uploads/revslider/slider1/3-100x58.png
+#	new file:   wp-content/uploads/revslider/slider1/3-1024x438.jpg
+#	new file:   wp-content/uploads/revslider/slider1/3-1170x66.jpg
+#	new file:   wp-content/uploads/revslider/slider1/3-150x150.jpg
+#	new file:   wp-content/uploads/revslider/slider1/3-150x58.png
+#	new file:   wp-content/uploads/revslider/slider1/3-180x180.jpg
+#	new file:   wp-content/uploads/revslider/slider1/3-180x58.png
+#	new file:   wp-content/uploads/revslider/slider1/3-213x38.png
+#	new file:   wp-content/uploads/revslider/slider1/3-213x91.jpg
+#	new file:   wp-content/uploads/revslider/slider1/3-220x154.jpg
+#	new file:   wp-content/uploads/revslider/slider1/3-220x58.png
+#	new file:   wp-content/uploads/revslider/slider1/3-234x350.jpg
+#	new file:   wp-content/uploads/revslider/slider1/3-234x58.png
+#	new file:   wp-content/uploads/revslider/slider1/3-300x128.jpg
+#	new file:   wp-content/uploads/revslider/slider1/3-300x54.png
+#	new file:   wp-content/uploads/revslider/slider1/3-30x30.jpg
+#	new file:   wp-content/uploads/revslider/slider1/3-30x30.png
+#	new file:   wp-content/uploads/revslider/slider1/3-32x32.jpg
+#	new file:   wp-content/uploads/revslider/slider1/3-32x32.png
+#	new file:   wp-content/uploads/revslider/slider1/3-585x66.jpg
+#	new file:   wp-content/uploads/revslider/slider1/3-600x500.jpg
+#	new file:   wp-content/uploads/revslider/slider1/3-825x500.jpg
+#	new file:   wp-content/uploads/revslider/slider1/3.jpg
+#	new file:   wp-content/uploads/revslider/slider1/3.png
+#	new file:   wp-content/uploads/revslider/slider1/33-100x35.png
+#	new file:   wp-content/uploads/revslider/slider1/33-150x35.png
+#	new file:   wp-content/uploads/revslider/slider1/33-180x35.png
+#	new file:   wp-content/uploads/revslider/slider1/33-213x23.png
+#	new file:   wp-content/uploads/revslider/slider1/33-220x35.png
+#	new file:   wp-content/uploads/revslider/slider1/33-234x35.png
+#	new file:   wp-content/uploads/revslider/slider1/33-300x33.png
+#	new file:   wp-content/uploads/revslider/slider1/33-30x30.png
+#	new file:   wp-content/uploads/revslider/slider1/33-32x32.png
+#	new file:   wp-content/uploads/revslider/slider1/33.png
+#	new file:   wp-content/uploads/revslider/slider1/333-100x44.png
+#	new file:   wp-content/uploads/revslider/slider1/333-150x44.png
+#	new file:   wp-content/uploads/revslider/slider1/333-30x30.png
+#	new file:   wp-content/uploads/revslider/slider1/333-32x32.png
+#	new file:   wp-content/uploads/revslider/slider1/333.png
+#	new file:   wp-content/uploads/revslider/slider1/3333-100x94.png
+#	new file:   wp-content/uploads/revslider/slider1/3333-150x94.png
+#	new file:   wp-content/uploads/revslider/slider1/3333-171x66.png
+#	new file:   wp-content/uploads/revslider/slider1/3333-30x30.png
+#	new file:   wp-content/uploads/revslider/slider1/3333-32x32.png
+#	new file:   wp-content/uploads/revslider/slider1/3333.png
+#	new file:   wp-content/uploads/revslider/slider1/l1-1x122.png
+#	new file:   wp-content/uploads/revslider/slider1/l1-1x150.png
+#	new file:   wp-content/uploads/revslider/slider1/l1-1x154.png
+#	new file:   wp-content/uploads/revslider/slider1/l1-1x180.png
+#	new file:   wp-content/uploads/revslider/slider1/l1-1x30.png
+#	new file:   wp-content/uploads/revslider/slider1/l1-1x32.png
+#	new file:   wp-content/uploads/revslider/slider1/l1-1x66.png
+#	new file:   wp-content/uploads/revslider/slider1/l1.png
+#	new file:   wp-content/uploads/revslider/slider1/l2-100x1.png
+#	new file:   wp-content/uploads/revslider/slider1/l2-150x1.png
+#	new file:   wp-content/uploads/revslider/slider1/l2-180x1.png
+#	new file:   wp-content/uploads/revslider/slider1/l2-213x1.png
+#	new file:   wp-content/uploads/revslider/slider1/l2-220x1.png
+#	new file:   wp-content/uploads/revslider/slider1/l2-234x1.png
+#	new file:   wp-content/uploads/revslider/slider1/l2-30x1.png
+#	new file:   wp-content/uploads/revslider/slider1/l2-32x1.png
+#	new file:   wp-content/uploads/revslider/slider1/l2.png
+#	new file:   wp-content/uploads/revslider/slider1/l3-100x1.png
+#	new file:   wp-content/uploads/revslider/slider1/l3-30x1.png
+#	new file:   wp-content/uploads/revslider/slider1/l3-32x1.png
+#	new file:   wp-content/uploads/revslider/slider1/l3.png
+#
+
