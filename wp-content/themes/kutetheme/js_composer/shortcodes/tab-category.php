@@ -1,6 +1,9 @@
 <?php
 // Exit if accessed directly
 if ( !defined('ABSPATH')) exit;
+
+if( ! kt_is_wc() ) return;
+
 vc_map( array(
     "name" => __( "Categories Tab", THEME_LANG),
     "base" => "categories_tab",

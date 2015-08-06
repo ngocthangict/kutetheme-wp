@@ -22,6 +22,16 @@
     			do_action( 'kt_loop_product_function' );
     		?>
         </div>
+        <div class="group-price">
+            <?php 
+            /**
+    			 * kt_loop_product_function hook
+    			 * @hooked kt_show_product_loop_new_flash - 5
+    			 * @hooked woocommerce_show_product_loop_sale_flash - 10
+    			 */
+    			do_action( 'kt_loop_product_label' );
+             ?>
+        </div>
         <?php
     		/**
     		 * woocommerce_after_shop_loop_item hook

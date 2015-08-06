@@ -135,6 +135,7 @@ function kutetheme_setup() {
     add_image_size ( '234x350', 234, 350, true );
     add_image_size ( '30x30', 30, 30, true );
     add_image_size ( 'shop_catalog', 213, 260, false );
+    add_image_size ( '248x303', 248, 303, false );
 }
 endif; // kt_setup
 add_action( 'after_setup_theme', 'kutetheme_setup' );

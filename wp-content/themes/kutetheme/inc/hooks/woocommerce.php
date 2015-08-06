@@ -30,7 +30,7 @@ function kt_get_rating_html($rating_html, $rating){
 }
 
 //content-product-tab.php
-add_action('kt_loop_product_thumbnail', 'woocommerce_template_loop_product_thumbnail', 10);
+add_action('kt_loop_product_thumbnail', 'kt_template_loop_product_thumbnail', 10);
 
 add_action('kt_after_shop_loop_item_title', 'woocommerce_template_loop_price', 5);
 
@@ -41,6 +41,11 @@ add_action( 'kt_loop_product_function' , 'kt_get_tool_wishlish', 1);
 add_action( 'kt_loop_product_function' , 'kt_get_tool_compare', 5);
 
 add_action( 'kt_loop_product_function' , 'kt_get_tool_quickview', 10);
+
+add_action( 'kt_loop_product_label', 'kt_show_product_loop_new_flash', 5 );
+
+add_action( 'kt_loop_product_label', 'woocommerce_show_product_loop_sale_flash', 10 );
+
 if( ! function_exists('kt_get_tool_compare')){
     function kt_get_tool_compare(){
         if(defined( 'YITH_WOOCOMPARE' )){
@@ -60,7 +65,25 @@ if( ! function_exists('kt_get_tool_quickview') ){
         echo sprintf('<a title="%1$s" data-id="%2$s" class="search btn-quick-view" href="#"></a>', __('Quick view', THEME_LANG), get_the_ID() );
     }
 }
+if( ! function_exists( 'kt_template_loop_product_thumbnail' ) ){
+    function kt_template_loop_product_thumbnail( $size = 'shop_catalog' ){
+        $size = apply_filters( 'kt_template_loop_product_thumbnail_size' , $size );
+        $size = $size ? $size : 'shop_catalog';
+        echo woocommerce_get_product_thumbnail( $size );
+    }
+}
 
+if ( ! function_exists( 'kt_show_product_loop_new_flash' ) ) {
+
+	/**
+	 * Get the sale flash for the loop.
+	 *
+	 * @subpackage	Loop
+	 */
+	function kt_show_product_loop_new_flash() {
+		wc_get_template( 'loop/new-flash.php' );
+	}
+}
 
 // Ensure cart contents update when products are added to the cart via AJAX (place the following in functions.php)
 add_filter( 'woocommerce_add_to_cart_fragments', 'kt_header_add_to_cart_fragment' );
