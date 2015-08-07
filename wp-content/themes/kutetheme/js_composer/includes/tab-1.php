@@ -1,4 +1,4 @@
-<div class="container">
+<div class="<?php echo $elementClass; ?>" id="change-color-<?php echo $id; ?>" data-target="change-color" data-color="<?php echo $main_color; ?>">
     <!-- featured category fashion -->
     <div class="category-featured">
         <nav class="navbar nav-menu nav-menu-red show-brand">
@@ -53,9 +53,24 @@
           </div><!-- /.container-fluid -->
           <div id="elevator-1" class="floor-elevator">
                 <a href="#" class="btn-elevator up disabled fa fa-angle-up"></a>
-                <a href="#elevator-2" class="btn-elevator down fa fa-angle-down"></a>
+                <a href="#" class="btn-elevator down disabled fa fa-angle-down"></a>
           </div>
         </nav>
+        <?php 
+        $list_banner_top = explode( ',', $banner_top );
+        if( is_array($list_banner_top) && count($list_banner_top) ):
+        $class = 12 / count( $list_banner_top );
+        ?>
+        <div class="category-banner">
+            <?php foreach($list_banner_top as $b): ?>
+            <div class="col-sm-<?php echo $class; ?> banner">
+                <a href="<?php echo $term_link ? $term_link : ''; ?>">
+                    <img alt="ads2" class="img-responsive" src="<?php echo wp_get_attachment_url($b) ?>" />
+                </a>
+            </div>
+            <?php endforeach; ?>
+       </div>
+       <?php endif; ?>
         <div class="product-featured clearfix">
             <div class="banner-featured">
                 <?php if( isset($featured) && $featured ): ?>
@@ -202,10 +217,33 @@
                         //$woocommerce_loop['columns'] = $atts['columns'];
                 
                         if ( $products->have_posts() ) :
+                            $data_carousel = array(
+                                "autoplay" => $autoplay,
+                                "navigation" => $navigation,
+                                "margin"    => $margin,
+                                "slidespeed" => $slidespeed,
+                                "theme" => 'style-navigation-bottom',
+                                "autoheight" => 'false',
+                                'nav' => 'true',
+                                'dots' => 'false',
+                                'loop' => 'true',
+                                'autoplayTimeout' => 1000,
+                                'autoplayHoverPause' => 'true'
+                            );
+                            
+                            if( ! $use_responsive){
+                                $arr = array('0' => array("items" => $items_mobile), '768' => array("items" => $items_tablet), '992' => array("items" => $items_destop));
+                                $data_responsive = json_encode($arr);
+                                $data_carousel["responsive"] = $data_responsive;
+                            }else{
+                                if( $product_column > 0 )
+                                    $data_carousel['items'] =  $product_column;
+                            }
+                        
                         ?>
                         <!-- tab product -->
                         <div class="tab-panel <?php echo ( $i == 0) ? 'active' : ''; ?>" id="<?php echo 'tab-'.$id.'-'.$i; ?>">
-                            <ul class="product-list owl-carousel" data-dots="false" data-loop="true" data-nav = "true" data-margin = "0" data-autoplayTimeout="1000" data-autoplayHoverPause = "true" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}'>
+                            <ul class="product-list owl-carousel" <?php echo _data_carousel($data_carousel); ?>>
                                 <?php 
                                 while ( $products->have_posts() ) : $products->the_post();
                                     wc_get_template_part( 'content', 'product-tab' );

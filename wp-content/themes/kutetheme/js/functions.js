@@ -2,6 +2,17 @@
     "use strict"; // Start of use strict
     
     /**==============================
+    ***  Change Color tab Category
+    ===============================**/
+    var $style = jQuery('head style');
+    jQuery('.container[data-target="change-color"]').each(function(){
+       var $this = jQuery(this);
+       var $color = $this.data("color");
+       var $id = $this.attr("id");
+       $style.append('#'+$id+' .nav-menu-red li a:hover,#'+$id+' .nav-menu-red li.active a,#'+$id+' .nav-menu-red li.selected a,#'+$id+' .nav-menu-red {background: '+$color+';}')
+       
+    });
+    /**==============================
     ***  Effect tab category
     ===============================**/
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {

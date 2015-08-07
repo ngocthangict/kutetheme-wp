@@ -399,7 +399,7 @@ class KT_Admin {
     	) );
         
         $cmb_options_woocommerce->add_field( array(
-    		'name'    => __( 'Products per page', THEME_LANG ),
+    		'name'    => __( 'Products perpage', THEME_LANG ),
     		'id'      => 'kt_woo_products_perpage',
     		'type'    => 'text',
     		'default' => '10',
@@ -412,6 +412,14 @@ class KT_Admin {
     		'type'    => 'text',
     		'default' => '3',
             'desc'    => __( 'Number column to display width gird mod', THEME_LANG ),
+    	) );
+        
+        $cmb_options_woocommerce->add_field( array(
+    		'name'    => __( 'Number of days newness', THEME_LANG ),
+    		'id'      => 'kt_woo_newness',
+    		'type'    => 'text',
+    		'default' => '7',
+            'desc'    => __( 'Number of days to treat as new product', THEME_LANG ),
     	) );
         
         $cmb_options_woocommerce->add_field( array(
