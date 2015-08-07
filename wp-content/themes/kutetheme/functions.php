@@ -110,9 +110,11 @@ function kutetheme_setup() {
 	 *
 	 * See: https://codex.wordpress.org/Post_Formats
 	 */
+     /*
 	add_theme_support( 'post-formats', array(
 		'aside', 'image', 'video', 'quote', 'link', 'gallery', 'status', 'audio', 'chat'
 	) );
+    */
 
 	$color_scheme  = kt_get_color_scheme();
 	$default_color = trim( $color_scheme[0], '#' );
@@ -136,6 +138,8 @@ function kutetheme_setup() {
     add_image_size ( '30x30', 30, 30, true );
     add_image_size ( 'shop_catalog', 213, 260, false );
     add_image_size ( '248x303', 248, 303, false );
+    add_image_size ( 'post-thumb', 345, 244, false );
+    add_image_size ( 'post-thumb-small', 70, 49, false );
 }
 endif; // kt_setup
 add_action( 'after_setup_theme', 'kutetheme_setup' );
@@ -408,6 +412,13 @@ add_filter( 'get_search_form', 'kt_search_form_modify' );
 require THEME_DIR . '/inc/custom-header.php';
 
 /**
+ * Implement the Custom breadcrumbs.
+ *
+ * @since Kute Theme 1.0
+ */
+require THEME_DIR . '/inc/breadcrumbs.php';
+
+/**
  * Custom template tags for this theme.
  *
  * @since Kute Theme 1.0
@@ -444,4 +455,38 @@ if( ! class_exists( 'wp_bootstrap_navwalker' ) && file_exists( THEME_DIR. 'inc/n
 }
 if( ! class_exists( 'KT_MEGAMENU' ) && file_exists( THEME_DIR. 'inc/nav/nav.php' ) ){
     require_once( THEME_DIR. 'inc/nav/nav.php' );
+}
+/**
+ * Custom excerpt_more text 
+**/
+function kt_custom_excerpt_more( $more ) {
+	return '';
+}
+add_filter('excerpt_more', 'kt_custom_excerpt_more');
+
+
+/**
+ * Custom display result blog
+**/
+function kt_display_result_post(){
+    global $wp_query;
+    ?>
+    <span class="results-count">
+        <?php _e('Showing', THEME_LANG );?> 
+        <?php $num = $wp_query->post_count; if (have_posts()) : echo $num; endif;?> <?php _e('of', THEME_LANG );?> <?php echo $wp_query->found_posts;?> <?php _e('posts', THEME_LANG );?> </h2>
+    </span>
+    <?php
+}
+
+function kt_list_cats($num){
+	$temp=get_the_category();
+	$cat_string ="";
+	$count=count($temp);// Getting the total number of categories the post is filed in.
+	for( $i=0; $i<$num && $i < $count; $i++){
+	//Formatting our output.
+	$cat_string.='<a href="'.get_category_link( $temp[$i]->cat_ID ).'">'.$temp[$i]->cat_name.'</a>';
+	if($i!=$num-1&&$i+1<$count)
+		$cat_string.=', ';
+	}
+	echo $cat_string;
 }

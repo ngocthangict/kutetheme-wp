@@ -56,7 +56,7 @@ body.is-ontop{
     margin-top: 53px;
 }
 h1{
-    font-size: 44px;
+    font-size: 30px;
 }
 h2{
     font-size: 20px;
@@ -611,9 +611,11 @@ img.alignright{
   border: 1px solid transparent;
   padding-right: 10px;
 }
+
 #form-search-opntop .btn-search{
-}
-#form-search-opntop .btn-search{
+  padding: 0;
+  border: none;
+  background: none;
 }
 #form-search-opntop .btn-search:before{
     font: normal normal normal 18px/1 FontAwesome;
@@ -634,9 +636,10 @@ img.alignright{
   -moz-transition: width 1s ease-in-out;
   -o-transition: width 1s ease-in-out;
   transition: width 1s ease-in-out;
+  padding: 0;
+  border: none;
+  background: none;
 }
-
-
 #form-search-opntop:hover form{
     border: 1px solid #dfdfdf;
     background: #fff;
@@ -756,6 +759,7 @@ img.alignright{
 .main-header .header-search-box .form-inline .form-category{
     background: #f6f6f6;
     height: 39px;
+    max-width: 152px;
 }
 .main-header .header-search-box .form-inline .select2{
     border-right: 1px solid #eaeaea;
@@ -784,7 +788,6 @@ img.alignright{
     padding-left: 15px;
 }
 .main-header .header-search-box .form-inline .input-serach{
-    width: calc(100% - 200px);
     
 }
 .main-header .header-search-box .form-inline .input-serach input{
@@ -1030,6 +1033,8 @@ span.notify-right{
     padding-right: 20px;
     letter-spacing: 1px;
     overflow: hidden;
+    margin: 0;
+    
 }
 .box-vertical-megamenus .title .btn-open-mobile>.fa{
   line-height: inherit;
@@ -1050,6 +1055,8 @@ span.notify-right{
 }
 .box-vertical-megamenus .vertical-menu-list{
   border-left: 1px solid #eaeaea;
+  padding: 0;
+  margin: 0;
 }
 .box-vertical-megamenus .vertical-menu-list li{
   display: block;
@@ -1721,6 +1728,7 @@ span.notify-right{
 .latest-deals .product-list li{
     padding-right: 0;
     border:none;
+
 }
 .latest-deals .latest-deal-content{
     border: 3px solid #ff3366;
@@ -1913,7 +1921,12 @@ span.notify-right{
 /*----------------
 [8. Product]
 */
+.product-list{
+  padding: 0;
+  margin: 0;
+}
 .product-list li{
+  list-style: none;
 }
 .product-list li:hover .add-to-cart{
     bottom: 0;
@@ -2834,6 +2847,7 @@ span.notify-right{
   margin: 0;
   padding-bottom: 17px;
   line-height: normal;
+  padding-top: 16px;
 }
 .breadcrumb .navigation-pipe:before{
     content: "\f105";
@@ -2844,6 +2858,9 @@ span.notify-right{
   color: #666;
   font-family: "FontAwesome";
   padding: 0 15px;
+}
+.breadcrumb .navigation-pipe{
+    font-size: 0;
 }
 
 /*------------------
@@ -4150,11 +4167,6 @@ span.notify-right{
 #message-box-conact .fa{
     line-height: inherit;
 }
-
-.content-text{
-  padding: 20px 0;
-  text-align: justify;
-}
 .content-text p{
   margin-bottom: 15px;
 }
@@ -4170,6 +4182,11 @@ span.notify-right{
     line-height: 24px;
     margin-top: 20px;
  }
+.blog-posts .entry-title{
+  margin: 0;
+  -ms-word-wrap: break-word;
+    word-wrap: break-word;
+ }
   .blog-posts .post-item{
     padding-bottom: 20px;
     padding-top: 20px;
@@ -4177,6 +4194,14 @@ span.notify-right{
     border-top: 1px solid #eaeaea;
     margin-top: -1px;
  }
+  .blog-posts .post-item.sticky .entry{
+    background: #fafafa;
+    padding: 20px;
+    overflow: hidden;
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(117,117,117,0.64);
+    -moz-box-shadow: 1px 1px 5px 0px rgba(117,117,117,0.64);
+    box-shadow: 1px 1px 5px 0px rgba(117,117,117,0.64);
+  }
 .blog-posts .post-item .entry-meta-data{
     padding: 5px 0;
     color: #666;
@@ -4276,11 +4301,9 @@ span.notify-right{
 }
 
 /** Blog detail **/
-.entry-detail{
-  margin-top: 20px;
-}
 .entry-detail .entry-photo img{
   border: 1px solid #eaeaea;
+  height: auto;
 }
 .entry-detail .entry-meta-data{
   padding: 10px 0;
@@ -4315,62 +4338,96 @@ span.notify-right{
 .comment-list{
   margin-top: 20px;
 }
-.comment-list ul{
-  padding-left: 80px;
+.comment-list li{
+  list-style: none;
 }
-.comment-list ul li{
+.comment-list .children{
+    padding-left: 80px;
+}
+
+.comment-list .comment {
   overflow: hidden;
   margin-bottom: 15px;
   border-bottom: 1px solid #eaeaea;
   padding-bottom: 15px;
 }
-.comment-list ul li:last-child{
-  margin-bottom: 0;
-  border: none;
-  padding: 0;
+.comment-list .comment:last-child{
+    border: none;
+    padding: 0;
 }
-.comment-list>ul{
-  padding-left: 0;
-}
-.comment-list .avartar{
-  width: 80px;
+
+.comment-list .comment-author img{
+  width: 70px;
   border: 1px solid #eaeaea;
   padding: 4px;
   float: left;
 }
-.comment-list .comment-body{
-  margin-left: 90px;
+.comment-list .says{
+    display: none;
 }
+.comment-list .comment-content,
+.comment-list .comment-metadata{
+    margin-left: 90px;
+}
+.comment-list .comment-metadata{
+   font-size: 12px;
+}
+.comment-list .fn{
+    margin-left: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
 .comment-list .comment-meta{
   color: #ccc;
 }
 .comment-list .comment-meta .author a{
   font-weight: bold;
 }
-.coment-form{
+.comment-list .comment-awaiting-moderation{
+    display: none;
+}
+.comment-list .reply{
+    text-align: right;
+    padding: 10px 0;
+}
+.comment-list .reply a:before{
+    content: "\f112";
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+}
+.comment-respond{
   margin-top: 20px;
 }
-.coment-form label{
+.comment-respond label{
   margin-top: 10px;
   margin-bottom: 2px;
 }
-.coment-form input,
-.coment-form textarea{
+.comment-respond input,
+.comment-respond textarea{
   border-radius: 0px;
   border:1px solid #eaeaea;
   -webkit-box-shadow:inherit;
   box-shadow:inherit;
 }
-.coment-form .btn-comment{
+.comment-respond .form-submit input[type="submit"]{
   padding: 10px 20px;
   border: 1px solid #eaeaea;
   background: #666;
   color: #fff;
   margin-top: 15px;
 }
-.coment-form .btn-comment:hover{
+.comment-respond .form-submit input[type="submit"]:hover{
   background: #ff3366;
   border:1px solid #ff3366;
+}
+.comment-list .comment-respond{
+    background: #fafafa;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+.comment-list .comment-respond #cancel-comment-reply-link{
+    float: right;
 }
 /**Related Posts**/
 
