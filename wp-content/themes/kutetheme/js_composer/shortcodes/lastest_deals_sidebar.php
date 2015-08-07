@@ -18,11 +18,11 @@ if( class_exists( 'WPBakeryShortCode' ) ){
                 'description' => __( 'Display title lastest deal box, It\'s hidden when empty', THEME_LANG )
             ),
             array(
-                "type" => "attach_image",
-                "heading" => __( "Icon", THEME_LANG ),
-                "param_name" => "icon",
-                "admin_label" => false,
-                'description' => __( 'Upload icon', THEME_LANG )
+                "type" => "kt_number",
+                "heading" => __("Number Product", THEME_LANG),
+                "param_name" => "number",
+                "value" => 12,
+                "description" => __("Enter number of Product", THEME_LANG)
             ),
             array(
                 "type" => "dropdown",
@@ -58,6 +58,44 @@ if( class_exists( 'WPBakeryShortCode' ) ){
     			// 'description' => __( 'If you wish to style particular content element differently, then use this field to add a class name and then refer to it in your css file.', 'js_composer' ),
     			'group' => __( 'Design options', 'js_composer' )
     		),
+            
+            // Carousel
+            array(
+    			'type' => 'checkbox',
+    			'heading' => __( 'AutoPlay', THEME_LANG ),
+    			'param_name' => 'autoplay',
+    			'value' => array( __( 'Yes, please', THEME_LANG ) => 'true' ),
+                'group' => __( 'Carousel settings', THEME_LANG ),
+                'admin_label' => false,
+    		),
+            array(
+    			'type' => 'checkbox',
+                'heading' => __( 'Navigation', THEME_LANG ),
+    			'param_name' => 'navigation',
+    			'value' => array( __( "Don't use Navigation", THEME_LANG ) => 'false' ),
+                'description' => __( "Don't display 'next' and 'prev' buttons.", THEME_LANG ),
+                'group' => __( 'Carousel settings', THEME_LANG ),
+                'admin_label' => false,
+    		),
+            array(
+    			'type' => 'checkbox',
+                'heading' => __( 'Loop', THEME_LANG ),
+    			'param_name' => 'loop',
+    			'value' => array( __( "Loop", THEME_LANG ) => 'false' ),
+                'description' => __( "Inifnity loop. Duplicate last and first items to get loop illusion.", THEME_LANG ),
+                'group' => __( 'Carousel settings', THEME_LANG ),
+                'admin_label' => false,
+    		),
+            array(
+    			"type" => "kt_number",
+    			"heading" => __("Slide Speed", THEME_LANG),
+    			"param_name" => "slidespeed",
+    			"value" => "200",
+                "suffix" => __("milliseconds", THEME_LANG),
+    			"description" => __('Slide speed in milliseconds', THEME_LANG),
+                'group' => __( 'Carousel settings', THEME_LANG ),
+                'admin_label' => false,
+    	  	),
             array(
                 "type" => "textfield",
                 "heading" => __( "Extra class name", THEME_LANG ),
@@ -70,15 +108,18 @@ if( class_exists( 'WPBakeryShortCode' ) ){
 class WPBakeryShortCode_Lastest_Deals_Sidebar extends WPBakeryShortCode {
     protected function content($atts, $content = null) {
         $atts = shortcode_atts( array(
-            'title' => '',
-            'orderby' => 'date',
-            'order' => 'DESC',
-            
-            
+            'title'      => '',
+            'number'     => 12,
+            //Carousel            
+            'autoplay'   => "false",
+            'navigation' => "false",
+            'slidespeed' => 250,
+            'loop'       => "false",
+            'items'      => 1,
             
             'css_animation' => '',
-            'el_class' => '',
-            'css' => '',
+            'el_class'   => '',
+            'css'        => '',
             
         ), $atts );
         extract($atts);
@@ -95,82 +136,63 @@ class WPBakeryShortCode_Lastest_Deals_Sidebar extends WPBakeryShortCode {
         
         $elementClass = apply_filters( 'kt_lastest_deals_sidebar_class_container', $elementClass );
         
+        // Get products on sale
+		$product_ids_on_sale = wc_get_product_ids_on_sale();
+
+		$meta_query = WC()->query->get_meta_query();
+        
+        $args = array(
+			'posts_per_page' => $number,
+            'post_type'      => 'product',
+            'orderby'        => 'meta_value_num',
+            'meta_key'       => '_sale_price_dates_to',
+            'order'          => 'DESC',
+            'no_found_rows'  => 1,
+			'post_status' 	 => 'publish',
+			'meta_query' 	 => $meta_query,
+			'post__in'		 => array_merge( array( 0 ), $product_ids_on_sale )
+		);
+        
+        $q = apply_filters( 'woocommerce_shortcode_products_query', $args, $atts );
+        
+        $query = new WP_Query( $q );
+        
+        global $woocommerce_loop;
+        
         ob_start();
-        ?>
-        <div class="<?php echo $elementClass; ?>">
-            <h2 class="latest-deal-title"><?php echo $title; ?></h2>
-            <div class="latest-deal-content">
-                <ul class="product-list owl-carousel" data-dots="false" data-loop="true" data-nav = "true" data-autoplayTimeout="1000" data-autoplayHoverPause = "true" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":1}}'>
-                    <li>
-                        <div class="count-down-time" data-countdown="2015/06/27"></div>
-                        <div class="left-block">
-                            <a href="#"><img class="img-responsive" alt="product" src="<?php echo THEME_URL ?>assets/data/ld1.jpg" /></a>
-                            <div class="quick-view">
-                                    <a title="Add to my wishlist" class="heart" href="#"></a>
-                                    <a title="Add to compare" class="compare" href="#"></a>
-                                    <a title="Quick view" class="search" href="#"></a>
-                            </div>
-                            <div class="add-to-cart">
-                                <a title="Add to Cart" href="#">Add to Cart</a>
-                            </div>
-                        </div>
-                        <div class="right-block">
-                            <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                            <div class="content_price">
-                                <span class="price product-price">$38,95</span>
-                                <span class="price old-price">$52,00</span>
-                                <span class="colreduce-percentage">(-10%)</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="count-down-time" data-countdown="2015/06/27 9:20:00"></div>
-                        <div class="left-block">
-                            <a href="#"><img class="img-responsive" alt="product" src="<?php echo THEME_URL ?>assets/data/ld2.jpg" /></a>
-                            <div class="quick-view">
-                                    <a title="Add to my wishlist" class="heart" href="#"></a>
-                                    <a title="Add to compare" class="compare" href="#"></a>
-                                    <a title="Quick view" class="search" href="#"></a>
-                            </div>
-                            <div class="add-to-cart">
-                                <a title="Add to Cart" href="#">Add to Cart</a>
-                            </div>
-                        </div>
-                        <div class="right-block">
-                            <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                            <div class="content_price">
-                                <span class="price product-price">$38,95</span>
-                                <span class="price old-price">$52,00</span>
-                                <span class="colreduce-percentage">(-90%)</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="count-down-time" data-countdown="2015/06/27 9:20:00"></div>
-                        <div class="left-block">
-                            <a href="#"><img class="img-responsive" alt="product" src="<?php echo THEME_URL ?>assets/data/ld3.jpg" /></a>
-                            <div class="quick-view">
-                                    <a title="Add to my wishlist" class="heart" href="#"></a>
-                                    <a title="Add to compare" class="compare" href="#"></a>
-                                    <a title="Quick view" class="search" href="#"></a>
-                            </div>
-                            <div class="add-to-cart">
-                                <a title="Add to Cart" href="#">Add to Cart</a>
-                            </div>
-                        </div>
-                        <div class="right-block">
-                            <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                            <div class="content_price">
-                                <span class="price product-price">$38,95</span>
-                                <span class="price old-price">$52,00</span>
-                                <span class="colreduce-percentage">(-20%)</span>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+        
+        if ( $query->have_posts() ) :
+            $data_carousel = array(
+                "autoplay"   => $autoplay,
+                "navigation" => $navigation,
+                "slidespeed" => $slidespeed,
+                "autoheight" => "false",
+                'loop'       => "false",
+                "dots"       => "false",
+                'nav'        => "true",
+                "autoplayTimeout" => 1000,
+                "autoplayHoverPause" => "true",
+                'items'      => 1,
+            );
+            ?>
+            <div class="<?php echo $elementClass; ?>">
+                <h2 class="latest-deal-title"><?php echo $title; ?></h2>
+                <div class="latest-deal-content">
+                    <ul class="product-list owl-carousel" <?php echo _data_carousel( $data_carousel ); ?>>
+                        <?php
+                            add_filter("woocommerce_get_price_html_from_to", "kt_get_price_html_from_to", 10 , 4);
+            				while ( $query->have_posts() ) : $query->the_post();
+            					wc_get_template_part( 'content', 'product-sidebar' );
+            				endwhile; // end of the loop.
+                            remove_filter("woocommerce_get_price_html_from_to", "kt_get_price_html_from_to", 10 , 4);
+                        ?>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <?php
+            <?php
+        endif;
+        wp_reset_postdata();
+        wp_reset_query();
         $result = ob_get_contents();
         ob_clean();
         return $result;

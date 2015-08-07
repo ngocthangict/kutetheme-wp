@@ -17,14 +17,14 @@ class WPBakeryShortCode_Tab_Producs extends WPBakeryShortCode {
             'css' => '',   
             
             //Carousel            
-            'autoplay' => '', 
-            'navigation' => '',
+            'autoplay' => 'false', 
+            'navigation' => 'false',
             'margin'    => 30,
             'slidespeed' => 200,
             'css' => '',
             'el_class' => '',
-            'nav' => true,
-            'loop'  => true,
+            'nav' => 'true',
+            'loop'  => 'true',
             //Default
             'use_responsive' => 0,
             'items_destop' => 3,
@@ -86,6 +86,7 @@ class WPBakeryShortCode_Tab_Producs extends WPBakeryShortCode {
                         $newargs['orderby']  = 'meta_value_num';
                     }elseif( $k == 'on-sales' ){
                         $product_ids_on_sale = wc_get_product_ids_on_sale();
+                        
                         $newargs['post__in'] = array_merge( array( 0 ), $product_ids_on_sale );
                         
                         $newargs['orderby'] = 'date';

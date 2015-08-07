@@ -7,6 +7,55 @@ if(is_admin())
 
 add_filter("woocommerce_product_get_rating_html", "kt_get_rating_html", 10, 2);
 
+/**
+ * Price Regular + Sale
+ * */
+add_action( "kt_after_loop_item_title", "woocommerce_template_loop_price", 5 );
+/**
+ * Sale price Percentage
+ */
+add_filter( 'woocommerce_sale_price_html', 'woocommerce_custom_sales_price', 10, 2 );
+
+function woocommerce_custom_sales_price( $price, $product ) {
+	$percentage = round( ( ( $product->regular_price - $product->sale_price ) / $product->regular_price ) * 100 );
+	return $price . sprintf( __('<span class="colreduce-percentage">-%s</span>', THEME_LANG ), $percentage . '%' );
+}
+
+/**
+ * Change DOM html loop template price
+ * */
+if( ! function_exists("kt_get_price_html_from_to")){
+    
+    function kt_get_price_html_from_to($price, $from, $to, $product ){
+        if($product->is_type( 'variable' )){
+            // Main price
+			$prices = array( $product->get_variation_price( 'min', true ), $product->get_variation_price( 'max', true ) );
+            $multi_price = false;
+            if($prices[0] !== $prices[1]){
+                $multi_price = true;
+            }
+            $pr = $prices[0];
+			// Sale
+			$prices = array( $product->get_variation_regular_price( 'min', true ), $product->get_variation_regular_price( 'max', true ) );
+            if($prices[0] !== $prices[1]){
+                $multi_price = true;
+            }
+			$sale = $prices[1];
+            $html_sale ='';
+            if($multi_price){
+                $html_sale .='~';
+            }
+            
+            if($pr != $sale){
+                $percentage = round( ( ( $sale - $pr  ) / $sale ) * 100 );
+                $price .= sprintf( __('<span class="colreduce-percentage">-%s</span>', THEME_LANG ), $html_sale . $percentage . '%' );
+            }
+        }
+        return $price;
+    }
+}
+
+
 function kt_get_rating_html($rating_html, $rating){
     $rating_html = '';
     global $product;
@@ -149,7 +198,7 @@ function woocommerce_datatime_sale_product_variable( $product = false, $post = f
     }
 
     if($sale_price_dates_to){
-        $cache = 'data-time="'.$sale_price_dates_to.'" data-strtotime="'.strtotime($sale_price_dates_to).'"';
+        $cache = 'data-countdown="'.$sale_price_dates_to.'" data-time="'.$sale_price_dates_to.'" data-strtotime="'.strtotime($sale_price_dates_to).'"';
         wp_cache_add( $cache_key, $cache );
         echo $cache;
     }else{
