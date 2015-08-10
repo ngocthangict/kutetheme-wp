@@ -8,12 +8,12 @@
  */
 ?>
 <?php
-$kt_used_sidebar = kt_option('kt_used_sidebar','sidebar-shop')
+$kt_woowoo_shop_used_sidebar = kt_option('kt_woowoo_shop_used_sidebar','sidebar-shop');
 ?>
 <div id="secondary" class="secondary">
-	<?php if ( is_active_sidebar( $kt_used_sidebar ) ) : ?>
+	<?php if ( is_active_sidebar( $kt_woowoo_shop_used_sidebar ) ) : ?>
 		<div id="widget-area" class="widget-area" role="complementary">
-			<?php dynamic_sidebar( $kt_used_sidebar ); ?>
+			<?php dynamic_sidebar( $kt_woowoo_shop_used_sidebar ); ?>
 		</div><!-- .widget-area -->
 	<?php endif; ?>
 

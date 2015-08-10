@@ -1924,6 +1924,7 @@ span.notify-right{
 .product-list{
   padding: 0;
   margin: 0;
+  float: left;
 }
 .product-list li{
   list-style: none;
@@ -2068,25 +2069,43 @@ span.notify-right{
 }
 .product-list li .product-name{
     padding-bottom: 5px;
+    margin: 0;
 }
 .product-list li .product-info{
     padding: 0 5px;
 }
-
-.product-list li .content_price{
-    width: auto;
-    display: inline-block;
-}
-.product-list li .product-price{
+.product-list li .content_price {
     font-size: 18px;
     color: #ff3366;
+    line-height: 24px;
+}
+.product-list li .content_price>.price>.amount{
+  display: inline-block;
+  float: left;
+}
+.product-list li .content_price .price{
+  display: inline-block;
+}
+.product-list li .content_price del{
+  margin-left: 11px;
+  color: #666;
+  font-size: 14px;
+  float: right;
+}
+.product-list li .content_price ins{
+  text-decoration: none;
+  float: left;
+  display: inline-block;
+}
+.product-list li .content_price .colreduce-percentage{
+  font-size: 14px;
+  color: #666;
 }
 .product-list li .old-price{
     text-decoration:line-through;
     margin-left: 11px;
     line-height: 25px;
     color: #666;
-
 }
 .product-list li .colreduce-percentage{
   line-height: 28px;
@@ -2151,13 +2170,12 @@ span.notify-right{
 }
 
 .product-list li .product-star{
-    width: auto;
-    float: right;
-    color: #ff9900;
-    text-align: right;
-     display: inline-block;
-     padding-top: 5px;
-     font-size: 13px;
+  width: auto;
+  float: right;
+  color: #ff9900;
+  text-align: right;
+  display: inline-block;
+  font-size: 13px;
 }
 
 /*------------------
@@ -3344,7 +3362,6 @@ span.notify-right{
 }
 
 .view-product-list{
-  margin-top: 20px;
   position: relative;
 }
 .page-heading{
@@ -3369,13 +3386,20 @@ span.notify-right{
 .view-product-list .display-product-option{
   position: absolute;
   top: 0;
-  right: 0;
+  right: 15px;
 }
 
 /** botton view option **/
+.display-product-option li{
+  list-style: none;
+  display: inline;
+  float: left;
+}
 .display-product-option{
-    width: 63px;
     height: 30px;
+    padding: 0;
+    margin: 0;
+    display: table;
 }
 .display-product-option li.view-as-grid span{
   width: 30px;

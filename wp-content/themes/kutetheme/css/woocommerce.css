@@ -62,3 +62,49 @@
 /*-----------------
 [Category page]
 ------------------*/
+
+.woocommerce .woocommerce-breadcrumb{
+	padding-top: 16px;
+	font-size: 14px;
+}
+.woocommerce ul.woof-products{
+	margin-top: -10px;
+	width: 100%;
+	float: left;
+	padding-bottom: 20px;
+}
+.woocommerce ul.woof-products li.product{
+	margin-top: 30px;
+	display: inline-block;
+}
+.view-product-list .pagination{
+	margin-top: 0;
+	float: right;
+}
+.view-product-list .pagination .screen-reader-text{
+	display: none;
+}
+.woocommerce .woocommerce-ordering{
+	width: auto;
+	margin: 0;
+	margin-right: 15px;
+	border: 1px solid #eaeaea;
+}
+.woocommerce .woocommerce-ordering:before{
+	content: "\f15d";
+	display: inline-block;
+    width: 38px;
+    text-align: center;
+    float: right;
+    height: 29px;
+    border-left: 1px solid #eaeaea;
+    background: #fafafa;
+    line-height: 28px;
+    font-family: 'FontAwesome';
+}
+.woocommerce .woocommerce-ordering .orderby{
+	display: inline-block;
+	float: left;
+	width: auto;
+	border: none;
+}

@@ -217,8 +217,6 @@ function kt_header_add_to_cart_fragment( $fragments ) {
 
 add_action( 'kt_woocommerce_single_product', 'kt_woocommerce_single_product' );
 function kt_woocommerce_single_product(){
-    
-    
     ?>
     <div class="product-detail-info">
         <div class="product-section">
@@ -273,3 +271,62 @@ function wp_ajax_frontend_product_quick_view_callback() {
 }
 add_action( 'wp_ajax_frontend_product_quick_view', 'wp_ajax_frontend_product_quick_view_callback' );
 add_action( 'wp_ajax_nopriv_frontend_product_quick_view', 'wp_ajax_frontend_product_quick_view_callback' );
+
+
+/*
+* Return a new number of maximum columns for shop archives
+* @param int Original value
+* @return int New number of columns
+*/
+function kt_loop_shop_columns( $number_columns ) {
+    $kt_woo_grid_column = kt_option('kt_woo_grid_column','3');
+    return $kt_woo_grid_column;
+}
+add_filter( 'loop_shop_columns', 'kt_loop_shop_columns', 1, 10 );
+
+/**
+* Custom category page
+**/
+
+//remove woocommerce resultcount
+remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
+remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
+
+// add products display
+add_filter( 'woocommerce_before_shop_loop' , 'kt_custom_display_view' );
+
+if(!function_exists('kt_custom_display_view')){
+    function kt_custom_display_view(){
+        ?>
+        <ul class="display-product-option">
+            <li class="view-as-grid">
+                <span><?php _e('grid',THEME_LANG);?></span>
+            </li>
+            <li class="view-as-list selected">
+                <span><?php _e('list', THEME_LANG );?></span>
+            </li>
+        </ul>
+        <?php
+    }
+}
+
+
+
+
+/* Remove pagination on the bottom of shop page */
+remove_action( 'woocommerce_after_shop_loop', 'woocommerce_pagination', 10 );
+
+/* Show pagination on the top of shop page */
+add_action( 'woocommerce_after_shop_loop', 'kt_paging_nav', 10 );
+add_action( 'woocommerce_after_shop_loop', 'woocommerce_catalog_ordering', 11 );
+
+/**
+ * Custom  products per page
+**/
+add_filter( 'loop_shop_per_page','kt_custom_products_per_page', 20 );
+function kt_custom_products_per_page(){
+    $loop_shop_per_page = kt_option('kt_woo_products_perpage',18);
+    // Display 24 products per page. Goes in functions.php
+    
+    return $loop_shop_per_page;
+}

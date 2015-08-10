@@ -140,6 +140,7 @@ function kutetheme_setup() {
     add_image_size ( '248x303', 248, 303, false );
     add_image_size ( 'post-thumb', 345, 244, false );
     add_image_size ( 'post-thumb-small', 70, 49, false );
+    add_image_size ( 'shop_catalog_image_size',300,366,false);
 }
 endif; // kt_setup
 add_action( 'after_setup_theme', 'kutetheme_setup' );
@@ -154,7 +155,16 @@ add_action( 'after_setup_theme', 'kutetheme_setup' );
 function kt_widgets_init() {
 	register_sidebar( array(
 		'name'          => __( 'Widget Area', THEME_LANG ),
-		'id'            => 'sidebar-1',
+		'id'            => 'sidebar-primary',
+		'description'   => __( 'Add widgets here to appear in your sidebar.', THEME_LANG ),
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
+	) );
+	register_sidebar( array(
+		'name'          => __( 'Widget Shop Area', THEME_LANG ),
+		'id'            => 'sidebar-shop',
 		'description'   => __( 'Add widgets here to appear in your sidebar.', THEME_LANG ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</aside>',
