@@ -55,6 +55,7 @@ if( class_exists( 'WPBakeryShortCode' ) ){
 }
 class WPBakeryShortCode_Service extends WPBakeryShortCode {
     protected function content($atts, $content = null) {
+        $tab = function_exists( 'vc_map_get_attributes' ) ? vc_map_get_attributes( 'service', $atts ) : $atts;
         $atts = shortcode_atts( array(
             'title' => '',
             'subtitle' => '',

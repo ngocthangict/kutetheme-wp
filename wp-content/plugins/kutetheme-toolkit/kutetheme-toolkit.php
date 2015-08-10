@@ -32,3 +32,6 @@ require_once KUTETHEME_PLUGIN_PATH.'js_composer/custom-fields.php';
 
 //Shortcodes
 require_once KUTETHEME_PLUGIN_PATH.'shortcodes.php';
+
+//Product brand
+require_once KUTETHEME_PLUGIN_PATH.'brands/product_brand.php';

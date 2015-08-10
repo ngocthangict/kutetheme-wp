@@ -159,7 +159,7 @@ vc_map( array(
     "name" => __( "Tab Products", THEME_LANG),
     "base" => "tab_producs",
     "category" => __('Kute Theme', THEME_LANG ),
-    "description" => __( 'Show product in tab best sellers, on sales, new products on option 1' ),
+    "description" => __( 'Show product in tab best sellers, on sales, new products on option 1', 'js_composer' ),
     "params" => array(
         array(
 			'type' => 'textfield',
