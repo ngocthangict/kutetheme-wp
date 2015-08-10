@@ -83,20 +83,22 @@ class WPBakeryShortCode_Service extends WPBakeryShortCode {
         if($title){
             ob_start();
             ?>
-            <div class="<?php echo esc_attr( $elementClass ); ?>">
-                <?php if($icon): ?>
-                
-                <div class="icon">
-                    <?php 
-                        echo wp_get_attachment_image( $icon, '40x40' );
-                    ?>
-                </div>
-                <?php endif; ?>
-                <div class="info">
-                    <a href="<?php echo esc_attr( $link ); ?>">
-                        <h3><?php echo $title; ?></h3>
-                    </a>
-                    <span><?php echo $subtitle; ?></span>
+            <div class="service">
+                <div class="<?php echo esc_attr( $elementClass ); ?>">
+                    <?php if($icon): ?>
+                    
+                    <div class="icon">
+                        <?php 
+                            echo wp_get_attachment_image( $icon, '40x40' );
+                        ?>
+                    </div>
+                    <?php endif; ?>
+                    <div class="info">
+                        <a href="<?php echo esc_attr( $link ); ?>">
+                            <h3><?php echo $title; ?></h3>
+                        </a>
+                        <span><?php echo $subtitle; ?></span>
+                    </div>
                 </div>
             </div>
             <?php

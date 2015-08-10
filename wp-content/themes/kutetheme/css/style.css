@@ -892,8 +892,8 @@ img.alignright{
     text-transform: uppercase;
     font-size: 12px;
 }
-.cart-block .cart-block-content .cart-block-list{
-    
+.cart-block .cart-block-content .cart-block-list ul{
+    padding: 0;
 }
 .cart-block .cart-block-content  .product-info{
     margin-top: 10px;
@@ -901,6 +901,7 @@ img.alignright{
     display: block;
     overflow: hidden;
     padding-bottom: 10px;
+    list-style: none;
 }
 .cart-block .cart-block-content  .product-info .p-left{
     width: 100px;
