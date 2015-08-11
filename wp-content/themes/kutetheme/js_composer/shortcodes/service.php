@@ -79,7 +79,6 @@ class WPBakeryShortCode_Service extends WPBakeryShortCode {
         
         $elementClass = preg_replace( array( '/\s+/', '/^\s|\s$/' ), array( ' ', '' ), implode( ' ', $elementClass ) );
         
-        
         if($title){
             ob_start();
             ?>

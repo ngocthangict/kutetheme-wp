@@ -37,7 +37,7 @@ class KT_Product_Brand_Taxonomies {
 			'update_item'       => __( 'Update Product Brand', THEME_LANG ),
 			'add_new_item'      => __( 'Add New Product Brand', THEME_LANG ),
 			'new_item_name'     => __( 'New Brand Name', THEME_LANG),
-			'menu_name'         => 'Product Brands',
+			'menu_name'         => 'Brands',
 		);
         
         $args = array(

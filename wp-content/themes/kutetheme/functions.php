@@ -140,6 +140,7 @@ function kutetheme_setup() {
     add_image_size ( '248x303', 248, 303, false );
     add_image_size ( 'post-thumb', 345, 244, false );
     add_image_size ( 'post-thumb-small', 70, 49, false );
+    add_image_size ( '142x173', 142, 173, true );
 }
 endif; // kt_setup
 add_action( 'after_setup_theme', 'kutetheme_setup' );

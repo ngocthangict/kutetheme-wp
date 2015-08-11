@@ -78,6 +78,7 @@ class WPBakeryShortCode_Brand extends WPBakeryShortCode {
                     </ul>
                     <div class="brand-showcase-content">
                         <?php $i = 1; ?>
+                        <?php add_filter( 'kt_template_loop_product_thumbnail_size', array( $this, 'kt_thumbnail_size' ) ); ?>
                         <?php foreach($terms as $term): ?>
                             <div class="brand-showcase-content-tab<?php echo ( $i ==1 ) ? ' active' : '' ?>" id="showcase-<?php echo $term->term_id ?>">
                                 <?php 
@@ -113,7 +114,7 @@ class WPBakeryShortCode_Brand extends WPBakeryShortCode {
                                     )
                         		);
                                 $products = new WP_Query( apply_filters( 'woocommerce_shortcode_products_query', $args, $atts ) );
-                                if($products->have_posts()):
+                                if( $products->have_posts() ):
                                 ?>
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-4 trademark-info">
@@ -163,9 +164,12 @@ class WPBakeryShortCode_Brand extends WPBakeryShortCode {
                                     </div>
                                 </div>
                                 <?php endif; ?>
+                                <?php wp_reset_query(); ?>
+                                <?php wp_reset_postdata(); ?>
                             </div>
                         <?php $i ++ ; ?>
                         <?php endforeach; ?>
+                        <?php remove_filter( 'kt_template_loop_product_thumbnail_size', array( $this, 'kt_thumbnail_size' ) ); ?>
                     </div>
                 </div>
             </div>
@@ -174,5 +178,8 @@ class WPBakeryShortCode_Brand extends WPBakeryShortCode {
         $result = ob_get_contents();
         ob_end_clean();
         return $result;
+    }
+    public function kt_thumbnail_size(){
+        return '142x173';
     }
 }
