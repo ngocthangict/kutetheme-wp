@@ -302,6 +302,16 @@ class KT_Admin {
     	) );
         
         /**
+    	 * Logo Footer
+    	 */
+    	$cmb_options_logo->add_field( array(
+    		'name'    => __( 'Logo Footer', THEME_LANG ),
+    		'id'      => 'kt_logo_footer',
+    		'type'    => 'file',
+            'desc'    => __( 'Setting your site\'s logo in footer', THEME_LANG ),
+    	) );
+        
+        /**
     	 * Favicon
     	 */
     	$cmb_options_logo->add_field( array(
@@ -565,6 +575,12 @@ class KT_Admin {
 				'value' => array( $this->key, )
 			),
 		) );
+        $cmb_options_info->add_field( array(
+    		'name' => __( 'Address', THEME_LANG ),
+    		'desc' => __( 'Setting address for your site', THEME_LANG ),
+    		'id'   => 'kt_address',
+    		'type' => 'text',
+    	) );
         
         $cmb_options_info->add_field( array(
     		'name' => __( 'Phone', THEME_LANG ),

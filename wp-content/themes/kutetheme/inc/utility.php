@@ -19,8 +19,8 @@ if( ! function_exists( 'kt_get_header' )){
 
 if( ! function_exists( 'kt_get_hotline' )){
     function kt_get_hotline(){
-        $hotline = kt_option('kt_phone', false);
-        $email   = kt_option('kt_email', false);
+        $hotline = kt_get_info_hotline();
+        $email   = kt_get_info_email();
         ob_start();
         ?>
             <div class="nav-top-links link-contact-us">
@@ -75,6 +75,31 @@ if( ! function_exists( "kt_get_logo" ) ){
         
         $html = '<a href="'.get_home_url().'"><img alt="'.get_bloginfo('name').'" src="'.esc_url($default).'" /></a>';
         return $html;
+    }
+}
+
+if( ! function_exists( "kt_get_logo_footer" ) ){
+    function kt_get_logo_footer(){
+        $default = kt_option("kt_logo_footer" , THEME_URL . '/images/logo.png');
+        
+        $html = '<a href="'.get_home_url().'"><img alt="'.get_bloginfo('name').'" src="'.esc_url($default).'" /></a>';
+        return $html;
+    }
+}
+if( ! function_exists( 'kt_get_info_address' )){
+    function kt_get_info_address(){
+        return  kt_option('kt_address', false);
+    }
+}
+
+if( ! function_exists( 'kt_get_info_hotline' )){
+    function kt_get_info_hotline(){
+        return  kt_option('kt_phone', false);
+    }
+}
+if( ! function_exists( 'kt_get_info_email' )){
+    function kt_get_info_email(){
+        return kt_option('kt_email', false);;
     }
 }
 /**

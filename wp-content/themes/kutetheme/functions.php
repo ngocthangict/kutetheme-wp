@@ -172,6 +172,40 @@ function kt_widgets_init() {
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
 	) );
+    
+    register_sidebar( array(
+        'name'          => __( 'Footer Menu 1', THEME_LANG),
+        'id'            => 'footer-menu-1',
+        'description'   => __( 'The footer menu 1 widget area', THEME_LANG),
+        'before_widget' => '<div id="%1$s" class="widget-container widget-footer-menu %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title introduce-title">',
+        'after_title'   => '</h3>',
+    ) );
+    
+    register_sidebar( array(
+        'name'          => __( 'Footer Menu 2', THEME_LANG),
+        'id'            => 'footer-menu-2',
+        'description'   => __( 'The footer menu 2 widget area', THEME_LANG),
+        'before_widget' => '<div id="%1$s" class="widget-container widget-footer-menu %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title introduce-title">',
+        'after_title'   => '</h3>',
+    ) );
+    
+    register_sidebar( array(
+        'name'          => __( 'Footer Menu 3', THEME_LANG),
+        'id'            => 'footer-menu-3',
+        'description'   => __( 'The footer menu 3 widget area', THEME_LANG),
+        'before_widget' => '<div id="%1$s" class="widget-container widget-footer-menu %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title introduce-title">',
+        'after_title'   => '</h3>',
+    ) );
+    
+    
+    
+    
 }
 add_action( 'widgets_init', 'kt_widgets_init' );
 

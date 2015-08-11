@@ -151,7 +151,7 @@ class WPBakeryShortCode_Categories extends WPBakeryShortCode {
         }else{
             $ids = array();
         }
-        
+        $classes = 'col-xs-'.( 12 / $items_mobile ). ' col-sm-'. ( 12 / $items_tablet ). ' col-md-'.( 12 / $items_destop );
         // get terms and workaround WP bug with parents/pad counts
 		$args = array(
 			'orderby'    => 'id',
@@ -167,6 +167,7 @@ class WPBakeryShortCode_Categories extends WPBakeryShortCode {
 			'order'      => $order,
 			'hide_empty' => 0,
 			'pad_counts' => true,
+            'number'     => $number
 		);
         
         ?>
@@ -179,6 +180,8 @@ class WPBakeryShortCode_Categories extends WPBakeryShortCode {
             <?php if( $product_categories ): ?>
                 <?php foreach($product_categories as $term): 
                 
+                    $arg_child['parent'] = $term->term_id;
+                    
                     $term_link = esc_attr(get_term_link( $term ) );
                     
                     $thumbnail_id = absint( get_woocommerce_term_meta( $term->term_id, 'thumbnail_id', true ) );
@@ -193,8 +196,9 @@ class WPBakeryShortCode_Categories extends WPBakeryShortCode {
             		} else {
             			$image = wc_placeholder_img_src();
             		}
+                    $children = get_terms( 'product_cat', $arg_child );
                 ?>
-                    <div class="col-sm-6  col-lg-3 cate-box">
+                    <div class="<?php echo esc_attr($classes) ?> cate-box">
                         <div class="cate-tit" >
                             <div class="div-1" style="width: 46%;">
                                 <div class="cate-name-wrap">
@@ -209,14 +213,16 @@ class WPBakeryShortCode_Categories extends WPBakeryShortCode {
                             </div>
                             
                         </div>
+                        <?php if( count( $children ) >0 ): ?>
                         <div class="cate-content">
                             <ul>
-                                <li><a href="#">Batteries & Chargers</a></li>
-                                <li><a href="#">Headphone, Headset</a></li>
-                                <li><a href="#">Home Audio</a></li>
-                                <li><a href="#">Mp3 Player Accessories</a></li>
+                                <?php foreach($children as $child): ?>
+                                    <?php $chil_link = esc_attr(get_term_link( $child ) ); ?>
+                                    <li><a href="<?php echo esc_attr($chil_link) ?>"><?php echo $child->name ?></a></li>
+                                <?php endforeach; ?>
                             </ul>
                         </div>
+                        <?php endif; ?>
                     </div> <!-- /.cate-box -->
                 <?php endforeach; ?>
             <?php endif; ?>                                                    

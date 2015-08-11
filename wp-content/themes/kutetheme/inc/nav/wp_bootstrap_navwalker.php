@@ -52,10 +52,8 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
         
-        if( $depth === 1 ) {
-            $this->megamenu_enable = get_post_meta( $item->ID, '_menu_item_megamenu_enable', true );
-            $this->megamenu_menu_page = get_post_meta( $item->ID, '_menu_item_megamenu_menu_page', true );
-        }
+        $this->megamenu_enable = get_post_meta( $item->ID, '_menu_item_megamenu_enable', true );
+        $this->megamenu_menu_page = get_post_meta( $item->ID, '_menu_item_megamenu_menu_page', true );
         $this->megamenu_img_icon = get_post_meta( $item->ID, '_menu_item_megamenu_img_icon', true );
 		/**
 		 * Dividers, Headers or Disabled
@@ -132,14 +130,10 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			 * if there is a value in the attr_title property. If the attr_title
 			 * property is NOT null we apply it as the class name for the glyphicon.
 			 */
-            if( $this->megamenu_enable && $this->megamenu_menu_page && $depth ==1 ){
-                $item_output .= $args->link_before;
-            }else{
-                if ( ! empty( $item->attr_title ) )
+            if ( ! empty( $item->attr_title ) )
     				$item_output .= '<a'. $attributes .'><span class="glyphicon ' . esc_attr( $item->attr_title ) . '"></span>&nbsp;';
     			else
     				$item_output .= '<a'. $attributes .'>';
-            }
             
             if($this->megamenu_img_icon){
                 $file = wp_get_attachment_thumb_url($this->megamenu_img_icon);
@@ -149,22 +143,18 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
                 }
                 
             }
-            if( $this->megamenu_enable && $this->megamenu_menu_page && $depth ==1 ){
-                $item_output .= $args->link_after;
-            }else{
-                $item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-                $item_output .= '</a>';
-            }
+            $item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
+            $item_output .= '</a>';
 			
             $item_output .= $args->after;
             
-            if($this->megamenu_enable && $this->megamenu_menu_page && $depth ==1 ){
-                if(post_type_exists('megamenu')){
-                    $pages = new WP_Query( array( 'post_type' => 'megamenu', 'post' => $this->megamenu_menu_page ));
+            if($this->megamenu_enable && $this->megamenu_menu_page){
+                if( post_type_exists('megamenu') ){
+                    $pages = new WP_Query( array( 'post_type' => 'megamenu', 'p' => $this->megamenu_menu_page ));
                 }else{
-                    $pages = new WP_Query( array( 'post_type' => 'page', 'post' => $this->megamenu_menu_page ));
+                    $pages = new WP_Query( array( 'post_type' => 'page', 'page' => $this->megamenu_menu_page ));
                 }
-                
+                $item_output .= '<div class="megamenu menu_page mega-menu-'.$depth.'">';
                 if($pages->have_posts()):
                     ob_start();
                     while($pages->have_posts()): $pages->the_post();
@@ -175,7 +165,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
                     wp_reset_query();
                     wp_reset_postdata();
                 endif;
-                
+                $item_output .'</div>';
             }
             
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );

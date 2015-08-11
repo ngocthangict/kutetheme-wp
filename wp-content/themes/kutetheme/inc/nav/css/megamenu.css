@@ -49,9 +49,3 @@
     margin-right: 0;
     width: auto;
 }
-.wrapper-megamenu{
-    display: none;
-}
-.menu-item-depth-1 .wrapper-megamenu{
-    display: block;
-}
