@@ -1345,19 +1345,22 @@ span.notify-right{
   vertical-align: 0;
   padding-left: 7px;
 }
-#main-menu li.dropdown:before {
+#main-menu li.dropdown>a:before {
   content: "\f0de";
   font-family: "FontAwesome";
   font-size: 15px;
   color: #fff;
   padding-left: 7px;
   position: absolute;
-  bottom: -13px;
-  right: 48%;
+  bottom: -28px;
+  left: 50%;
   display: none;
   z-index: 1001;
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
 }
-#main-menu li.dropdown:hover:before {
+#main-menu li.dropdown:hover>a:before {
   display: block;
 }
 

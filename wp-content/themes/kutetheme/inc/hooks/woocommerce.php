@@ -448,3 +448,14 @@ function  wp_ajax_fronted_set_products_view_style_callback(){
 }
 add_action( 'wp_ajax_fronted_set_products_view_style', 'wp_ajax_fronted_set_products_view_style_callback' );
 add_action( 'wp_ajax_nopriv_fronted_set_products_view_style', 'wp_ajax_fronted_set_products_view_style_callback' );
+
+/*------------------
+Custom woocommerce_breadcrumb_defaults
+-------------------*/
+
+add_filter( 'woocommerce_breadcrumb_defaults', 'jk_change_breadcrumb_home_text' );
+function jk_change_breadcrumb_home_text( $defaults ) {
+    // Change the breadcrumb home text from 'Home' to 'Appartment'
+    $defaults['delimiter'] = '<span class="navigation-pipe">&nbsp;</span>';
+    return $defaults;
+}

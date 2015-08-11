@@ -5,7 +5,6 @@
 	width: 32px;
 	height: 32px;
 	margin: 0;
-	float: left;
 }
 .yith-wcwl-add-to-wishlist .show a{
 	font-size: 0;
@@ -412,6 +411,24 @@
 	border-top-color: #ff3366;
 }
 
-/*--------------------
-[ Category sli]
---------------------*/
+.woocommerce-breadcrumb .navigation-pipe:before {
+    content: "\f105";
+    font-size: 14px;
+    display: inline-block;
+    text-align: right;
+    width: 6px;
+    color: #666;
+    font-family: "FontAwesome";
+    padding: 0 15px;
+}
+.woocommerce .woocommerce-breadcrumb a{
+	color: #333;
+}
+.woocommerce .woocommerce-breadcrumb a:hover{
+	color: #ff3366;
+}
+
+.view-product-list .page-title{
+	text-transform: none;
+	padding-left: 12px;
+}
