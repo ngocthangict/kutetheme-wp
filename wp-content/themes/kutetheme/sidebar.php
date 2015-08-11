@@ -3,18 +3,18 @@
  * The sidebar containing the main widget area
  *
  * @package WordPress
- * @subpackage Twenty_Fifteen
- * @since Twenty Fifteen 1.0
+ * @subpackage Kutetheme
+ * @since kuteshop 1.0
  */
+?>
+<?php
+$kt_used_sidebar = kt_option('kt_used_sidebar','sidebar-shop')
+?>
+<div id="secondary" class="secondary">
+	<?php if ( is_active_sidebar( $kt_used_sidebar ) ) : ?>
+		<div id="widget-area" class="widget-area" role="complementary">
+			<?php dynamic_sidebar( $kt_used_sidebar ); ?>
+		</div><!-- .widget-area -->
+	<?php endif; ?>
 
-if ( has_nav_menu( 'primary' ) || has_nav_menu( 'social' ) || is_active_sidebar( 'sidebar-1' )  ) : ?>
-	<div id="secondary" class="secondary">
-		<?php if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
-			<div id="widget-area" class="widget-area" role="complementary">
-				<?php dynamic_sidebar( 'sidebar-1' ); ?>
-			</div><!-- .widget-area -->
-		<?php endif; ?>
-
-	</div><!-- .secondary -->
-
-<?php endif; ?>
+</div><!-- .secondary -->

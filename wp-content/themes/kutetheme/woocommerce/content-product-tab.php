@@ -45,6 +45,7 @@
     </div>
     <div class="right-block">
         <h5 class="product-name"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
+        <div class="content_price">
         <?php
 			/**
 			 * woocommerce_after_shop_loop_item_title hook
@@ -53,5 +54,6 @@
 			 */
 			do_action( 'kt_after_shop_loop_item_title' );
 		?>
+        </div>
     </div>
 </li>

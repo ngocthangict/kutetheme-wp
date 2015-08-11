@@ -253,7 +253,7 @@ class KT_Admin {
     		'name'    => __( 'Choose sidebar', THEME_LANG ),
     		'id'      => 'kt_used_sidebar',
     		'type'    => 'select',
-    		'default' => 'full',
+    		'default' => 'sidebar-primary',
             'options' => $sidebars,
             'desc'    => __( 'Setting sidebar in the area sidebar', THEME_LANG ),
     	) );
@@ -393,7 +393,7 @@ class KT_Admin {
     		'name'    => __( 'Shop page sidebar', THEME_LANG ),
     		'id'      => 'kt_woowoo_shop_used_sidebar',
     		'type'    => 'select',
-    		'default' => 'full',
+    		'default' => 'sidebar-shop',
             'options' => $sidebars,
             'desc'    => __( 'Setting sidebar in the area sidebar on shop page', THEME_LANG ),
     	) );

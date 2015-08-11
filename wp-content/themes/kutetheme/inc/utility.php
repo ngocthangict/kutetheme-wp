@@ -337,7 +337,7 @@ function kt_paging_nav() {
     echo get_the_posts_pagination( array(
         'prev_text'          => __( '<i class="fa fa-angle-double-left"></i> Previous', THEME_LANG ),
         'next_text'          => __( 'Next <i class="fa fa-angle-double-right"></i>', THEME_LANG ),
-        'screen_reader_text' => '',
+        'screen_reader_text' => ' ',
         'before_page_number' => '',
     ) );
     

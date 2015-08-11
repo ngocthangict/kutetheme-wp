@@ -41,46 +41,61 @@ if ( 0 == ( $woocommerce_loop['loop'] - 1 ) % $woocommerce_loop['columns'] || 1 
 if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
 	$classes[] = 'last';
 }
+
+
+// Bootstrap Column
+$bootstrapColumn = round( 12 / $woocommerce_loop['columns'] );
+$classes[] = 'col-xs-'.$bootstrapColumn.' col-sm-'. $bootstrapColumn .' col-md-' . $bootstrapColumn;
+
+
 ?>
 <li <?php post_class( $classes ); ?>>
-
+    <div class="product-container">
 	<?php do_action( 'woocommerce_before_shop_loop_item' ); ?>
-
-	<a href="<?php the_permalink(); ?>">
-
-		<?php
-			/**
-			 * woocommerce_before_shop_loop_item_title hook
-			 *
-			 * @hooked woocommerce_show_product_loop_sale_flash - 10
-			 * @hooked woocommerce_template_loop_product_thumbnail - 10
-			 */
-			do_action( 'woocommerce_before_shop_loop_item_title' );
-		?>
-
-		<h3><?php the_title(); ?></h3>
-
-		<?php
-			/**
-			 * woocommerce_after_shop_loop_item_title hook
-			 *
-			 * @hooked woocommerce_template_loop_rating - 5
-			 * @hooked woocommerce_template_loop_price - 10
-			 */
-			do_action( 'woocommerce_after_shop_loop_item_title' );
-		?>
-
-	</a>
-
-	<?php
-
-		/**
-		 * woocommerce_after_shop_loop_item hook
-		 *
-		 * @hooked woocommerce_template_loop_add_to_cart - 10
-		 */
-		do_action( 'woocommerce_after_shop_loop_item' );
-
-	?>
-
+    	<div class="left-block">
+            <a href="<?php echo get_permalink(); ?>">
+                <?php
+        			/**
+        			 * kt_loop_product_thumbnail hook
+        			 *
+        			 * @hooked woocommerce_template_loop_product_thumbnail - 10
+        			 */
+        			echo woocommerce_get_product_thumbnail('shop_catalog_image_size');
+        		?>
+            </a>
+            <div class="quick-view">
+                <?php
+        			/**
+        			 * kt_loop_product_function hook
+        			 *
+        			 * @hooked kt_get_tool_wishlish - 1
+                     * @hooked kt_get_tool_compare - 5
+                     * @hooked kt_get_tool_quickview - 10
+        			 */
+        			do_action( 'kt_loop_product_function' );
+        		?>
+            </div>
+            <?php
+                /**
+                 * woocommerce_after_shop_loop_item hook
+                 *
+                 * @hooked woocommerce_template_loop_add_to_cart - 10
+                 */
+                do_action( 'woocommerce_after_shop_loop_item' );
+            ?>
+        </div>
+        <div class="right-block">
+            <h5 class="product-name"><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?></a></h5>
+            <div class="content_price">
+                <?php
+        			/**
+        			 * woocommerce_after_shop_loop_item_title hook
+    			     *
+        			 * @hooked woocommerce_template_loop_price - 10
+        			 */
+        			do_action( 'kt_after_shop_loop_item_title' );
+        		?>
+            </div>
+        </div>
+    </div>
 </li>
