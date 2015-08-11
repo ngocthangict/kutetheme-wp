@@ -5,6 +5,7 @@
 	width: 32px;
 	height: 32px;
 	margin: 0;
+	float: left;
 }
 .yith-wcwl-add-to-wishlist .show a{
 	font-size: 0;
@@ -77,6 +78,36 @@
 	margin-top: 30px;
 	display: inline-block;
 }
+.woocommerce ul.woof-products .availability .outofstock{
+	color: #ff3366;
+}
+.woocommerce ul.woof-products li.product.instock .outofstock{
+	display: none;
+}
+.woocommerce ul.woof-products li.product.outofstock .instock{
+	display: none;
+}
+.woocommerce .product-list.list .yith-wcwl-add-to-wishlist{
+	margin-right: 10px;
+}
+.woocommerce .product-list.list .yith-wcwl-add-to-wishlist .show a{
+	margin: inherit;
+}
+.product-list.list li .quick-view>div{
+	display: inline-block;
+	float: left;
+}
+.product-list.list li .quick-view .clear{
+	display: none;
+}
+.product-list.list li .quick-view a.search{
+	margin: inherit;
+	display: inline-block;
+}
+.product-list.list li .quick-view a.compare{
+	margin: inherit;
+	margin-right: 10px;
+}
 .view-product-list .pagination{
 	margin-top: 0;
 	float: right;
@@ -122,10 +153,8 @@
 }
 .widget_product_categories span.count,
 .widget_layered_nav span.count{
-	float: right;
-	color: #999;
-	font-size: 12px;
-	font-style: italic;
+	color: #a4a4a4;
+	margin-left: 5px;
 }
 .widget_product_categories ul li .children {
     padding-left: 20px;
@@ -302,6 +331,10 @@
 	cursor: pointer;
 	margin: 0;
 }
+.woof_container label .count{
+	color: #a4a4a4;
+	margin-left: 5px;
+}
 .woof_container input[type="radio"],
 .woof_container input[type="checkbox"]{
 	display: none;
@@ -369,10 +402,16 @@
     text-align: center;
     z-index: 10000;
 }
-
+.woof_container .woof_mselect{
+	min-height: 100px;
+}
 /*--------------------
 [ woo messages]
 --------------------*/
 .woocommerce .woocommerce-info{
 	border-top-color: #ff3366;
 }
+
+/*--------------------
+[ Category sli]
+--------------------*/

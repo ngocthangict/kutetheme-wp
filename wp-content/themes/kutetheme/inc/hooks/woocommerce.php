@@ -293,24 +293,39 @@ remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
 remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
 
 // add products display
-add_filter( 'woocommerce_before_shop_loop' , 'kt_custom_display_view' );
 
 if(!function_exists('kt_custom_display_view')){
+    add_filter( 'woocommerce_before_shop_loop' , 'kt_custom_display_view' );
     function kt_custom_display_view(){
+        $shop_products_layout = 'grid';
+        if(isset($_SESSION['shop_products_layout'])){
+            $shop_products_layout = $_SESSION['shop_products_layout'];
+        }
         ?>
         <ul class="display-product-option">
-            <li class="view-as-grid">
+            <li class="view-as-grid <?php if($shop_products_layout == "grid" ) echo esc_attr('selected');?>">
                 <span><?php _e('grid',THEME_LANG);?></span>
             </li>
-            <li class="view-as-list selected">
+            <li class="view-as-list <?php if($shop_products_layout == "list" ) echo esc_attr('selected');?>">
                 <span><?php _e('list', THEME_LANG );?></span>
             </li>
         </ul>
         <?php
     }
 }
+// kt_custom_class_list_product
 
-
+if(!function_exists('kt_custom_class_list_product')){
+    add_filter( 'kt_custom_class_list_product' , 'kt_custom_class_list_product' );
+    function kt_custom_class_list_product(){
+        // style view
+        $shop_products_layout = 'grid';
+        if(isset($_SESSION['shop_products_layout'])){
+            $shop_products_layout = $_SESSION['shop_products_layout'];
+        }
+        echo $shop_products_layout;
+    }
+}
 
 
 /* Remove pagination on the bottom of shop page */
@@ -330,3 +345,106 @@ function kt_custom_products_per_page(){
     
     return $loop_shop_per_page;
 }
+
+
+/*-----------------
+Category slider
+-----------------*/
+if(!function_exists('kt_category_slider')){
+    add_filter( 'kt_before_list_product','kt_category_slider', 1 );
+    function kt_category_slider(){
+        $cate = get_queried_object();
+        $cateID = $cate->term_id;
+        $category_slider = get_tax_meta($cateID,'kt_category_slider');
+        if($category_slider){
+            $list_image = explode('|', $category_slider['url']);
+            if(count($list_image)>1){
+                ?>
+                <div class="category-slider">
+                    <ul class="owl-carousel owl-style2" data-dots="false" data-loop="true" data-nav = "true" data-autoplay="true" data-items="1">
+                        <?php 
+                        foreach($list_image as $url){
+                            ?>
+                            <li>
+                                <img src="<?php echo $url;?>" alt="category-slider">
+                            </li>
+                            <?php
+                        }
+                        ?>
+                    </ul>
+                </div>
+                <?php
+            }elseif (count($list_image)>0) {
+                ?>
+                <div class="category-slider">
+                    <ul>
+                        <?php 
+                        foreach($list_image as $url){
+                            ?>
+                            <li>
+                                <img src="<?php echo $url;?>" alt="category-slider">
+                            </li>
+                            <?php
+                        }
+                        ?>
+                    </ul>
+                </div>
+                <?php
+            }
+        }
+    }
+}
+
+/*-----------------
+Sub category
+-----------------*/
+
+if(!function_exists('kt_display_sub_category')){
+    add_filter( 'kt_before_list_product','kt_display_sub_category', 2 );
+    function kt_display_sub_category(){
+        global  $category;
+        $cate = get_queried_object();
+        $cateID = $cate->term_id;
+        $cf = array(
+            'hierarchical' => 1,
+            'show_option_none' => '',
+            'hide_empty' => 0,
+            'parent' => $cateID,
+            'taxonomy' => 'product_cat'
+        );
+        $subcats = get_categories($cf);
+        if($subcats){
+
+            ?>
+            <div class="subcategories">
+                <ul>
+                    <li class="current-categorie">
+                        <a href="#"><?php echo $cate->name;?></a>
+                    </li>
+                    <?php
+                    foreach($subcats as $cat){
+                        ?>
+                        <li>
+                            <a href="<?php echo get_term_link( $cat->slug, $cat->taxonomy );?>"><?php echo $cat->name; ?></a>
+                        </li>
+                        <?php
+                    }
+                    ?>
+                </ul>
+            </div>
+            <?php
+        }
+    }
+}
+
+/*----------------------
+Product view style
+----------------------*/
+function  wp_ajax_fronted_set_products_view_style_callback(){
+    check_ajax_referer( 'screenReaderText', 'security' );
+    $style = $_POST['style'];
+    $_SESSION['shop_products_layout'] = $style;
+    die;
+}
+add_action( 'wp_ajax_fronted_set_products_view_style', 'wp_ajax_fronted_set_products_view_style_callback' );
+add_action( 'wp_ajax_nopriv_fronted_set_products_view_style', 'wp_ajax_fronted_set_products_view_style_callback' );

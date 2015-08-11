@@ -35,3 +35,6 @@ require_once KUTETHEME_PLUGIN_PATH.'shortcodes.php';
 
 //Product brand
 require_once KUTETHEME_PLUGIN_PATH.'brands/product_brand.php';
+
+//Tax Metabox
+require_once KUTETHEME_PLUGIN_PATH.'kt_tax_metabox.php';

@@ -266,6 +266,14 @@
             $(this).closest('.display-product-option').find('li').removeClass('selected');
             $(this).addClass('selected');
             $(this).closest('.view-product-list').find('.product-list').removeClass('list').addClass('grid');
+            var data = {
+                action: 'fronted_set_products_view_style',
+                security : screenReaderText.security,
+                style: 'grid'
+            };
+            $.post(screenReaderText.ajaxurl, data, function(response){
+               // console.log(response);
+            })
             return false;
         })
         // View list list product 
@@ -273,8 +281,17 @@
             $(this).closest('.display-product-option').find('li').removeClass('selected');
             $(this).addClass('selected');
             $(this).closest('.view-product-list').find('.product-list').removeClass('grid').addClass('list');
+            var data = {
+                action: 'fronted_set_products_view_style',
+                security : screenReaderText.security,
+                style: 'list'
+            };
+            $.post(screenReaderText.ajaxurl, data, function(response){
+                //console.log(response);
+            })
             return false;
         })
+
         /// tre menu category
         $(document).on('click','.tree-menu li span',function(){
             $(this).closest('li').children('ul').slideToggle();

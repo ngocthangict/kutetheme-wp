@@ -38,6 +38,15 @@ add_filter('kt_loop_product_thumbnail',function(){
     <div class="row <?php echo esc_attr($sidebar_are_layout);?>">
         <div class="view-product-list <?php echo esc_attr( $col_class );?>">
             <?php
+            /**
+             * kt_before_list_product hook
+             *
+             * @hooked kt_category_slider 
+             * @hooked kt_sub_category
+             */
+            do_action( 'kt_before_list_product' );
+
+            // Remover sale price
             remove_filter( 'woocommerce_sale_price_html','woocommerce_custom_sales_price', 10 , 2 ); 
             ?>
             <?php woocommerce_content(); ?>

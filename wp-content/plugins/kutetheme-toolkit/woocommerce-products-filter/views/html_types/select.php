@@ -24,7 +24,7 @@ if (!function_exists('woof_draw_select_childs'))
                 {
                     $count = $term['count'];
                 }
-                $count_string = '(' . $count . ')';
+                $count_string = '<span class="count">(' . $count . ')</span>';
             }
             //+++
             if ($hide_dynamic_empty_pos AND $count == 0)
@@ -68,7 +68,7 @@ if (!function_exists('woof_draw_select_childs'))
             {
                 $count = $term['count'];
             }
-            $count_string = '(' . $count . ')';
+            $count_string = '<span class="count">(' . $count . ')</span>';
         }
         //+++
         if ($hide_dynamic_empty_pos AND $count == 0)
