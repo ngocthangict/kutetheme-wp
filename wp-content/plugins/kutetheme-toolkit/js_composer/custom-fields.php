@@ -24,7 +24,8 @@ function kt_add_vc_global_params(){
     
     add_shortcode_param( 'kt_select_image', 'vc_kt_select_image_settings_field' );
     add_shortcode_param( 'kt_categories', 'vc_kt_categories_settings_field' );
-    vc_add_shortcode_param('kt_number' , 'vc_ktnumber_settings_field');
+    add_shortcode_param('kt_number' , 'vc_ktnumber_settings_field');
+    add_shortcode_param('kt_taxonomy', 'vc_kt_taxonomy_settings_field', KUTETHEME_PLUGIN_URL.'/js_composer/js/chosen/chosen.jquery.min.js');
 }
 /**
  * Tabs type dropdown
@@ -99,4 +100,47 @@ function vc_kt_categories_settings_field($settings, $value) {
         $args['taxonomy'] = 'product_cat';
     }
     return wp_dropdown_categories( $args );
+}
+
+/**
+ * Taxonomy checkbox list field.
+ *
+ */
+function vc_kt_taxonomy_settings_field($settings, $value) {
+	$dependency = '';
+
+	$value_arr = $value;
+	if ( ! is_array($value_arr) ) {
+		$value_arr = array_map( 'trim', explode(',', $value_arr) );
+	}
+    $output = '';
+	if ( ! empty($settings['taxonomy']) ) {
+		
+        $terms_fields = array();
+        if(isset($settings['placeholder']) && $settings['placeholder']){
+            $terms_fields[] = "<option value=''>".$settings['placeholder']."</option>";
+        }
+        
+        $terms = get_terms( $settings['taxonomy'] , array('hide_empty' => false, 'parent' => $settings['parent']));
+		if ( $terms && !is_wp_error($terms) ) {
+			foreach( $terms as $term ) {
+                $selected = (in_array( $term->term_id, $value_arr )) ? ' selected="selected"' : '';
+                $terms_fields[] = "<option value='{$term->term_id}' {$selected}>{$term->name}</option>";
+			}
+		}
+
+        $size = (!empty($settings['size'])) ? 'size="'.$settings['size'].'"' : '';
+        $multiple = (!empty($settings['multiple'])) ? 'multiple="multiple"' : '';
+        
+        $uniqeID    = uniqid();
+        
+        $output = '<select id="kt_taxonomy-'.$uniqeID.'" '.$multiple.' '.$size.' name="'.$settings['param_name'].'" class="wpb_vc_param_value wpb-input wpb-select '.$settings['param_name'].' '.$settings['type'].'_field" '.$dependency.'>'
+                    .implode( $terms_fields )
+                .'</select>';
+                
+        $output .= '<script type="text/javascript">jQuery("#kt_taxonomy-' . $uniqeID . '").chosen();</script>';
+
+	}
+    
+    return $output;
 }

@@ -84,7 +84,10 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 
 			if ( $args->has_children )
 				$class_names .= ' dropdown';
-
+                
+            if($this->megamenu_enable){
+                $class_names .= ' mega-menu';
+            }
 			if ( in_array( 'current-menu-item', $classes ) )
 				$class_names .= ' active';
 
