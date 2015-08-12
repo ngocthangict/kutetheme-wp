@@ -319,11 +319,13 @@ if(!function_exists('kt_custom_class_list_product')){
     add_filter( 'kt_custom_class_list_product' , 'kt_custom_class_list_product' );
     function kt_custom_class_list_product(){
         // style view
-        $shop_products_layout = 'grid';
-        if(isset($_SESSION['shop_products_layout'])){
-            $shop_products_layout = $_SESSION['shop_products_layout'];
+        if(!is_singular( 'product' )){
+            $shop_products_layout = 'grid';
+            if(isset($_SESSION['shop_products_layout'])){
+                $shop_products_layout = $_SESSION['shop_products_layout'];
+            }
+            echo $shop_products_layout;
         }
-        echo $shop_products_layout;
     }
 }
 
@@ -466,7 +468,8 @@ function custom_woocommerce_page_title( $page_title ) {
   return  '<span>'.$page_title.'</span>';
 }
 
-// Show SKU
+// Product meta
+remove_action('woocommerce_single_product_summary','woocommerce_template_single_meta',40);
 if(!function_exists('kt_show_product_meta')){
     add_filter('woocommerce_single_product_summary','kt_show_product_meta',11);
     function kt_show_product_meta(){
@@ -486,4 +489,44 @@ if(!function_exists('kt_show_product_meta')){
         </div>
         <?php
     }
+}
+//Available Options
+
+if(!function_exists('kt_available_options')){
+    add_filter('woocommerce_single_product_summary','kt_available_options',21);
+    function kt_available_options(){
+        global $product;
+        if( $product->is_type( 'variable' ) ){
+            ?>
+                <div class="available-options">
+                    <h3 class="available-title"><?php echo _e('Available Options', THEME_LANG );?>:</h3>
+                </div>
+            <?php     
+        }
+    }
+}
+/**
+* Custom item related_products
+**/
+if(!function_exists('kt_related_products_args')){
+    add_filter( 'woocommerce_output_related_products_args', 'kt_related_products_args' );
+    function kt_related_products_args( $args ) {
+        $args['posts_per_page'] = 9; // 4 related product
+        return $args;
+    }
+}
+
+// Utilities
+if(!function_exists('kt_utilities_single_product')){
+    add_filter( 'woocommerce_single_product_summary', 'kt_utilities_single_product',51);
+    function kt_utilities_single_product(){
+        ?>
+        <div class="utilities">
+            <ul>
+                <li><a href="javascript:print();"><i class="fa fa-print"></i> <?php _e('Print', THEME_LANG);?></a></li>
+                <li><a href="<?php echo esc_url('mailto:?subject='.get_the_title());?>"><i class="fa fa-envelope-o"></i> <?php _e('Send to a friend', THEME_LANG);?></a></li>
+            </ul>
+        </div>
+        <?php
+    }   
 }

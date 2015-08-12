@@ -367,6 +367,29 @@
                 }
             })
         })
+
+        // OWL Product thumb
+        $('.product .thumbnails').owlCarousel(
+            {
+                dots:false,
+                nav:true,
+                items:3,
+                navText:['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+                margin:19
+
+            }
+        );
+
+        // OWl related product
+        $('.related.products .product-list,.upsells.products .product-list').owlCarousel(
+            {
+                dots:false,
+                nav:true,
+                items:3,
+                navText:['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>']
+
+            }
+        );
     });
     /* ---------------------------------------------
      Scripts resize
