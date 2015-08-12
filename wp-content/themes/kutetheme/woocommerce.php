@@ -44,8 +44,9 @@ add_filter('kt_loop_product_thumbnail',function(){
              * @hooked kt_category_slider 
              * @hooked kt_sub_category
              */
-            do_action( 'kt_before_list_product' );
-
+             if(!is_singular( 'product' )){
+                do_action( 'kt_before_list_product' );  
+             }
             // Remover sale price
             remove_filter( 'woocommerce_sale_price_html','woocommerce_custom_sales_price', 10 , 2 ); 
             ?>

@@ -342,7 +342,6 @@ add_filter( 'loop_shop_per_page','kt_custom_products_per_page', 20 );
 function kt_custom_products_per_page(){
     $loop_shop_per_page = kt_option('kt_woo_products_perpage',18);
     // Display 24 products per page. Goes in functions.php
-    
     return $loop_shop_per_page;
 }
 
@@ -458,4 +457,33 @@ function jk_change_breadcrumb_home_text( $defaults ) {
     // Change the breadcrumb home text from 'Home' to 'Appartment'
     $defaults['delimiter'] = '<span class="navigation-pipe">&nbsp;</span>';
     return $defaults;
+}
+/*------------------
+Custom woocommerce_page_title
+-------------------*/
+add_filter( 'woocommerce_page_title', 'custom_woocommerce_page_title');
+function custom_woocommerce_page_title( $page_title ) {
+  return  '<span>'.$page_title.'</span>';
+}
+
+// Show SKU
+if(!function_exists('kt_show_product_meta')){
+    add_filter('woocommerce_single_product_summary','kt_show_product_meta',11);
+    function kt_show_product_meta(){
+        global $product;
+        $sku          = $product->get_sku();
+        $availability ="";
+        if ( $product->is_in_stock() ) $availability = __('In stock', THEME_LANG);
+        if ( !$product->is_in_stock() ) $availability = __('Out of stock', THEME_LANG);
+        ?>
+        <div class="product-meta">
+            <?php if($sku!=""):?>
+                <p><?php _e('Item Code', THEME_LANG );?>: #<?php echo $sku;?></p>
+            <?php endif;?>
+            <?php if($availability!=""):?>
+                <p><?php _e('Availability', THEME_LANG );?>: <?php echo $availability;?></p>
+            <?php endif;?>
+        </div>
+        <?php
+    }
 }
