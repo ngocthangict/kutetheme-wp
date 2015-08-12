@@ -148,14 +148,16 @@ class WPBakeryShortCode_Brand extends WPBakeryShortCode {
                                                     <a href="<?php echo $link; ?>">
                                                         <h5><?php echo get_the_title() ?></h5>
                                                     </a>
-                                                    <?php
-                                            			/**
-                                            			 * woocommerce_after_shop_loop_item_title hook
-                                            			 * @hooked woocommerce_template_loop_price - 5
-                                            			 * @hooked woocommerce_template_loop_rating - 10
-                                            			 */
-                                            			do_action( 'kt_after_shop_loop_item_title' );
-                                            		?>
+                                                    <div class="content_price">
+                                                        <?php
+                                                			/**
+                                                			 * woocommerce_after_shop_loop_item_title hook
+                                                			 * @hooked woocommerce_template_loop_price - 5
+                                                			 * @hooked woocommerce_template_loop_rating - 10
+                                                			 */
+                                                			do_action( 'kt_after_shop_loop_item_title' );
+                                                		?>
+                                                    </div>
                                                     <a class="btn-view-more" title="<?php _e( 'View More', THEME_LANG ) ?>" href="<?php echo $link; ?>"><?php _e( 'View More', THEME_LANG ) ?></a>
                                                 </div>
                                             </div>

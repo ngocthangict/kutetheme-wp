@@ -17,8 +17,7 @@
     ===============================**/
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
       var $this = jQuery(this);
-      var $container = $this.closest('.category-featured');
-      
+      var $container = $this.closest('.container-tab');
       var $href = $this.attr('href');
       var $tab_active = $container.find($href);
       $tab_active.find('.owl-item.active').each(function($i){

@@ -1,6 +1,6 @@
 <div class="<?php echo $elementClass; ?>" id="change-color-<?php echo $id; ?>" data-target="change-color" data-color="<?php echo $main_color; ?>">
     <!-- featured category fashion -->
-    <div class="category-featured">
+    <div class="category-featured container-tab">
         <nav class="navbar nav-menu nav-menu-red show-brand">
           <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
