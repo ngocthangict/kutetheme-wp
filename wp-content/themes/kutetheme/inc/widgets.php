@@ -2,3 +2,5 @@
 
 require THEME_DIR . '/inc/widgets/trademark-payment.php';
 require THEME_DIR . '/inc/widgets/seo-keyword.php';
+require THEME_DIR . '/inc/widgets/slider.php';
+require THEME_DIR . '/inc/widgets/testimonial.php';

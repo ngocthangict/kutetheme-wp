@@ -3264,6 +3264,9 @@ span.notify-right{
   text-align: center;
   font-weight: 600;
 }
+.block_content .testimonials.owl-carousel .owl-item img{
+    width: inherit;
+}
 .testimonials .client-avarta {
   margin-top: 10px;
   text-align: center;
