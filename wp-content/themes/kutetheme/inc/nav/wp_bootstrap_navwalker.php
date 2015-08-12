@@ -154,7 +154,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
                 }else{
                     $pages = new WP_Query( array( 'post_type' => 'page', 'page' => $this->megamenu_menu_page ));
                 }
-                $item_output .= '<div class="dropdown-menu megamenu menu_page mega-menu-'.$depth.'">';
+                $item_output .= '<div class="dropdown-menu megamenu menu_page mega-menu-'.$depth.' p-'.$this->megamenu_menu_page.'">';
                 if($pages->have_posts()):
                     ob_start();
                     while($pages->have_posts()): $pages->the_post();
