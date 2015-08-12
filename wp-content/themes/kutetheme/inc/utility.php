@@ -99,7 +99,12 @@ if( ! function_exists( 'kt_get_info_hotline' )){
 }
 if( ! function_exists( 'kt_get_info_email' )){
     function kt_get_info_email(){
-        return kt_option('kt_email', false);;
+        return kt_option('kt_email', false);
+    }
+}
+if( ! function_exists('kt_get_info_copyrights') ){
+    function kt_get_info_copyrights(){
+        return kt_option( 'kt_copyrights', false );
     }
 }
 /**

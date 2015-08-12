@@ -203,7 +203,45 @@ function kt_widgets_init() {
         'after_title'   => '</h3>',
     ) );
     
+    register_sidebar( array(
+        'name'          => __( 'Footer Social', THEME_LANG),
+        'id'            => 'footer-social',
+        'description'   => __( 'The footer social widget area', THEME_LANG),
+        'before_widget' => '<div id="%1$s" class="widget-container widget-footer-social %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title introduce-title">',
+        'after_title'   => '</h3>',
+    ) );
     
+    register_sidebar( array(
+        'name'          => __( 'Footer Payment', THEME_LANG),
+        'id'            => 'footer-payment',
+        'description'   => __( 'The footer payment widget area', THEME_LANG),
+        'before_widget' => '<div id="%1$s" class="widget-container widget-footer-payment %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title introduce-title">',
+        'after_title'   => '</h3>',
+    ) );
+    
+    register_sidebar( array(
+        'name'          => __( 'Footer Bottom', THEME_LANG),
+        'id'            => 'footer-bottom',
+        'description'   => __( 'The footer bottom widget area', THEME_LANG),
+        'before_widget' => '<div id="%1$s" class="widget-container widget-footer-bottom %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
+    
+    register_sidebar( array(
+        'name'          => __( 'Footer Menu Bottom', THEME_LANG),
+        'id'            => 'footer-menu-bottom',
+        'description'   => __( 'The footer menu bottom widget area', THEME_LANG),
+        'before_widget' => '<div id="%1$s" class="widget-container footer-menu-list widget-footer-menu-bottom %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
     
     
 }
@@ -376,6 +414,26 @@ function kt_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'kt_scripts' );
 
+
+add_action( 'admin_enqueue_scripts', 'kt_enqueue_script' );
+if( ! function_exists("kt_enqueue_script")){
+    function kt_enqueue_script(){
+        wp_register_style( 'framework-core', THEME_URL.'css/framework-core.css');
+        wp_enqueue_style( 'framework-core');
+        
+        wp_enqueue_script( 'kt_image', THEME_URL.'js/kt_image.js', array('jquery'), '1.0.0', true);
+        
+        wp_localize_script( 'kt_image', 'kt_image_lange', array(
+            'frameTitle' => __( 'Select your image', THEME_LANG )
+        ));                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+        
+        wp_register_script( 'framework-core', THEME_URL.'js/framework-core.js', array('jquery', 'jquery-ui-tabs'), '1.0.0', true);
+        wp_enqueue_script('framework-core');
+        
+        wp_enqueue_media();
+    }
+}
+
 /**
  * Add featured image as background image to post navigation elements.
  *
@@ -503,6 +561,11 @@ if( ! class_exists( 'wp_bootstrap_navwalker' ) && file_exists( THEME_DIR. 'inc/n
 if( ! class_exists( 'KT_MEGAMENU' ) && file_exists( THEME_DIR. 'inc/nav/nav.php' ) ){
     require_once( THEME_DIR. 'inc/nav/nav.php' );
 }
+
+/**
+ * Widgets
+ */
+require THEME_DIR . '/inc/widgets.php';
 /**
  * Custom excerpt_more text 
 **/

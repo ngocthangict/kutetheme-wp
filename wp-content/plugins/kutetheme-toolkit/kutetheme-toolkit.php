@@ -13,7 +13,7 @@ if( ! defined('THEME_LANG')){
     define('THEME_LANG', 'kutetheme');
 }
 //Mailchimp
-//require_once KUTETHEME_PLUGIN_PATH.'mailchimp/mailchimp.php';
+require_once KUTETHEME_PLUGIN_PATH.'mailchimp/mailchimp.php';
 
 //CMB2
 require_once KUTETHEME_PLUGIN_PATH .'cmb2/init.php';

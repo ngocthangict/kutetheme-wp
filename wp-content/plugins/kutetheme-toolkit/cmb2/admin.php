@@ -355,6 +355,27 @@ class KT_Admin {
     	) );
         
         /**
+    	 * Footer
+    	 */
+        $cmb_options_footer = new_cmb2_box( array(
+			'id'      => 'kt_footer',
+			'hookup'  => false,
+            'title'   => 'Footer',
+			'show_on' => array(
+				// These are important, don't remove
+				'key'   => 'options-page',
+				'value' => array( $this->key, )
+			),
+		) );
+        
+        $cmb_options_footer->add_field( array(
+    		'name' => __( 'Copyrights', THEME_LANG ),
+    		'desc' => __( 'Copyrights your site', THEME_LANG ),
+    		'id'   => 'kt_copyrights',
+    		'type' => 'textarea',
+    	) );
+        
+        /**
          * Typography
          * */
        $cmb_options_typography = new_cmb2_box( array(

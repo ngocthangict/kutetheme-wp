@@ -2625,7 +2625,7 @@ span.notify-right{
 
 .cate-link span {
     padding-right: 12px;
-    background: url('../data/cate-readmore-arrow.png') right 2px top 50%  no-repeat;
+    background: url('../images/cate-readmore-arrow.png') right 2px top 50%  no-repeat;
    text-transform: uppercase;
    font-size: 10px;
    line-height: 20px;
