@@ -84,7 +84,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 				$class_names .= ' dropdown';
                 
             if($this->megamenu_enable){
-                $class_names .= ' mega-menu';
+                $class_names .= ' dropdown';
             }
 			if ( in_array( 'current-menu-item', $classes ) )
 				$class_names .= ' active';
@@ -154,7 +154,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
                 }else{
                     $pages = new WP_Query( array( 'post_type' => 'page', 'page' => $this->megamenu_menu_page ));
                 }
-                $item_output .= '<div class="megamenu menu_page mega-menu-'.$depth.'">';
+                $item_output .= '<div class="dropdown-menu megamenu menu_page mega-menu-'.$depth.'">';
                 if($pages->have_posts()):
                     ob_start();
                     while($pages->have_posts()): $pages->the_post();
