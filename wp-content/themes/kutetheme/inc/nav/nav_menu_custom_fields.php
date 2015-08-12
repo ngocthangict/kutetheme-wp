@@ -62,7 +62,7 @@ function kt_add_custom_fields( $item_id, $item, $depth, $args ) {
                                 <option value="0">Choose Menu Page</option>
                                 <?php
                                 while($pages->have_posts()): $pages->the_post();
-                                    $id = get_the_ID;
+                                    $id = get_the_ID();
                                     echo '<option '.selected($id, $item->menu_page, false).' value="'.$id.'">'.get_the_title().'</option>';
                                 endwhile;
                                 ?>
