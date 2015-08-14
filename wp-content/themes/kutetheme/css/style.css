@@ -3108,9 +3108,6 @@ span.notify-right{
   float: left;
 }
 .owl-controls .owl-dots{
-  position: absolute;
-  left: 0;
-  bottom: 0;
   text-align: center;
   width: 100%;
 }

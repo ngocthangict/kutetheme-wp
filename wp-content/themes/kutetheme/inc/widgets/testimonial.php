@@ -29,17 +29,20 @@ class Widget_KT_Testimonial extends WP_Widget {
             "autoplay"   => $instance[ 'autoplay' ],
             "slidespeed" => $instance[ 'slidespeed' ],
             "theme"      => 'style-navigation-bottom',
-            'nav'        => "true",
+            'nav'        => false,
             'loop'       => $instance[ 'loop' ],
             'items'      => 1
         );
-        
+        if($title!=""){
+            echo $args['before_title'];
+            echo $title;
+            echo $args['after_title'];
+        }
         $pages = new WP_Query( array( 'post_type' => 'testimonial', 'numbe' => $number ));
         if($pages->have_posts()):
            ?>
            <!-- Testimonials -->
             <div class="block left-module container-testimonials">
-                <p class="title_block"><?php echo $title; ?></p>
                 <div class="block_content">
                     <ul class="testimonials owl-carousel" <?php echo _data_carousel($data_carousel); ?>>
                         <?php while($pages->have_posts()): $pages->the_post(); ?>

@@ -44,7 +44,7 @@ add_filter('kt_loop_product_thumbnail',function(){
              * @hooked kt_category_slider 
              * @hooked kt_sub_category
              */
-             if(!is_singular( 'product' )){
+             if(is_product_category()){
                 do_action( 'kt_before_list_product' );  
              }
             // Remover sale price
