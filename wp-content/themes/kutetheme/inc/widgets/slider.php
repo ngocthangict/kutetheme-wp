@@ -28,12 +28,15 @@ class Widget_KT_Slider extends WP_Widget {
             'loop'       => $instance[ 'loop' ],
             'items'      => 1
         );
+       if( is_array( $instance[ 'image' ] ) && count($instance[ 'image' ]) < 2 ){
+            $data_carousel[ 'loop' ] = false;
+       }
        ?>
         <div class="col-left-slide left-module">
             <ul class="owl-carousel owl-style2" <?php echo _data_carousel($data_carousel); ?>>
                 <?php
-                    if( isset($instance[ 'title' ] ) && $instance[ 'title' ] && count( $instance[ 'title' ] ) > 0 ):
-                        for( $i = 0; $i < count( $instance[ 'title' ] ); $i++ ):
+                    if( isset($instance[ 'image' ] ) && $instance[ 'image' ] && count( $instance[ 'image' ] ) > 0 ):
+                        for( $i = 0; $i < count( $instance[ 'image' ] ); $i++ ):
                             $title = isset($instance[ 'title' ][$i]) && $instance[ 'title' ][$i] ? $instance[ 'title' ][$i] : '';
                             $image = isset($instance[ 'image' ][$i]) && $instance[ 'image' ][$i] ? $instance[ 'image' ][$i] : '';
                             $link  = isset($instance[ 'link' ][$i])  && $instance[ 'link' ][$i] ? $instance[ 'link' ][$i] : '#';

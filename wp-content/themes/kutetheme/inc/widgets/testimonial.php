@@ -63,7 +63,7 @@ class Widget_KT_Testimonial extends WP_Widget {
        <?php
        endif;
        wp_reset_query();
-       wp_reset_query();
+       wp_reset_postdata();
        echo $args[ 'after_widget' ];
 	}
 
@@ -129,12 +129,8 @@ class Widget_KT_Testimonial extends WP_Widget {
         <p>
             <label for="<?php echo $this->get_field_id( 'order' ); ?>"><?php _e( 'Order Way:', THEME_LANG); ?></label> 
             <select class="widefat" id="<?php echo $this->get_field_id( 'order' ); ?>" name="<?php echo $this->get_field_name('order'); ?>">
-                <option value="id" <?php selected( 'id', $order ) ?>><?php _e( 'ID', THEME_LANG ) ?></option>
-            	<option class="author" value="author" <?php selected( 'author', $order ) ?>><?php _e( 'Author', THEME_LANG ) ?></option>
-            	<option class="name" value="name" <?php selected( 'name', $order ) ?>><?php _e( 'Name', THEME_LANG ) ?></option>
-            	<option class="date" value="date" <?php selected( 'date', $order ) ?>><?php _e( 'Date', THEME_LANG ) ?></option>
-            	<option class="modified" value="modified" <?php selected( 'modified', $order ) ?>><?php _e( 'Modified', THEME_LANG ) ?></option>
-            	<option class="rand" value="rand" <?php selected( 'rand', $order ) ?>><?php _e( 'Rand', THEME_LANG ) ?></option>
+                <option value="desc" <?php selected( 'desc', $order ) ?>><?php _e( 'DESC', THEME_LANG ) ?></option>
+            	<option value="asc" <?php selected( 'asc', $order ) ?>><?php _e( 'ASC', THEME_LANG ) ?></option>
             </select>
         </p>
         
