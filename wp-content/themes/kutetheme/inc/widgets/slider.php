@@ -36,6 +36,7 @@ class Widget_KT_Slider extends WP_Widget {
             <ul class="owl-carousel owl-style2" <?php echo _data_carousel($data_carousel); ?>>
                 <?php
                     if( isset($instance[ 'image' ] ) && $instance[ 'image' ] && count( $instance[ 'image' ] ) > 0 ):
+                    
                         for( $i = 0; $i < count( $instance[ 'image' ] ); $i++ ):
                             $title = isset($instance[ 'title' ][$i]) && $instance[ 'title' ][$i] ? $instance[ 'title' ][$i] : '';
                             $image = isset($instance[ 'image' ][$i]) && $instance[ 'image' ][$i] ? $instance[ 'image' ][$i] : '';
@@ -72,16 +73,17 @@ class Widget_KT_Slider extends WP_Widget {
 		$instance[ 'autoplay' ] = $new_instance[ 'autoplay' ] ? true : false;
         $instance[ 'loop' ]     = $new_instance[ 'loop' ] ? true : false;
         $instance[ 'slidespeed' ] = $new_instance[ 'slidespeed' ] ? $new_instance[ 'slidespeed' ] : 200;
-        if( isset( $new_instance[ 'title' ] ) && $new_instance[ 'title' ] && count( $new_instance[ 'title' ] ) > 0 ){
+        
+        if( isset( $new_instance[ 'image' ] ) && $new_instance[ 'image' ] && count( $new_instance[ 'image' ] ) > 0 ){
             $tmp = array();
-            for( $i = 0; $i < count($new_instance['title']); $i++ ){
+            for( $i = 0; $i < count($new_instance['image']); $i++ ){
                 
                 $title  = isset($new_instance[ 'title' ][$i]) ? $new_instance[ 'title' ][$i] : '';
                 $image  = isset($new_instance[ 'image' ][$i]) ? $new_instance[ 'image' ][$i] : '';
                 $link   = isset($new_instance[ 'link' ][$i]) ? $new_instance[ 'link' ][$i] : '#';
                 $target = isset($new_instance[ 'target' ][$i]) ? $new_instance[ 'target' ][$i] : '_blank';
                 
-                if($title){
+                if($image){
                     $tmp[ 'title' ][]   = esc_html(trim($title)) ?  esc_html(trim($title)) : '';
                     $tmp[ 'image' ][]   = esc_html(trim($image)) ? esc_html(trim($image)) : '';
                     $tmp[ 'link' ][]    = esc_html(trim($link)) ? esc_html(trim($link)) : '#';
@@ -116,12 +118,12 @@ class Widget_KT_Slider extends WP_Widget {
         </p>
         <div class="content multi-item">
             <?php
-                if(isset($instance[ 'title' ]) && $instance[ 'title' ] && count($instance[ 'title' ]) > 0 ){
-                    for( $i = 0; $i < count($instance['title']); $i++ ){
+                if(isset($instance[ 'image' ]) && $instance[ 'image' ] && count($instance[ 'image' ]) > 0 ){
+                    for( $i = 0; $i < count($instance['image']); $i++ ){
                         
-                        $title = isset($instance[ 'title' ][$i])   && $instance[ 'title' ][$i]   ? $instance[ 'title' ][$i] : '';
-                        $image = isset($instance[ 'image' ][$i])   && $instance[ 'image' ][$i]   ? $instance[ 'image' ][$i] : '';
-                        $link  = isset($instance[ 'link' ][$i])    && $instance[ 'link' ][$i]    ? $instance[ 'link' ][$i] : '#';
+                        $title  = isset($instance[ 'title' ][$i])   && $instance[ 'title' ][$i]   ? $instance[ 'title' ][$i] : '';
+                        $image  = isset($instance[ 'image' ][$i])   && $instance[ 'image' ][$i]   ? $instance[ 'image' ][$i] : '';
+                        $link   = isset($instance[ 'link' ][$i])    && $instance[ 'link' ][$i]    ? $instance[ 'link' ][$i] : '#';
                         $target = isset($instance[ 'target' ][$i]) && $instance[ 'target' ][$i]  ? $instance[ 'target' ][$i] : '_blank';
                         
                         $img_preview = "";
@@ -134,7 +136,7 @@ class Widget_KT_Slider extends WP_Widget {
                             }
                             $preview = true;
                         }
-                        if($title){?>
+                        if($image){?>
                         <div class="item widget-content">
                             <span class="remove">X</span>
                             <p>
