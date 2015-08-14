@@ -141,6 +141,7 @@ function kutetheme_setup() {
     add_image_size ( 'post-thumb', 345, 244, false );
     add_image_size ( 'post-thumb-small', 70, 49, false );
     add_image_size ( '142x173', 142, 173, true );
+    add_image_size ( '173x211', 173, 211, true );
     add_image_size ( 'shop_catalog_image_size', 300, 366,false );
 }
 endif; // kt_setup
@@ -375,6 +376,8 @@ function kt_scripts() {
 	wp_enqueue_style( 'custom-vc-style', get_template_directory_uri().'/css/vc.css',array('kt-style') );
             
     //wp_enqueue_style( 'kt-option-6', get_template_directory_uri() . '/css/option6.css', array('kt-style') );
+    
+    wp_enqueue_style( 'kt-option-2', get_template_directory_uri() . '/css/option2.css', array('kt-style') );
     
 	wp_enqueue_script( 'kt-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20141010', true );
 

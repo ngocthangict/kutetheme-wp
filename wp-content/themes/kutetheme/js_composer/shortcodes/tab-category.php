@@ -84,7 +84,7 @@ vc_map( array(
     		'type' => 'attach_images',
     		'heading' => __( 'Banner left', THEME_LANG ),
     		'param_name' => 'banner_left',
-            "dependency" => array("element" => "tabs_type","value" => array('tab-1')),
+            "dependency" => array("element" => "tabs_type","value" => array('tab-1', 'tab-2')),
     		'description' => __( 'Setup image on  left of the tab', THEME_LANG )
     	),
         
@@ -121,6 +121,7 @@ vc_map( array(
 			'value' => array( __( 'Yes, please', THEME_LANG ) => 'true' ),
             'group' => __( 'Carousel settings', THEME_LANG ),
             'admin_label' => false,
+            "dependency" => array("element" => "tabs_type","value" => array('tab-1')),
 		),
         array(
 			'type' => 'checkbox',
@@ -130,6 +131,7 @@ vc_map( array(
             'description' => __( "Don't display 'next' and 'prev' buttons.", THEME_LANG ),
             'group' => __( 'Carousel settings', THEME_LANG ),
             'admin_label' => false,
+            "dependency" => array("element" => "tabs_type","value" => array('tab-1')),
 		),
         array(
 			'type' => 'checkbox',
@@ -139,6 +141,7 @@ vc_map( array(
             'description' => __( "Inifnity loop. Duplicate last and first items to get loop illusion.", THEME_LANG ),
             'group' => __( 'Carousel settings', THEME_LANG ),
             'admin_label' => false,
+            "dependency" => array("element" => "tabs_type","value" => array('tab-1')),
 		),
         array(
 			"type" => "kt_number",
@@ -149,6 +152,7 @@ vc_map( array(
 			"description" => __('Slide speed in milliseconds', THEME_LANG),
             'group' => __( 'Carousel settings', THEME_LANG ),
             'admin_label' => false,
+            "dependency" => array("element" => "tabs_type","value" => array('tab-1')),
 	  	),
         array(
 			"type" => "kt_number",
@@ -159,6 +163,7 @@ vc_map( array(
 			"description" => __('Distance( or space) between 2 item', THEME_LANG),
             'group' => __( 'Carousel settings', THEME_LANG ),
             'admin_label' => false,
+            "dependency" => array("element" => "tabs_type","value" => array('tab-1')),
 	  	),
         array(
 			'type' => 'checkbox',
@@ -168,6 +173,7 @@ vc_map( array(
             'description' => __( "Try changing your browser width to see what happens with Items and Navigations", THEME_LANG ),
             'group' => __( 'Carousel responsive', THEME_LANG ),
             'admin_label' => false,
+            "dependency" => array("element" => "tabs_type","value" => array('tab-1')),
 		),
         array(
 			"type" => "kt_number",
@@ -178,6 +184,7 @@ vc_map( array(
 			"description" => __('The number of items on destop', THEME_LANG),
             'group' => __( 'Carousel responsive', THEME_LANG ),
             'admin_label' => false,
+            "dependency" => array("element" => "tabs_type","value" => array('tab-1')),
 	  	),
         array(
 			"type" => "kt_number",
@@ -188,6 +195,7 @@ vc_map( array(
 			"description" => __('The number of items on destop', THEME_LANG),
             'group' => __( 'Carousel responsive', THEME_LANG ),
             'admin_label' => false,
+            "dependency" => array("element" => "tabs_type","value" => array('tab-1')),
 	  	),
         array(
 			"type" => "kt_number",
@@ -198,6 +206,7 @@ vc_map( array(
 			"description" => __('The numbers of item on destop', THEME_LANG),
             'group' => __( 'Carousel responsive', THEME_LANG ),
             'admin_label' => false,
+            "dependency" => array("element" => "tabs_type","value" => array('tab-1')),
 	  	),
         array(
 			'type' => 'css_editor',
@@ -330,6 +339,7 @@ class WPBakeryShortCode_Categories_Tab extends WPBakeryShortCodesContainer {
         
         $elementClass = preg_replace( array( '/\s+/', '/^\s|\s$/' ), array( ' ', '' ), implode( ' ', $elementClass ) );
         
+        
         $elementClass = apply_filters( 'kt_category_tab_class_container', $elementClass );
         
         
@@ -341,7 +351,31 @@ class WPBakeryShortCode_Categories_Tab extends WPBakeryShortCodesContainer {
         
         if( count( $tabs ) >0 && $term ):
             $term_link = get_term_link($term);
+            $args = array(
+               'hierarchical' => 1,
+               'show_option_none' => '',
+               'hide_empty' => 0,
+               'parent' => $term->term_id,
+               'taxonomy' => 'product_cat'
+            );
+            $subcats = get_categories($args);
+            
             if( file_exists( THEME_DIR.'js_composer/includes/'.$tabs_type.'.php' ) ){
+                if( $tabs_type == 'tab-1' ){
+                    $elementClass .= ' option1';
+                }elseif( $tabs_type == 'tab-2' ){
+                    $elementClass .= ' option2';
+                }elseif( $tabs_type == 'tab-3' ){
+                    $elementClass .= ' option3';
+                }elseif( $tabs_type == 'tab-4' ){
+                    $elementClass .= ' option4';
+                }elseif( $tabs_type == 'tab-5' ){
+                    $elementClass .= ' option5';
+                }elseif( $tabs_type == 'tab-6' ){
+                    $elementClass .= ' option6';
+                }elseif( $tabs_type == 'tab-7' ){
+                    $elementClass .= ' option7';
+                }
                 @include( locate_template( 'js_composer/includes/'.$tabs_type.'.php' ) );
             }
         endif;
@@ -370,5 +404,8 @@ class WPBakeryShortCode_Categories_Tab extends WPBakeryShortCodesContainer {
     	$args['groupby'] = "$wpdb->posts.ID";
     
     	return $args;
+    }
+    public function kt_thumbnail_size173x211(){
+        return '173x211';
     }
 }

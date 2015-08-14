@@ -207,7 +207,7 @@ function woocommerce_datatime_sale_product_variable( $product = false, $post = f
 }
 
 // Ensure cart contents update when products are added to the cart via AJAX (place the following in functions.php)
-add_filter( 'woocommerce_add_to_cart_fragments', 'kt_header_add_to_cart_fragment' );
+add_filter( 'woocommerce_add_to_cart_fragments', 'kt_header_add_to_cart_fragment', 1, 1 );
 
 function kt_header_add_to_cart_fragment( $fragments ) {
 	$fragments['#cart-block.shopping-cart-box'] = kt_cart_button();
