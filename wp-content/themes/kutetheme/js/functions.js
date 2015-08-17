@@ -4,14 +4,26 @@
     /**==============================
     ***  Change Color tab Category
     ===============================**/
-    var $style = jQuery('head style');
+    var $style = jQuery('head style').first();
+    
     jQuery('.container[data-target="change-color"]').each(function(){
-       var $this = jQuery(this);
+       var $this  = jQuery(this);
        var $color = $this.data("color");
+       var $rgb   = $this.data('rgb');
        var $id = $this.attr("id");
-       $style.append('#'+$id+' .nav-menu-red li a:hover,#'+$id+' .nav-menu-red li.active a,#'+$id+' .nav-menu-red li.selected a,#'+$id+' .nav-menu-red {background: '+$color+';}')
-       
+       if( $this.hasClass('option1') ){
+            $style.append('#'+$id+'.option1 .nav-menu-red li a:hover,#'+$id+' .nav-menu-red li.active a,#'+$id+' .nav-menu-red li.selected a,#'+$id+' .nav-menu-red,#'+$id+'.option2 .product-list li .add-to-cart:hover,#'+$id+'.option1 .product-list li .add-to-cart:hover {background: '+$color+';}');
+            $style.append( '#'+$id+'.option1 .product-list li .add-to-cart{background-color:rgba( '+$rgb+', 0.5 )}' );
+       }else if( $this.hasClass('option2') ){
+            if( $this.hasClass( 'tab-2' ) ){
+                $style.append( '#'+$id+'.option2 .show-brand .navbar-brand,#'+$id+'.option2 .category-featured .nav-menu .nav>li>a:before,#'+$id+'.option2 .product-list li .add-to-cart:hover {background-color: '+$color+';}' );
+                $style.append( '#'+$id+'.option2 .category-featured .nav-menu .nav>li.active a,#'+$id+'.option2 .category-featured .nav-menu .nav>li:hover a,#'+$id+'.option2 .category-featured .sub-category-list a:hover {color: '+$color+';}' );
+                $style.append( '#'+$id+'.option2 .category-featured .nav-menu .navbar-collapse{border-bottom-color:'+$color+'}' );
+                $style.append( '#'+$id+'.option2 .product-list li .add-to-cart{background-color:rgba( '+$rgb+', 0.7 )}' );
+            }
+       }
     });
+    
     /**==============================
     ***  Effect tab category
     ===============================**/

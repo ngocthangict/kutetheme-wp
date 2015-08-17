@@ -1,4 +1,4 @@
-<div class="<?php echo $elementClass; ?>" id="change-color-<?php echo $id; ?>" data-target="change-color" data-color="<?php echo $main_color; ?>">
+<div class="<?php echo $elementClass; ?>" id="change-color-<?php echo $id; ?>" data-target="change-color" data-color="<?php echo $main_color; ?>" data-rgb="<?php echo implode( ',', $main_color_rgb ) ;  ?>">
     <!-- featured category fashion -->
     <div class="category-featured container-tab">
         <nav class="navbar nav-menu show-brand">
@@ -52,8 +52,8 @@
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
           <div id="elevator-1" class="floor-elevator">
-                <a href="#" class="btn-elevator up disabled fa fa-angle-up"></a>
-                <a href="#" class="btn-elevator down disabled fa fa-angle-down"></a>
+            <a href="#" class="btn-elevator up disabled fa fa-angle-up"></a>
+            <a href="#" class="btn-elevator down disabled fa fa-angle-down"></a>
           </div>
         </nav>
        <div class="product-featured clearfix">
@@ -67,10 +67,16 @@
                     </ul>
                 </div>
                 <?php 
+                $current = 0;
+                $list_banner_left = array();
                 if( isset( $banner_left ) && $banner_left ): 
-                    $att_banner_left = wp_get_attachment_image_src( $banner_left, '386x572' );  
-                    $att_banner_left_url =  is_array($att_banner_left) ? esc_url($att_banner_left[0]) : ""; 
-                endif; 
+                    $banner_left_args = array(
+                        'post_type' => 'attachment',
+                        'include'   => $banner_left,
+                        'orderby'   => 'post__in'
+                    );
+                    $list_banner_left = get_posts( $banner_left_args );
+                endif;
                 ?>
                 <div class="col-sm-10 col-right-tab">
                     <div class="product-featured-tab-content">
@@ -197,11 +203,19 @@
                             if ( $products->have_posts() ) :?>
                             <!-- tab product -->
                             <div class="tab-panel <?php echo ( $i == 0) ? 'active' : ''; ?>" id="<?php echo 'tab-'.$id.'-'.$i; ?>">
-                               <?php if( isset( $att_banner_left_url ) && $att_banner_left_url ): ?> 
+                               <?php 
+                                    if( isset( $list_banner_left[$i] ) && $list_banner_left[$i] ){
+                                        $current = $list_banner_left[$i];
+                                    }
+                               ?>
+                               <?php if( $current ): ?>
+                               <?php  
+                               $att_banner_left = wp_get_attachment_image_src( $current->ID, '386x572' );  
+                               $att_banner_left_url =  is_array($att_banner_left) ? esc_url($att_banner_left[0]) : "";    ?> 
                                <div class="box-left">
                                    <div class="banner-img">
                                         <a href="<?php echo $term_link ? $term_link : ''; ?>">
-                                            <img alt="<?php  echo ( isset( $title ) && $title ) ? $title : "" ?>" src="<?php echo $att_banner_left_url; ?>" />
+                                            <img alt="<?php  echo esc_attr($current->post_title) ?>" src="<?php echo ($att_banner_left_url); ?>" />
                                         </a>
                                     </div>
                                </div>

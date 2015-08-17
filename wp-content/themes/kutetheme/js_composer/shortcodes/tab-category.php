@@ -84,7 +84,7 @@ vc_map( array(
     		'type' => 'attach_images',
     		'heading' => __( 'Banner left', THEME_LANG ),
     		'param_name' => 'banner_left',
-            "dependency" => array("element" => "tabs_type","value" => array('tab-1', 'tab-2')),
+            "dependency" => array("element" => "tabs_type","value" => array('tab-1', 'tab-2', 'tab-3')),
     		'description' => __( 'Setup image on  left of the tab', THEME_LANG )
     	),
         
@@ -338,7 +338,11 @@ class WPBakeryShortCode_Categories_Tab extends WPBakeryShortCodesContainer {
         );
         
         $elementClass = preg_replace( array( '/\s+/', '/^\s|\s$/' ), array( ' ', '' ), implode( ' ', $elementClass ) );
-        
+        if( function_exists( 'kt_hex2rgb' )){
+            $main_color_rgb = kt_hex2rgb($main_color);
+        }else{
+            $main_color_rgb = array( 'red' => 255, 'green' => 51, 'blue' => 102 );
+        }
         
         $elementClass = apply_filters( 'kt_category_tab_class_container', $elementClass );
         
@@ -362,19 +366,19 @@ class WPBakeryShortCode_Categories_Tab extends WPBakeryShortCodesContainer {
             
             if( file_exists( THEME_DIR.'js_composer/includes/'.$tabs_type.'.php' ) ){
                 if( $tabs_type == 'tab-1' ){
-                    $elementClass .= ' option1';
+                    $elementClass .= ' option1 tab-1';
                 }elseif( $tabs_type == 'tab-2' ){
-                    $elementClass .= ' option2';
+                    $elementClass .= ' option2 tab-2';
                 }elseif( $tabs_type == 'tab-3' ){
-                    $elementClass .= ' option3';
+                    $elementClass .= ' option2 tab-3';
                 }elseif( $tabs_type == 'tab-4' ){
-                    $elementClass .= ' option4';
+                    $elementClass .= ' option2 tab-4';
                 }elseif( $tabs_type == 'tab-5' ){
-                    $elementClass .= ' option5';
+                    $elementClass .= ' option5 tab-5';
                 }elseif( $tabs_type == 'tab-6' ){
-                    $elementClass .= ' option6';
+                    $elementClass .= ' option6 tab-6';
                 }elseif( $tabs_type == 'tab-7' ){
-                    $elementClass .= ' option7';
+                    $elementClass .= ' option7 tab-7';
                 }
                 @include( locate_template( 'js_composer/includes/'.$tabs_type.'.php' ) );
             }

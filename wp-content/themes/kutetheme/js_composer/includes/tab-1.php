@@ -1,4 +1,4 @@
-<div class="<?php echo $elementClass; ?>" id="change-color-<?php echo $id; ?>" data-target="change-color" data-color="<?php echo $main_color; ?>">
+<div class="<?php echo $elementClass; ?>" id="change-color-<?php echo $id; ?>" data-target="change-color" data-color="<?php echo $main_color; ?>" data-rgb="<?php echo implode( ',', $main_color_rgb ) ;  ?>">
     <!-- featured category fashion -->
     <div class="category-featured container-tab">
         <nav class="navbar nav-menu nav-menu-red show-brand">
@@ -56,20 +56,27 @@
                 <a href="#" class="btn-elevator down disabled fa fa-angle-down"></a>
           </div>
         </nav>
-        <?php 
-        $list_banner_top = explode( ',', $banner_top );
-        if( is_array($list_banner_top) && count($list_banner_top) ):
-        $class = 12 / count( $list_banner_top );
-        ?>
-        <div class="category-banner">
-            <?php foreach($list_banner_top as $b): ?>
-            <div class="col-sm-<?php echo $class; ?> banner">
-                <a href="<?php echo $term_link ? $term_link : ''; ?>">
-                    <img alt="ads2" class="img-responsive" src="<?php echo wp_get_attachment_url($b) ?>" />
-                </a>
-            </div>
-            <?php endforeach; ?>
-       </div>
+        <?php
+        if( isset( $banner_top ) &&  $banner_top ):
+            $banner_top_args = array(
+                'post_type' => 'attachment',
+                'include'   => $banner_top,
+                'orderby'   => 'post__in'
+            );
+            $list_banner_top = get_posts( $banner_top_args );
+            if( $list_banner_top ):
+            $class = 12/ ( count( $list_banner_top ) );
+            ?>
+            <div class="category-banner">
+                <?php foreach($list_banner_top as $b): ?>
+                <div class="col-sm-<?php echo $class ?> banner">
+                    <a href="<?php echo $term_link ? $term_link : ''; ?>">
+                        <img alt="<?php echo $b->post_title ?>" class="img-responsive" src="<?php echo wp_get_attachment_url($b->ID) ?>" />
+                    </a>
+                </div>
+                <?php endforeach; ?>
+           </div>
+           <?php endif; ?>
        <?php endif; ?>
         <div class="product-featured clearfix">
             <div class="banner-featured">
@@ -81,17 +88,23 @@
                     </div>
                 <?php endif; ?>
                 <?php 
-                    if( isset( $banner_left ) && $banner_left ): 
-                        $att_banner_left = wp_get_attachment_image_src( $banner_left, '234x350' );  
-                        $att_banner_left_url =  is_array($att_banner_left) ? esc_url($att_banner_left[0]) : ""; 
-                    endif; 
-                ?>
-                <?php if( isset( $att_banner_left_url ) && $att_banner_left_url ): ?>
-                    <div class="banner-img">
-                        <a href="<?php echo $term_link ? $term_link : ''; ?>">
-                            <img alt="<?php  echo ( isset( $title ) && $title ) ? $title : "" ?>" src="<?php echo $att_banner_left_url; ?>" />
-                        </a>
-                    </div>
+                if( isset( $banner_left ) && $banner_left ): 
+                    $banner_left_args = array(
+                        'post_type' => 'attachment',
+                        'include'   => $banner_left,
+                        'orderby'   => 'post__in'
+                    );
+                    $list_banner_left = get_posts( $banner_left_args );
+                    if( $list_banner_left ):
+                    ?>
+                    <?php foreach($list_banner_left as $l): ?>
+                        <div class="banner-img">
+                            <a href="<?php echo $term_link ? $term_link : ''; ?>">
+                                <img alt="<?php echo esc_attr($l->post_title) ?>" src="<?php echo wp_get_attachment_url($l->ID) ?>" />
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
                 <?php endif; ?>
             </div>
             <div class="product-featured-content">
