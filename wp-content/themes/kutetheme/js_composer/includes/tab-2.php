@@ -38,10 +38,10 @@
                                 if($child_term){
                                     echo $child_term->name;
                                 }else{
-                                    echo sprintf('%1$s %2$s', __( "Tab", THEME_LANG ), $i );
+                                    _e( "Best Sellers", THEME_LANG );
                                 }
                             }else{
-                               echo sprintf('%1$s %2$s', __( "Tab", THEME_LANG ), $i );
+                               _e( "Best Sellers", THEME_LANG );
                             }
                              ?>
                         </a>
@@ -224,7 +224,13 @@
                                    <ul class="product-list row">
                                         <?php 
                                         while ( $products->have_posts() ) : $products->the_post();
-                                            wc_get_template_part( 'content', 'product-tab2' );
+                                            ?>
+                                            <li class="col-sm-4">
+                                            <?php
+                                                wc_get_template_part( 'content', 'product-tab2' );
+                                            ?>
+                                            </li>
+                                            <?php
                                         endwhile; // end of the loop.
                                         ?>
                                    </ul>

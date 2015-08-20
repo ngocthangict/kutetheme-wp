@@ -14,11 +14,10 @@ add_action( "kt_after_loop_item_title", "woocommerce_template_loop_price", 5 );
 /**
  * Sale price Percentage
  */
-add_filter( 'woocommerce_sale_price_html', 'woocommerce_custom_sales_price', 10, 2 );
 
 function woocommerce_custom_sales_price( $price, $product ) {
 	$percentage = round( ( ( $product->regular_price - $product->sale_price ) / $product->regular_price ) * 100 );
-	return $price . sprintf( __('<span class="colreduce-percentage">-%s</span>', THEME_LANG ), $percentage . '%' );
+	return $price . sprintf( __('<span class="colreduce-percentage">-%s <span class="colreduce-lable">%s</span></span>', THEME_LANG ), $percentage . '%', __( 'OFF', THEME_LANG ) );
 }
 
 /**
@@ -48,7 +47,7 @@ if( ! function_exists("kt_get_price_html_from_to")){
             
             if($pr != $sale){
                 $percentage = round( ( ( $sale - $pr  ) / $sale ) * 100 );
-                $price .= sprintf( __('<span class="colreduce-percentage">-%s</span>', THEME_LANG ), $html_sale . $percentage . '%' );
+                $price .= sprintf( __('<span class="colreduce-percentage">-%s <span class="colreduce-lable">%s</span></span>', THEME_LANG ), $html_sale . $percentage . '%', __( 'OFF', THEME_LANG ) );
             }
         }
         return $price;
@@ -140,7 +139,9 @@ add_action( 'woocommerce_datatime_sale_product', 'woocommerce_datatime_sale_prod
 
 function woocommerce_datatime_sale_product_variable( $product = false, $post = false ){
     $product_id = 0;
-    if( is_object( $product ) ){
+    if(is_int( $product )){
+        $product_id = $product;
+    }elseif( is_object( $product ) ){
         $product_id = $product->id;
     }elseif( is_object( $post) ){
         $product_id = $post->ID;
@@ -530,3 +531,6 @@ if(!function_exists('kt_utilities_single_product')){
         <?php
     }   
 }
+//Tab category Deal
+add_action('kt_loop_product_after_countdown', 'woocommerce_template_loop_rating', 5);
+add_action('kt_loop_product_after_countdown', 'woocommerce_template_single_excerpt', 10);

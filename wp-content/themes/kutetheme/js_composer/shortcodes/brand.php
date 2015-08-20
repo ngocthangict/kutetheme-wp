@@ -54,13 +54,11 @@ class WPBakeryShortCode_Brand extends WPBakeryShortCode {
         );
         
         $elementClass = preg_replace( array( '/\s+/', '/^\s|\s$/' ), array( ' ', '' ), implode( ' ', $elementClass ) );
-        
+        ob_start();
         //Set up the taxonomy object and get terms
 		$tax   = get_taxonomy('product_brand');
+        if( $tax ):
 		$terms = get_terms('product_brand',array('hide_empty' => 0));
-        
-        ob_start();
-        
         if($title){
             ?>
             <div class="<?php echo $elementClass; ?>">
@@ -177,6 +175,7 @@ class WPBakeryShortCode_Brand extends WPBakeryShortCode {
             </div>
             <?php
         }
+        endif;
         $result = ob_get_contents();
         ob_end_clean();
         return $result;

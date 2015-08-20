@@ -54,6 +54,13 @@
   font-weight: normal;
   line-height: 40px;
 }
+.count-down-time2 span{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: top;
+}
 .count-down-time2 .icon-clock{
   width: 23px;
   height: 26px;
@@ -412,11 +419,16 @@
 	width: 100%;
 	float: left;
 	border-left: 1px solid #eaeaea;
+    overflow: hidden;    
 } 
 .option2 .product-featured .product-featured-tab-content .box-full .product-list li{
 	width: 20%;
 	float: left;
 	border-bottom: none;
+}
+.option2 .product-featured .product-featured-tab-content .box-full .product-list li.col-carousel{
+    width: 40%;
+    float: left;
 }
 .option2 .product-featured .product-featured-tab-content .category-banner{
 	padding-right: 0;
@@ -430,7 +442,8 @@
 .option2 .product-featured .product-list{
 	margin-left: 0;
 	margin-right: 0;
-
+    width: 100%;
+    padding: 0;
 }
 .option2 .product-featured .product-list li{
 	padding: 0;
@@ -523,10 +536,11 @@
 .option2 .product-featured .deal-product .price .old-price{
 	text-decoration: line-through;
 }
-.option2 .product-featured .deal-product .price .sale-price{
+.option2 .product-featured .deal-product .price .colreduce-percentage{
 	background: url("../images/sale-bg.png") no-repeat;
 	color: #fff;
 	padding: 0 7px;
+    font-size: 14px;
 }
 .option2 .product-featured .deal-product .product-star{
 	color: #febf2b;
@@ -581,6 +595,7 @@
 .option2 .product-featured .manufacture-list .manufacture-waper ul{
 	padding: 0 20px;
 	background: #fff;
+    list-style: none;
 }
 
 .option2 .product-featured .manufacture-list .manufacture-waper .owl-prev{
@@ -885,10 +900,13 @@
 [8. Services]
 */
 .services2{
-	margin-top: 30px;
 	border-top: 1px solid #eaeaea;
 	border-right: 1px solid #eaeaea;
 	overflow: hidden;
+}
+.services2 ul{
+    margin: 0;
+    padding: 0;
 }
 .services2 .services2-item{
 	padding: 0;
@@ -896,6 +914,7 @@
 	border-bottom: 1px solid #eaeaea;
 	padding-bottom: 15px;
 	min-height: 120px;
+    list-style: none;
 }
 .services2 .services2-item .image{
 	text-align: center;
@@ -910,6 +929,7 @@
 	color: #333333;
 	font-weight: 600;
 	margin-top: 10px;
+    margin-bottom: 0;
 }
 .services2 .services2-item .text{
 	padding-top: 15px;

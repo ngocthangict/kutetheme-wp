@@ -38,10 +38,10 @@
                                     if($child_term){
                                         echo $child_term->name;
                                     }else{
-                                        echo sprintf('%1$s %2$s', __( "Tab", THEME_LANG ), $i );
+                                        _e( "Best Sellers", THEME_LANG );
                                     }
                                 }else{
-                                   echo sprintf('%1$s %2$s', __( "Tab", THEME_LANG ), $i );
+                                   _e( "Best Sellers", THEME_LANG );
                                 }
                                  ?>
                             </a>
@@ -239,7 +239,7 @@
                                 "autoheight" => 'false',
                                 'nav' => 'true',
                                 'dots' => 'false',
-                                'loop' => 'true',
+                                'loop' => 'false',
                                 'autoplayTimeout' => 1000,
                                 'autoplayHoverPause' => 'true'
                             );

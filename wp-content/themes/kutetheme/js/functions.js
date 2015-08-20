@@ -12,15 +12,27 @@
        var $rgb   = $this.data('rgb');
        var $id = $this.attr("id");
        if( $this.hasClass('option1') ){
-            $style.append('#'+$id+'.option1 .nav-menu-red li a:hover,#'+$id+' .nav-menu-red li.active a,#'+$id+' .nav-menu-red li.selected a,#'+$id+' .nav-menu-red,#'+$id+'.option2 .product-list li .add-to-cart:hover,#'+$id+'.option1 .product-list li .add-to-cart:hover {background: '+$color+';}');
+            $style.append('#'+$id+'.option1 .nav-menu-red li a:hover,#'+$id+' .nav-menu-red li.active a,#'+$id+' .nav-menu-red li.selected a,#'+$id+' .nav-menu-red,#'+$id+'.option2 .product-list li .add-to-cart:hover,#'+$id+'.option1 .product-list li .add-to-cart:hover, #'+$id+'.option1 .product-list li .quick-view a:hover {background: '+$color+';}');
             $style.append( '#'+$id+'.option1 .product-list li .add-to-cart{background-color:rgba( '+$rgb+', 0.5 )}' );
        }else if( $this.hasClass('option2') ){
             if( $this.hasClass( 'tab-2' ) ){
-                $style.append( '#'+$id+'.option2 .show-brand .navbar-brand,#'+$id+'.option2 .category-featured .nav-menu .nav>li>a:before,#'+$id+'.option2 .product-list li .add-to-cart:hover {background-color: '+$color+';}' );
-                $style.append( '#'+$id+'.option2 .category-featured .nav-menu .nav>li.active a,#'+$id+'.option2 .category-featured .nav-menu .nav>li:hover a,#'+$id+'.option2 .category-featured .sub-category-list a:hover {color: '+$color+';}' );
+                $style.append( '#'+$id+'.option2 .show-brand .navbar-brand,#'+$id+'.option2 .category-featured .nav-menu .nav>li>a:before,#'+$id+'.option2 .product-list li .add-to-cart:hover, #'+$id+'.option2 .product-list li .quick-view a:hover, #'+$id+'.option2 .product-list li .quick-view a:hover {background-color: '+$color+';}' );
+                $style.append( '#'+$id+'.option2 .category-featured .nav-menu .nav>li.active a,#'+$id+'.option2 .category-featured .nav-menu .nav>li:hover a,#'+$id+'.option2 .category-featured .sub-category-list a:hover, #'+$id+'.option2 .nav-menu .nav>li:hover a:after, #'+$id+'.option2 .nav-menu .nav>li.active a:after {color: '+$color+';}' );
                 $style.append( '#'+$id+'.option2 .category-featured .nav-menu .navbar-collapse{border-bottom-color:'+$color+'}' );
                 $style.append( '#'+$id+'.option2 .product-list li .add-to-cart{background-color:rgba( '+$rgb+', 0.7 )}' );
+            }else if( $this.hasClass( 'tab-3' ) ){
+                $style.append( '#'+$id+'.option2 .category-featured .navbar-brand, #'+$id+'.option2 .category-featured .nav-menu .nav>li>a:before, #'+$id+'.option2 .category-featured .product-list li .add-to-cart:hover, #'+$id+'.option2 .category-featured .product-list li .quick-view a.search:hover, #'+$id+'.option2 .category-featured .product-list li .quick-view a.compare:hover, #'+$id+'.option2 .category-featured .product-list li .quick-view a.heart:hover, #'+$id+'.option2 .product-list li .quick-view a:hover{background-color: '+$color+';}' );
+                $style.append( '#'+$id+'.option2 .category-featured .nav-menu .nav>li:hover a, #'+$id+'.option2 .category-featured .nav-menu .nav>li.active a, #'+$id+'.option2 .category-featured .nav-menu .nav>li:hover a:after, #'+$id+'.option2 .category-featured .nav-menu .nav>li.active a:after, #'+$id+'.option2 .category-featured .sub-category-list a:hover {color: '+$color+';}' );
+                $style.append( '#'+$id+'.option2 .category-featured .nav-menu .navbar-collapse{border-bottom-color:'+$color+'}' );
+                $style.append( '#'+$id+'.option2 .category-featured .product-list li .add-to-cart{background-color:rgba( '+$rgb+', 0.7 )}' );
+            }else if( $this.hasClass( 'tab-4' ) ){
+                $style.append( '#'+$id+'.option2 .category-featured .navbar-brand, #'+$id+'.option2 .category-featured .nav-menu .nav>li>a:before,#'+$id+'.option2 .category-featured .product-list li .add-to-cart:hover, #'+$id+'.option2 .category-featured .product-list li .quick-view a.search:hover, #'+$id+'.option2 .category-featured .product-list li .quick-view a.compare:hover, #'+$id+'.option2 .category-featured .product-list li .quick-view a.heart:hover, #'+$id+'.option2 .product-list li .quick-view a:hover{background-color: '+$color+';}' );
+                $style.append( '#'+$id+'.option2 .category-featured .nav-menu .nav>li:hover a, #'+$id+'.option2 .category-featured .nav-menu .nav>li.active a, #'+$id+'.option2 .category-featured .nav-menu .nav>li:hover a:after, #'+$id+'.option2 .category-featured .nav-menu .nav>li.active a:after, #'+$id+'.option2 .category-featured .sub-category-list a:hover{color: '+$color+';}' );
+                $style.append( '#'+$id+'.option2 .category-featured .nav-menu .navbar-collapse{border-bottom-color:'+$color+'}' );
+                $style.append( '#'+$id+'.option2 .category-featured .add-to-cart{background-color:rgba( '+$rgb+', 0.7 )}' );
             }
+       }else if( $this.hasClass('option3') ){
+            
        }
     });
     
@@ -122,25 +134,42 @@
           $(this).owlCarousel(config);
         });
         /** COUNT DOWN **/
-        $('[data-countdown]').each(function() {
+        $('.count-down-time[data-countdown]').each(function() { 
            var $this = $(this), finalDate = $(this).data('countdown');
-           $this.countdown(finalDate, function(event) {
-             var fomat ='<span>%H</span><b></b><span>%M</span><b></b><span>%S</span>';
+           if( ! $this.hasClass( 'countdown-lastest' ) ){
+               $this.countdown(finalDate, function(event) {
+                 var fomat ='<span>%H</span><b></b><span>%M</span><b></b><span>%S</span>';
+                 $this.html(event.strftime(fomat));
+               });
+            }else{
+                $this.countdown(finalDate, function(event) {
+                 var fomat = '<span class="box-count"><span class="number">%D</span> <span class="text">Days</span></span><span class="dot">:</span><span class="box-count"><span class="number">%H</span> <span class="text">Hrs</span></span><span class="dot">:</span><span class="box-count"><span class="number">%M</span> <span class="text">Mins</span></span><span class="dot">:</span><span class="box-count"><span class="number">%S</span> <span class="text">Secs</span></span>';
+                 $this.html(event.strftime(fomat));
+               });
+                            
+            }
+        });
+        
+        $('.stick-countdown').each(function() {
+           var $this = $(this),
+           $parent = $this.closest('.container-data-time');
+           var $time = 0;
+           var $date_time = 0;
+           var $data = $parent.find('.data-time[data-countdown]').each(function(){
+                var $e = jQuery(this);
+                var $data_time = $e.data('strtotime');
+                var $data_datetime = $e.data('time');
+                if($data_time > $time){
+                    $time = $data_time;
+                    $date_time = $data_datetime;
+                }
+           });
+           $this.countdown($date_time, function(event) {
+             var fomat = '<span class="box-count"><span class="number">%D</span> <span class="text">Days</span></span><span class="dot">:</span><span class="box-count"><span class="number">%H</span> <span class="text">Hrs</span></span><span class="dot">:</span><span class="box-count"><span class="number">%M</span> <span class="text">Mins</span></span><span class="dot">:</span><span class="box-count"><span class="number">%S</span> <span class="text">Secs</span></span>';
              $this.html(event.strftime(fomat));
            });
         });
-        if($('.countdown-lastest').length >0){
-            var labels = ['Years', 'Months', 'Weeks', 'Days', 'Hrs', 'Mins', 'Secs'];
-            var layout = '<span class="box-count"><span class="number">{dnn}</span> <span class="text">Days</span></span><span class="dot">:</span><span class="box-count"><span class="number">{hnn}</span> <span class="text">Hrs</span></span><span class="dot">:</span><span class="box-count"><span class="number">{mnn}</span> <span class="text">Mins</span></span><span class="dot">:</span><span class="box-count"><span class="number">{snn}</span> <span class="text">Secs</span></span>';
-            $('.countdown-lastest').each(function() {
-                var austDay = new Date($(this).data('y'),$(this).data('m') - 1,$(this).data('d'),$(this).data('h'),$(this).data('i'),$(this).data('s'));
-                $(this).countdown({
-                    until: austDay,
-                    labels: labels, 
-                    layout: layout
-                });
-            });
-        }
+        
         /* Close top banner*/
         $(document).on('click','.btn-close',function(){
             $(this).closest('.top-banner').animate({ height: 0, opacity: 0 },1000);

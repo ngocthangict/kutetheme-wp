@@ -2091,11 +2091,17 @@ span.notify-right{
 .product-list li .content_price .price{
   display: inline-block;
 }
+.latest-deal-content .product-list li .content_price .price{
+  width: 100%;
+}
 .product-list li .content_price del{
   margin-left: 11px;
   color: #666;
   font-size: 14px;
   float: right;
+}
+.latest-deal-content .product-list li .content_price del{
+    float: none;
 }
 .product-list li .content_price ins{
   text-decoration: none;
@@ -2135,7 +2141,7 @@ span.notify-right{
     padding-top: 5px;
     margin-bottom: 5px;
 }
-.product-list li .price-percent-reduction2{
+.latest-deals-product .product-list li .colreduce-percentage{
   width: 52px;
   height: 44px;
   background: url("../images/price-percent-br.png") no-repeat center center;
@@ -2145,10 +2151,13 @@ span.notify-right{
   font-size: 14px;
   position: absolute;
   top: 10px;
-  right: 0;
+  right: -8px;
   font-family: 'Arial Narrow', Arial, sans-serif;
   padding-left: 5px;
   padding-top: 2px;
+}
+.latest-deals-product .product-list li .colreduce-percentage .colreduce-lable{
+    display: inline-block;
 }
 
 .product-list li .group-price .product-new{
@@ -3392,6 +3401,9 @@ span.notify-right{
   position: absolute;
   bottom: -1px;
   padding: 0 12px;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: bold;
 }
 .page-heading span.page-heading-title2{
   text-transform: uppercase;
@@ -5304,4 +5316,47 @@ span.notify-right{
 .block-popular-cat .more:hover{
   color: #fff;
   opacity: 0.8;
+}
+/**
+* Deal Of The Day In option 2
+*/
+
+.option2 .product-list li .content_price{
+    line-height: 22px;
+}
+.option2 .deal-product p{
+    margin: 0;
+}
+.option2 .product-featured .deal-product .deal-product-head h3{
+    margin-bottom: 0;
+}
+.option2 .product-featured .box-left .deal-product{
+    padding-bottom: 2px;
+}
+.option2 .deal-product .content_price{
+    font-size: 18px;
+    color: #958457;
+    line-height: 17px;
+}
+
+.option2 .deal-product .content_price .price {
+    display: inline-block;
+}
+.option2 .deal-product .content_price del {
+    margin-left: 11px;
+    color: #666;
+    font-size: 14px;
+    float: right;
+}
+.option2 .deal-product .content_price ins {
+    text-decoration: none;
+    float: left;
+    display: inline-block;
+}
+.product-list li .content_price{
+    
+}
+
+.option2 .deal-product .deal-product-content .content_price del{
+    float: none;
 }

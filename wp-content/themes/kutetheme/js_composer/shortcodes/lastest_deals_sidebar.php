@@ -174,6 +174,7 @@ class WPBakeryShortCode_Lastest_Deals_Sidebar extends WPBakeryShortCode {
                 "autoplayHoverPause" => "true",
                 'items'      => 1,
             );
+            add_filter( 'woocommerce_sale_price_html', 'woocommerce_custom_sales_price', 10, 2 );
             ?>
             <div class="<?php echo $elementClass; ?>">
                 <h2 class="latest-deal-title"><?php echo $title; ?></h2>
@@ -190,6 +191,7 @@ class WPBakeryShortCode_Lastest_Deals_Sidebar extends WPBakeryShortCode {
                 </div>
             </div>
             <?php
+            remove_filter( 'woocommerce_sale_price_html', 'woocommerce_custom_sales_price', 10, 2 );
         endif;
         wp_reset_postdata();
         wp_reset_query();

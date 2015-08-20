@@ -84,7 +84,7 @@ vc_map( array(
     		'type' => 'attach_images',
     		'heading' => __( 'Banner left', THEME_LANG ),
     		'param_name' => 'banner_left',
-            "dependency" => array("element" => "tabs_type","value" => array('tab-1', 'tab-2', 'tab-3')),
+            "dependency" => array("element" => "tabs_type","value" => array('tab-1', 'tab-2', 'tab-3', 'tab-4', 'tab-5')),
     		'description' => __( 'Setup image on  left of the tab', THEME_LANG )
     	),
         
@@ -374,7 +374,7 @@ class WPBakeryShortCode_Categories_Tab extends WPBakeryShortCodesContainer {
                 }elseif( $tabs_type == 'tab-4' ){
                     $elementClass .= ' option2 tab-4';
                 }elseif( $tabs_type == 'tab-5' ){
-                    $elementClass .= ' option5 tab-5';
+                    $elementClass .= ' option2 tab-5';
                 }elseif( $tabs_type == 'tab-6' ){
                     $elementClass .= ' option6 tab-6';
                 }elseif( $tabs_type == 'tab-7' ){
@@ -411,5 +411,11 @@ class WPBakeryShortCode_Categories_Tab extends WPBakeryShortCodesContainer {
     }
     public function kt_thumbnail_size173x211(){
         return '173x211';
+    }
+    public function kt_thumbnail_size_131x160(){
+        return '131x160';
+    }
+    public function kt_thumbnail_size175x214(){
+        return '175x214';
     }
 }

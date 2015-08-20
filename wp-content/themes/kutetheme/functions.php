@@ -142,7 +142,11 @@ function kutetheme_setup() {
     add_image_size ( 'post-thumb-small', 70, 49, false );
     add_image_size ( '142x173', 142, 173, true );
     add_image_size ( '173x211', 173, 211, true );
-    add_image_size ( 'shop_catalog_image_size', 300, 366,false );
+    add_image_size ( '175x214', 175, 214, true );
+    add_image_size ( '131x160', 131, 160, true );
+    add_image_size ( '204x249', 204, 249, true );
+    add_image_size( '268x255', 268, 255, true );
+    add_image_size ( 'shop_catalog_image_size', 300, 366, false );
 }
 endif; // kt_setup
 add_action( 'after_setup_theme', 'kutetheme_setup' );
