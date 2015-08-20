@@ -412,7 +412,8 @@ if(!function_exists('kt_display_sub_category')){
             'show_option_none' => '',
             'hide_empty' => 0,
             'parent' => $cateID,
-            'taxonomy' => 'product_cat'
+            'taxonomy' => 'product_cat',
+            'number'=>4
         );
         $subcats = get_categories($cf);
         if($subcats){

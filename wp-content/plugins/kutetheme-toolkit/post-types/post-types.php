@@ -35,7 +35,8 @@ function register_post_type_init() {
         'query_var'           => true,
         'can_export'          => true,
         'rewrite'             => false,
-        'capability_type'     => 'page'
+        'capability_type'     => 'page',
+        'menu_icon' => 'dashicons-welcome-widgets-menus',
     );
 
     register_post_type( 'megamenu', $args );
@@ -66,7 +67,9 @@ function register_post_type_init() {
         'rewrite'            => false,
         'query_var'          => false,
         'publicly_queryable' => false,
-        'public'             => true
+        'public'             => true,
+        'menu_icon' => 'dashicons-editor-quote',
+        
 
     );
     register_post_type( 'testimonial', $args );
@@ -97,8 +100,8 @@ function register_post_type_init() {
         'rewrite'            => false,
         'query_var'          => false,
         'publicly_queryable' => false,
-        'public'             => true
-
+        'public'             => true,
+        'menu_icon' => 'dashicons-update'
     );
     register_post_type( 'service', $args );
 }

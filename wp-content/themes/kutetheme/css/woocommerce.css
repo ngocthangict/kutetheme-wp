@@ -156,9 +156,11 @@
 }
 .woocommerce .woocommerce-ordering .orderby{
 	display: inline-block;
-	float: left;
-	width: auto;
-	border: none;
+    float: left;
+    width: auto;
+    border: none;
+    height: 29px;
+    padding: 0 10px;
 }
 
 /*-----------------
@@ -878,4 +880,20 @@ Cart
 	color: #666;
 	font-size: 14px;
 	color: #666;
+}
+
+.woocommerce span.onsale{
+	color: #fff;
+    float: left;
+    line-height: 22px;
+    text-align: center;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 0px 10px;
+    background: #ff4318;
+    height: 22px;
+    border-radius: 0;
+    left: 10px;
+    top: 10px;
+    min-height: 22px;
 }
