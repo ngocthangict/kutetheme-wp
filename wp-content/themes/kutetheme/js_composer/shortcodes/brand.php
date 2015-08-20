@@ -16,7 +16,35 @@ if( class_exists( 'WPBakeryShortCode' ) ){
                 "param_name" => "title",
                 "admin_label" => true,
                 'description' => __( 'Display title brand showcase', THEME_LANG )
-            ),array(
+            ),
+            array(
+                "type" => "dropdown",
+            	"heading" => __("Order by", THEME_LANG),
+            	"param_name" => "orderby",
+            	"value" => array(
+            		__('None', THEME_LANG)     => 'none',
+                    __('ID', THEME_LANG)       => 'ID',
+                    __('Author', THEME_LANG)   => 'author',
+                    __('Name', THEME_LANG)     => 'name',
+                    __('Date', THEME_LANG)     => 'date',
+                    __('Modified', THEME_LANG) => 'modified',
+                    __('Rand', THEME_LANG)     => 'rand',
+            	),
+                'std' => 'date',
+            	"description" => __("Select how to sort retrieved posts.",THEME_LANG),
+            ),
+            array(
+                "type" => "dropdown",
+            	"heading" => __("Order", THEME_LANG),
+            	"param_name" => "order",
+            	"value" => array(
+                    __('ASC', THEME_LANG)  => 'ASC',
+                    __('DESC', THEME_LANG) => 'DESC'
+            	),
+                'std' => 'DESC',
+            	"description" => __("Designates the ascending or descending order.",THEME_LANG)
+            ),
+            array(
     			'type' => 'css_editor',
     			'heading' => __( 'Css', 'js_composer' ),
     			'param_name' => 'css',
@@ -37,11 +65,12 @@ class WPBakeryShortCode_Brand extends WPBakeryShortCode {
         $tab = function_exists( 'vc_map_get_attributes' ) ? vc_map_get_attributes( 'brand', $atts ) : $atts;
                         
         $atts = shortcode_atts( array(
-            'title' => '',
-            
+            'title'     => '',
+            'orderby'   => 'date',
+            'order'     => 'desc',
             'css_animation' => '',
-            'el_class' => '',
-            'css' => '',
+            'el_class'  => '',
+            'css'       => '',
             
         ), $atts );
         extract($atts);
@@ -58,8 +87,8 @@ class WPBakeryShortCode_Brand extends WPBakeryShortCode {
         //Set up the taxonomy object and get terms
 		$tax   = get_taxonomy('product_brand');
         if( $tax ):
-		$terms = get_terms('product_brand',array('hide_empty' => 0));
-        if($title){
+		$terms = get_terms( 'product_brand',array( 'hide_empty' => 0, 'orderby' => $orderby, 'order' => $order ) );
+        if( $terms && $title){
             ?>
             <div class="<?php echo $elementClass; ?>">
                 <h2 class="brand-showcase-title"><?php echo $title; ?>

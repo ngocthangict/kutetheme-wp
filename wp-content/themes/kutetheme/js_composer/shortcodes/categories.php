@@ -136,7 +136,7 @@ class WPBakeryShortCode_Categories extends WPBakeryShortCode {
         extract($atts);
         
         $elementClass = array(
-        	'base' => apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, 'brand-showcase ', $this->settings['base'], $atts ),
+        	'base' => apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, 'hot-categories ', $this->settings['base'], $atts ),
         	'extra' => $this->getExtraClass( $el_class ),
         	'css_animation' => $this->getCSSAnimation( $css_animation ),
             'shortcode_custom' => vc_shortcode_custom_css_class( $css, ' ' )
@@ -171,7 +171,7 @@ class WPBakeryShortCode_Categories extends WPBakeryShortCode {
 		);
         
         ?>
-        <div id="hot-categories" class="row">
+        <div id="hot-categories" class="<?php echo $elementClass; ?>">
             <div class="col-sm-12 group-title-box">
                 <h2 class="group-title ">
                     <span><?php echo $title; ?></span>

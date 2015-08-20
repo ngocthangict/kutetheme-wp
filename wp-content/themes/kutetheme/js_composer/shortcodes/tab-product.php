@@ -121,7 +121,6 @@ class WPBakeryShortCode_Tab_Producs extends WPBakeryShortCode {
                         if( $product_column > 0 )
                             $data_carousel['items'] =  $product_column;
                     }
-                    remove_filter( 'woocommerce_sale_price_html', 'woocommerce_custom_sales_price', 10, 2 );
                     add_filter( 'kt_template_loop_product_thumbnail_size', array( $this, 'kt_thumbnail_size' ) );
                     ?>
                     <div id="tab-<?php echo $k . $uniqeID  ?>" class="tab-panel <?php echo ( $i == 0 ) ? 'active': '' ?>">
@@ -132,9 +131,7 @@ class WPBakeryShortCode_Tab_Producs extends WPBakeryShortCode {
                         </ul>
                     </div>
                     <?php 
-                    
                     remove_filter( 'kt_template_loop_product_thumbnail_size', array( $this, 'kt_thumbnail_size' ) );
-                    add_filter( 'woocommerce_sale_price_html', 'woocommerce_custom_sales_price', 10, 2 );
                     endif; 
                     ?>
                     <?php 

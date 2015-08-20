@@ -5,19 +5,23 @@
  */
 
 ( function( api ) {
-	var cssTemplate = wp.template( 'twentyfifteen-color-scheme' ),
+	var cssTemplate = wp.template( 'kutetheme-color-scheme' ),
 		colorSchemeKeys = [
 			'background_color',
-			'header_background_color',
+			'main_color',
 			'box_background_color',
 			'textcolor',
-			'sidebar_textcolor',
-			'meta_box_background_color'
+			'rate_color',
+			'button_color',
+            'menu_link_footer',
+            'button_color_rgb',
+            'color_main_rgb'
 		],
 		colorSettings = [
 			'background_color',
-			'header_background_color',
-			'sidebar_textcolor'
+			'main_color',
+			'box_background_color',
+            'textcolor'
 		];
 
 	api.controlConstructor.select = api.Control.extend( {
@@ -30,17 +34,23 @@
 						.data( 'data-default-color', colorScheme[value].colors[0] )
 						.wpColorPicker( 'defaultColor', colorScheme[value].colors[0] );
 
-					// Update Header/Sidebar Background Color.
-					api( 'header_background_color' ).set( colorScheme[value].colors[1] );
-					api.control( 'header_background_color' ).container.find( '.color-picker-hex' )
+					// Update Main Color.
+					api( 'main_color' ).set( colorScheme[value].colors[1] );
+					api.control( 'main_color' ).container.find( '.color-picker-hex' )
 						.data( 'data-default-color', colorScheme[value].colors[1] )
 						.wpColorPicker( 'defaultColor', colorScheme[value].colors[1] );
 
-					// Update Header/Sidebar Text Color.
-					api( 'sidebar_textcolor' ).set( colorScheme[value].colors[4] );
-					api.control( 'sidebar_textcolor' ).container.find( '.color-picker-hex' )
-						.data( 'data-default-color', colorScheme[value].colors[4] )
-						.wpColorPicker( 'defaultColor', colorScheme[value].colors[4] );
+					// Update Box and Sidebar Color.
+					api( 'box_background_color' ).set( colorScheme[value].colors[2] );
+					api.control( 'box_background_color' ).container.find( '.color-picker-hex' )
+						.data( 'data-default-color', colorScheme[value].colors[2] )
+						.wpColorPicker( 'defaultColor', colorScheme[value].colors[2] );
+                        
+                    // Update Text Color.
+					api( 'textcolor' ).set( colorScheme[value].colors[3] );
+					api.control( 'textcolor' ).container.find( '.color-picker-hex' )
+						.data( 'data-default-color', colorScheme[value].colors[3] )
+						.wpColorPicker( 'defaultColor', colorScheme[value].colors[3] );    
 				} );
 			}
 		}
@@ -48,6 +58,8 @@
 
 	// Generate the CSS for the current Color Scheme.
 	function updateCSS() {
+	   console.log(colorScheme);
+       console.log(api( 'color_scheme' )());
 		var scheme = api( 'color_scheme' )(), css,
 			colors = _.object( colorSchemeKeys, colorScheme[ scheme ].colors );
 
@@ -57,13 +69,9 @@
 		});
 
 		// Add additional colors.
-		colors.secondary_textcolor = Color( colors.textcolor ).toCSS( 'rgba', 0.7 );
-		colors.border_color = Color( colors.textcolor ).toCSS( 'rgba', 0.1 );
-		colors.border_focus_color = Color( colors.textcolor ).toCSS( 'rgba', 0.3 );
-		colors.secondary_sidebar_textcolor = Color( colors.sidebar_textcolor ).toCSS( 'rgba', 0.7 );
-		colors.sidebar_border_color = Color( colors.sidebar_textcolor ).toCSS( 'rgba', 0.1 );
-		colors.sidebar_border_focus_color = Color( colors.sidebar_textcolor ).toCSS( 'rgba', 0.3 );
-
+		colors.button_color_rgb = Color( colors.button_color_rgb ).toCSS( 'rgba', 0.7 );
+        colors.color_main_rgb   = Color( colors.color_main_rgb ).toCSS( 'rgba', 0.5 );
+        
 		css = cssTemplate( colors );
 
 		api.previewer.send( 'update-color-scheme-css', css );
