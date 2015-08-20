@@ -99,6 +99,7 @@
      Scripts ready
      --------------------------------------------- */
     $(document).ready(function() {
+        show_other_item_vertical_menu();
         /* Resize top menu*/
         resizeTopmenu();
         /* Zoom image */
@@ -495,8 +496,8 @@
         var full_width = parseInt($('.container').innerWidth());
         //full_width = $( document ).width();
         var menu_width = parseInt($('.vertical-menu-content').actual('width'));
-        $('.vertical-menu-content').find('.vertical-dropdown-menu').each(function(){
-            $(this).width((full_width - menu_width)-2);
+        $('.vertical-menu-content').find('.megamenu').each(function(){
+            $(this).width((full_width - menu_width)-32);
         });
     }
     /**==============================
@@ -568,5 +569,18 @@
         }else{
             $("#main-menu li.dropdown >a").removeAttr('data-toggle');
         }
+    }
+
+
+    function show_other_item_vertical_menu(){
+      if($('.box-vertical-megamenus').length >0){
+          var all_item = 0;
+          $('.box-vertical-megamenus').find('.vertical-menu-list>li').each(function(i){
+              all_item = all_item +1;
+              if(i>10){
+                $(this).addClass('cat-link-orther');
+              }
+          })
+      }
     }
 })(jQuery); // End of use strict
