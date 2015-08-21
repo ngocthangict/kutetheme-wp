@@ -897,3 +897,44 @@ Cart
     top: 10px;
     min-height: 22px;
 }
+.woocommerce div.product p.price ins, 
+.woocommerce div.product span.price ins{
+	text-decoration: none;
+}
+.woo-quickview{
+	margin-top: 15px;
+}
+.woo-quickview .images{
+	width: 48%;
+	float: left;
+}
+.woo-quickview .entry-summary{
+	width: 48%;
+	float: right;
+}
+.woo-quickview .product_title{
+	font-size: 24px;
+}
+.woo-quickview .price{
+	font-size: 18px;
+    color: #ff3366;
+}
+.woo-quickview del{
+	font-size: 14px;
+    color: #666;
+    margin-left: 10px;
+}
+.woo-quickview ins{
+	text-decoration: none;
+	float: left;
+}
+.woo-quickview table,
+.woo-quickview th,
+.woo-quickview td{
+	border: none;
+	padding: 10px 0;
+}
+.woo-quickview .utilities,
+.woo-quickview .thumbnails{
+	display: none;
+}

@@ -72,6 +72,7 @@
             product_id: product_id
         };
         $(this).append('<i class="fa fa-spinner fa-spin"></i>');
+        
         var t = $(this);
         $.post(screenReaderText.ajaxurl, data, function(response){
             t.find('.fa').remove();
@@ -499,6 +500,12 @@
         $('.vertical-menu-content').find('.megamenu').each(function(){
             $(this).width((full_width - menu_width)-32);
         });
+        
+        if($(window).width()+scrollCompensate() < 1025){
+            $("#box-vertical-megamenus li.dropdown:not(.active) >a").attr('data-toggle','dropdown');
+        }else{
+            $("#box-vertical-megamenus li.dropdown >a").removeAttr('data-toggle');
+        }
     }
     /**==============================
     ***  Remove menu on top

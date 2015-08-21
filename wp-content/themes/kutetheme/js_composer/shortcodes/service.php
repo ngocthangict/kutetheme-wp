@@ -72,7 +72,7 @@ class WPBakeryShortCode_Service extends WPBakeryShortCode {
                 $service_query->the_post();
                 $meta = get_post_meta( get_the_ID());
                 ?>
-                <div class="col-xs-6 col-sm-3 service-item">
+                <div class="col-xs-12 com-sm-6 col-md-3 service-item">
                     <?php if(has_post_thumbnail()):?>
                     <div class="icon">
                         <?php the_post_thumbnail(array(40, 40));?>
