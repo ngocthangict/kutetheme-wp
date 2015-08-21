@@ -671,6 +671,30 @@
 		overflow: hidden;
 		width: 100%;
 	}
+	.vertical-menu-list .dropdown-menu{
+		position: relative;
+		visibility: visible;
+	    display: none;
+	    height: auto;
+	    -webkit-transform: translate(0,0);
+	    -moz-transform: translate(0,0);
+	    -o-transform: translate(0,0);
+	    -ms-transform: translate(0,0);
+	    transform: translate(0,0);
+	    opacity: 1;
+	    left: 0;
+	    top: 0;
+	    width: 100%!important;
+	    overflow: hidden;
+	}
+	.vertical-menu-list .megamenu{
+		padding: 15px;
+	}
+	.box-vertical-megamenus .vertical-menu-list li{
+		width: 100%;
+		display: block;
+		overflow: hidden;
+	}
 }
 /*--------------------
 [5. Styles for devices(<=480px)]
